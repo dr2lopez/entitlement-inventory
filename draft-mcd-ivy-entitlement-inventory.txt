@@ -80,19 +80,136 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-   2.  References
-     2.1.  Normative References
-     2.2.  Informative References
+     1.1.  Scope of the Entitlement Model
+   2.  Conventions and Definitions
+   3.  Modeling Capabilities and Entitlements
+   4.  References
+     4.1.  Normative References
+     4.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
 1.  Introduction
 
-   Here we go...
+   The goal of any network elements are included as assets in the
+   inventory of any network service provider is to be used to build such
+   services, takind advantage of the features provided by the
+   inventoried assets.  The use of many of these features are not
+   necessarily associated with the acquisition of an inventoried network
+   element, as their use required specific permissions, usually in
+   termes of licenses issued by the network element provider explicily
+   authorizing the use of a (number of) feature(s).  As the technology
+   evolves, making network elements more modular and software-intensive,
+   and even fully virtualized, the management of these permissions,
+   their agrgeggation and application to enable a concrete network
+   service becomes more relevant.  These trends also imply the
+   combination of greater number of these permissions, within a given
+   network element or in a number of then, implying an increasing
+   complexity when trying to assess the feasibility of providing a
+   specific service by integrating the necessary assets.  This draft
+   proposes a YANG model for incorporating the management of these
+   permissions, based on two essential concepts: capability and
+   entitlement.
 
-2.  References
+   Capability refers to the ability or power to do something, often
+   indicating a skill, talent, or potential to achieve a specific
+   outcome, and is commonly used to describe the features or functions
+   of a system or device that enable it to perform tasks.  On its side,
+   an entitlement corresponds to the right that someone has to do or
+   have something.  Following this general definitions, the model
+   considers entitlements as the means that grant specific holders the
+   right to access particular capabilities of one or more of the assets
+   in the network inventory.  The use of these capabilities may be
+   restricted in various ways, such as by duration, usage limits, or
+   predefined conditions.  Being able to exchange information on the
+   state of the entitlements applicable to network elements can save
+   time and facilitate decision making.  This document proposes a YANG
+   model that, complementing the network inventory module, can provide
+   the information an asset/entitlement adminstrator needs for this
+   purpose.
 
-2.1.  Normative References
+1.1.  Scope of the Entitlement Model
+
+   The entitlement model aims to provide an inventory of entitlements.
+   This includes the entitled holders and the capabilities to which they
+   are entitled.  Additionally, it offers information into the
+   restrictions of the operation of the different assets (network
+   entities and components).  In general, this model seeks to address
+   the following questions:
+
+   *  What entitlements are administered/owned by the organization?
+
+   *  How are entitlements restricted to some assets and holders?
+
+   *  What entitlements are assigned or installed on each assets?
+
+   *  What constraints do the current entitlements impose in the assets
+      functionality?
+
+   *  Does the entitlement imposses any kind of global restrictions?
+      What are they?
+
+   *  What are the restrictions that each asset due to the entitlements
+      it holds?
+
+   The model is designed with flexibility in mind, allowing for
+   expansion through the utilization of tools provided by YANG.
+
+   The realm of entitlements and licensing is inherently complex,
+   presenting challenges in creating a model that can comprehensively
+   encompass all scenarios without ambiguity.  While we attempt to
+   address various situations through examples and use cases, we
+   acknowledge that the model might not be able to cover all corner
+   cases without ambiguity.  In such cases, we recommend that
+   implementations provide additional documentation to clarify thoese
+   potential ambiguities.  The current model does not aim to serve as a
+   catalog of licenses.  While it may accommodate basic scenarios, it
+   does not aim to cover the full spectrum of license characteristics,
+   which can vary significantly.  Instead, our focus is on providing a
+   general framework for describing relationships and answering the
+   questions exposed above.
+
+   Withe the aim of clarifying the model scope, here are some questions
+   that our model does not attempt to answer:
+
+   *  What are the implications of purchasing a specific entitlement?
+
+   *  Which entitlement should I acquire to get a specific capability?
+
+   *  Is license migration feasible?
+
+   *  What capabilities will be allowed if I install an entitlement in a
+      specific device?
+
+   *  Features or restrictions that depend on each user.  We are not
+      covering this in the current version of this document, but it
+      could be done if we expand the holders indentification.
+
+   It is important to remark that the model primarily addresses the
+   commercial utilization of capabilities, rather than access control.
+   For instance, if a network device cannot be configured to use an
+   arbitrary network protocol (e.g. MPLS) due to licensing restrictions,
+   this implies that the organization owning the router (the holder in
+   this scenario) is not permitted to utilize the MPLS feature.  This
+   distinction is separate from, for instance, the ability of a specific
+   user to configure MPLS due to access control limitations.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   (Glossary TBP.  We need at least formal definitions of "capability"
+   and "entitlement")
+
+3.  Modeling Capabilities and Entitlements
+
+4.  References
+
+4.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -103,7 +220,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-2.2.  Informative References
+4.2.  Informative References
 
    [BaseInventory]
               Yu, C., Belotti, S., Bouquier, J., Peruzzini, F., and P.
