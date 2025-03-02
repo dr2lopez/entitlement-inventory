@@ -2,34 +2,49 @@
 
 
 
-WG Working Group                                              Y. N. Here
-Internet-Draft                                    Your Organization Here
-Intended status: Informational                              2 March 2025
-Expires: 3 September 2025
+Network Inventory YANG WG                                     M. Palmero
+Internet-Draft                                             Cisco Systems
+Intended status: Informational                                C. Cardona
+Expires: 3 September 2025                                            NTT
+                                                                D. Lopez
+                                                              Telefonica
+                                                            2 March 2025
 
 
-                           TODO - Your title
-                  draft-todo-yourname-protocol-latest
+                A YANG Module for Entitlement Inventory
+               draft-mcd-ivy-entitlement-inventory-latest
 
 Abstract
 
-   TODO Abstract
+   This document proposes a YANG module for incorporating entitlmements
+   in a network inventory of entitlements.  Entitlements define the
+   rights for their holder to use specific feature in a network
+   elements.  The model is rooted by the concept of the capabilities
+   offered by an element, enabled by the held entitlements, and
+   considers entitlement scope, how they are assigned, and when they
+   expire.  The model introduces a descriptive definition of
+   capabailities and the entitlement use restrictions, supporting
+   entitlement admistration and the understanding of the capabilities
+   available through the network.
 
 About This Document
 
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-todo-yourname-
-   protocol/.
+   https://dr2lopez.github.io/ivy-capability-entitlement/draft-mcd-ivy-
+   entitlement-inventory.html.  Status information for this document may
+   be found at https://datatracker.ietf.org/doc/draft-mcd-ivy-
+   entitlement-inventory/.
 
-   Discussion of this document takes place on the WG Working Group
-   mailing list (mailto:WG@example.com), which is archived at
-   https://example.com/WG.
+   Discussion of this document takes place on the Network Inventory YANG
+   WG Working Group mailing list (mailto:inventory-yang@ietf.org), which
+   is archived at https://mailarchive.ietf.org/arch/browse/inventory-
+   yang/.  Subscribe at https://www.ietf.org/mailman/listinfo/inventory-
+   yang/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/USER/REPO.
+   https://github.com/dr2lopez/ivy-capability-entitlement.
 
 Status of This Memo
 
@@ -65,34 +80,19 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-   2.  Conventions and Definitions
-   3.  Security Considerations
-   4.  IANA Considerations
-   5.  Normative References
+   2.  References
+     2.1.  Normative References
+     2.2.  Informative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
-   TODO Introduction
+   Here we go...
 
-2.  Conventions and Definitions
+2.  References
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
-
-3.  Security Considerations
-
-   TODO Security
-
-4.  IANA Considerations
-
-   This document has no IANA actions.
-
-5.  Normative References
+2.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -103,12 +103,32 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+2.2.  Informative References
+
+   [BaseInventory]
+              Yu, C., Belotti, S., Bouquier, J., Peruzzini, F., and P.
+              Bedard, "A Base YANG Data Model for Network Inventory",
+              Work in Progress, Internet-Draft, draft-ietf-ivy-network-
+              inventory-yang-05, 28 February 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-ivy-
+              network-inventory-yang-05>.
+
 Acknowledgments
 
    TODO acknowledge.
 
-Author's Address
+Authors' Addresses
 
-   Your Name Here
-   Your Organization Here
-   Email: your.email@example.com
+   Marisol Palmero
+   Cisco Systems
+   Email: mpalmero@cisco.com
+
+
+   Camilo Cardona
+   NTT
+   Email: mpalmero@cisco.com
+
+
+   Diego Lopez
+   Telefonica
+   Email: diego.r.lopez@telefonica.com
