@@ -1314,12 +1314,12 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
          +--rw resource-amount?                  int32
          +--rw supporting-entitlements
             +--rw entitlement* [entitlement-id]
-            +--rw entitlement-id                 -&gt; ../entitlements/entitlment/entitlement-id
+            +--rw entitlement-id                 -&gt; ../../../../../entitlements/entitlment/entitlement-id
             +--rw allowed?                       boolean
             +--rw in-use?                        boolean
             +--rw capability-restriction* [capability-restriction-id]
                +--rw capability-restriction-id   string
-               +--rw component-id?               -&gt; ../components/component/component-id
+               +--rw component-id?               -&gt; ../../../../../components/component/component-id
                +--rw description?                string
                +--rw resource-name?              string
                +--rw units?                      string
@@ -1354,7 +1354,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
    |  +--rw units?                            string
    |  +--rw max-value?                        int32
    |  +--rw current-value?                    int32
-   +--rw parent-entitlement-uid?     -&gt; ../../entitlement/uid
+   +--rw parent-entitlement-uid?              -&gt; ../entitlement/eid
    +--rw entitlement-attachment
       +--rw universal-access?   boolean
       +--rw holders!
