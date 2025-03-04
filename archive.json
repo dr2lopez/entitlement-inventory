@@ -1,0 +1,83 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2025-03-04T00:36:57.473102+00:00",
+  "repo": "dr2lopez/entitlement-inventory",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOOCAVZs6NHWJW",
+      "title": "Update draft-mcd-ivy-entitlement-inventory.md",
+      "url": "https://github.com/dr2lopez/entitlement-inventory/pull/1",
+      "state": "MERGED",
+      "author": "marisolpalmero",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "grammar check. Thanks Diego!!",
+      "createdAt": "2025-03-03T08:43:19Z",
+      "updatedAt": "2025-03-03T20:49:14Z",
+      "baseRepository": "dr2lopez/entitlement-inventory",
+      "baseRefName": "main",
+      "baseRefOid": "33352a997357592f4cb61c078384be665f7aea18",
+      "headRepository": "marisolpalmero/entitlement-inventory",
+      "headRefName": "main",
+      "headRefOid": "f9cdd7513dbf7d1f96b895f61622ca8eca385340",
+      "closedAt": "2025-03-03T20:49:14Z",
+      "mergedAt": "2025-03-03T20:49:14Z",
+      "mergedBy": "dr2lopez",
+      "mergeCommit": {
+        "oid": "058a403f3b5ea3e09ed3674124824d404f156c35"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
