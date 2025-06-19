@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-17T00:41:32.208670+00:00",
+  "timestamp": "2025-06-19T00:41:55.490924+00:00",
   "repo": "dr2lopez/entitlement-inventory",
   "labels": [
     {
@@ -76,6 +76,32 @@
       "mergeCommit": {
         "oid": "058a403f3b5ea3e09ed3674124824d404f156c35"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOOCAVZs6bKME2",
+      "title": "some changes based on the notes from IETF 122",
+      "url": "https://github.com/dr2lopez/entitlement-inventory/pull/2",
+      "state": "OPEN",
+      "author": "marisolpalmero",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-18T23:20:11Z",
+      "updatedAt": "2025-06-18T23:20:12Z",
+      "baseRepository": "dr2lopez/entitlement-inventory",
+      "baseRefName": "main",
+      "baseRefOid": "058a403f3b5ea3e09ed3674124824d404f156c35",
+      "headRepository": "marisolpalmero/entitlement-inventory",
+      "headRefName": "main",
+      "headRefOid": "2ab58ad318ae6b89bed1304949a08a6595be86c5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
