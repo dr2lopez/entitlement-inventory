@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-01T00:49:15.055964+00:00",
+  "timestamp": "2025-07-03T00:42:22.519866+00:00",
   "repo": "dr2lopez/entitlement-inventory",
   "labels": [
     {
@@ -84,26 +84,42 @@
       "id": "PR_kwDOOCAVZs6bKME2",
       "title": "some changes based on the notes from IETF 122",
       "url": "https://github.com/dr2lopez/entitlement-inventory/pull/2",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "marisolpalmero",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-06-18T23:20:11Z",
-      "updatedAt": "2025-06-18T23:20:12Z",
+      "updatedAt": "2025-07-02T17:17:34Z",
       "baseRepository": "dr2lopez/entitlement-inventory",
       "baseRefName": "main",
       "baseRefOid": "058a403f3b5ea3e09ed3674124824d404f156c35",
       "headRepository": "marisolpalmero/entitlement-inventory",
       "headRefName": "main",
       "headRefOid": "2ab58ad318ae6b89bed1304949a08a6595be86c5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-07-02T17:17:33Z",
+      "mergedAt": "2025-07-02T17:17:33Z",
+      "mergedBy": "dr2lopez",
+      "mergeCommit": {
+        "oid": "ac51508fb86fbf1bddb468b166901db8949c8ee8"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOOCAVZs6xn3AJ",
+          "commit": {
+            "abbreviatedOid": "2ab58ad"
+          },
+          "author": "dr2lopez",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Nothing to object - I would only change the \"Nokia\" specific mention",
+          "createdAt": "2025-07-02T17:17:17Z",
+          "updatedAt": "2025-07-02T17:17:17Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
