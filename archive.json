@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-06T00:47:02.297266+00:00",
+  "timestamp": "2025-07-08T00:42:00.820535+00:00",
   "repo": "dr2lopez/entitlement-inventory",
   "labels": [
     {
@@ -117,6 +117,61 @@
           "body": "Nothing to object - I would only change the \"Nokia\" specific mention",
           "createdAt": "2025-07-02T17:17:17Z",
           "updatedAt": "2025-07-02T17:17:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOOCAVZs6dntGe",
+      "title": "Update draft-mcd-ivy-entitlement-inventory.md",
+      "url": "https://github.com/dr2lopez/entitlement-inventory/pull/3",
+      "state": "MERGED",
+      "author": "marisolpalmero",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "following our conversation, I have addressed the following:\r\n>>\r\nmodify mainly Introduction to clarify the core intent and scope of the model, focusing on three main use cases:\r\n\r\nListing entitlements (licenses),\r\n\r\nModeling capabilities enabled or permitted by entitlements,\r\n\r\nRepresenting the use of capabilities and their restrictions.\r\n\r\n>> Introductory Cleanup & Rewording\r\n\r\n>> Review definitions of capability and entitlement to reinforce conceptual clarity.\r\n\r\n>> Typo and Consistency Fixes\r\n\r\n>> Fixed multiple typos\r\n\r\n>> TBU Glossary Update to be included in the network inventory\r\n\r\n>> Cleaned up use of terms: consistently used \"capability\" instead of \"feature(s).\"",
+      "createdAt": "2025-07-06T08:43:02Z",
+      "updatedAt": "2025-07-07T13:58:19Z",
+      "baseRepository": "dr2lopez/entitlement-inventory",
+      "baseRefName": "main",
+      "baseRefOid": "cf45b1ffdf26ec4b8af6759b64c9dae5ef75a1a6",
+      "headRepository": "marisolpalmero/entitlement-inventory",
+      "headRefName": "main",
+      "headRefOid": "bdc54199ad584ee4abe1bbc3dcb2b3d698cae4b1",
+      "closedAt": "2025-07-07T13:58:19Z",
+      "mergedAt": "2025-07-07T13:58:19Z",
+      "mergedBy": "dr2lopez",
+      "mergeCommit": {
+        "oid": "f0dde127146e88024b5d527a1bc6f77100944c35"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOCAVZs6yTvQ4",
+          "commit": {
+            "abbreviatedOid": "c03d218"
+          },
+          "author": "dr2lopez",
+          "authorAssociation": "OWNER",
+          "state": "CHANGES_REQUESTED",
+          "body": "There is a reference that makes markdown processing to fail:\r\n\r\nWhen it is said:  \"[I-D.draft-ietf-ivy-network-inventory-yang-03] model should be updated\"\r\n\r\nI think i should be: \"{{I-D.ietf-ivy-network-inventory-yang}} should be augmented\" to properly process the reference and use the term \"augmented\".\r\n\r\nApart from this, there are other style considerations, but they are minor an would not imply any serious issue for approval\r\n\r\n",
+          "createdAt": "2025-07-06T17:08:36Z",
+          "updatedAt": "2025-07-06T17:08:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOOCAVZs6ydTuC",
+          "commit": {
+            "abbreviatedOid": "bdc5419"
+          },
+          "author": "dr2lopez",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "I think we are going in the right direction",
+          "createdAt": "2025-07-07T13:57:50Z",
+          "updatedAt": "2025-07-07T13:57:50Z",
           "comments": []
         }
       ]
