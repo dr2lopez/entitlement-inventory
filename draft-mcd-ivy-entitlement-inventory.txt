@@ -366,22 +366,36 @@ Table of Contents
          Figure 1: Relationship of Entitlement Inventory Model to Other
                                  Inventory Models
 
-   +--ro entitlements +--ro entitlement* [eid] +--ro eid string +--ro
-   product-id?  string +--ro state?  entitlement-state-t +--ro renewal-
-   profile | +--ro activation-date?  yang:date-and-time | +--ro
-   expiration-date?  yang:date-and-time +--ro restrictions | +--ro
-   restriction* [restriction-id] | +--ro restriction-id string | +--ro
-   description?  string | +--ro units?  string | +--ro max-value?
-   int32 | +--ro current-value?  int32 +--ro parent-entitlement-uid?  ->
-   ../entitlement/eid +--ro entitlement-attachment +--ro universal-
-   access?  boolean +--ro holders | +--ro organizations_names | | +--ro
-   organizations* string | +--ro users_names | +--ro users* string +--ro
-   assets +--ro elements +--ro network-elements* -> /network-inventory/
-   network-elements/network-element/ne-id +--ro components +--ro
-   component* [network-element component-id] +--ro network-element ->
-   /network-inventory/network-elements/network-element/ne-id +--ro
-   component-id -> /network-inventory/network-elements/network-
-   element/components/component/component-id ~~~
++--ro entitlements
+   +--ro entitlement* [eid]
+   +--ro eid                                  string
+   +--ro product-id?                          string
+   +--ro state?                               entitlement-state-t
+   +--ro renewal-profile
+   |  +--ro activation-date?                  yang:date-and-time
+   |  +--ro expiration-date?                  yang:date-and-time
+   +--ro restrictions
+   |  +--ro restriction* [restriction-id]
+   |  +--ro restriction-id                    string
+   |  +--ro description?                      string
+   |  +--ro units?                            string
+   |  +--ro max-value?                        int32
+   |  +--ro current-value?                    int32
+   +--ro parent-entitlement-uid?              -> ../entitlement/eid
+   +--ro entitlement-attachment
+      +--ro universal-access?   boolean
+      +--ro holders
+      |  +--ro organizations_names
+      |  |  +--ro organizations*           string
+      |  +--ro users_names
+      |     +--ro users*                   string
+      +--ro assets
+         +--ro elements
+            +--ro network-elements*        -> /network-inventory/network-elements/network-element/ne-id
+            +--ro components
+               +--ro component* [network-element component-id]
+                  +--ro network-element    -> /network-inventory/network-elements/network-element/ne-id
+                  +--ro component-id       -> /network-inventory/network-elements/network-element/components/component/component-id
 
    Entitlements and network elements are linked in the model in multiple
    ways.  Entitlements at the network-inventory level might be attached

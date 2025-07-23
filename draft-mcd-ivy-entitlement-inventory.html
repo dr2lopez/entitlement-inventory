@@ -1431,7 +1431,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                               Inventory Models
 </pre><a href="#section-3.2-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-4">+--ro entitlements
+<div class="alignLeft art-text artwork" id="section-3.2-4">
+<pre>
++--ro entitlements
    +--ro entitlement* [eid]
    +--ro eid                                  string
    +--ro product-id?                          string
@@ -1461,7 +1463,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                +--ro component* [network-element component-id]
                   +--ro network-element    -&gt; /network-inventory/network-elements/network-element/ne-id
                   +--ro component-id       -&gt; /network-inventory/network-elements/network-element/components/component/component-id
-~~~<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+</pre><a href="#section-3.2-4" class="pilcrow">¶</a>
+</div>
 <p id="section-3.2-5">Entitlements and network elements are linked in the model in multiple ways. Entitlements at the network-inventory level might be attached to network elements through their attachment mechanism, representing organizational entitlements. Network elements have their own installed-entitlements that may be derived from the centralized entitlements or installed directly. The capabilities of network elements reference these locally installed entitlements through their supporting-entitlements lists. The former addresses the case of a centralized license server or inventory system, while the latter represents entitlements that are locally available and actively used by the network element's capabilities. An installed entitlement that is not referenced by any network element capability means that it is available locally but not currently in use.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
 <p id="section-3.2-6">Entitlements are managed both centrally at the network-inventory level and locally within network elements through installed-entitlements. Network elements utilize locally installed entitlements and reference them through their capabilities' supporting-entitlements lists. For instance, a license server or inventory system might list an entitlement at the top level, which then gets installed on specific network elements where the capabilities reference the local copy. The "parent-entitlement-uid" field in installed entitlements provides traceability back to centralized entitlements when applicable. Proper identification of entitlements is imperative to ensure consistency across systems, enabling monitoring systems to recognize when multiple locations reference related entitlements. Furthermore, there are cases where an authorized network element might have locally installed entitlements without explicit knowledge of the covering organizational license. Consider the scenario of a site license, wherein any device under the site may utilize a feature through locally installed entitlements derived from the site-wide license. In such cases, the parent-entitlement-uid maintains the connection to the organizational entitlement policy.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
 <div id="reverse-mapping-from-entitlements-to-capabilities">
