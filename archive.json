@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-02T00:36:45.620613+00:00",
+  "timestamp": "2025-10-05T00:42:04.685149+00:00",
   "repo": "dr2lopez/entitlement-inventory",
   "labels": [
     {
@@ -330,6 +330,32 @@
           "updatedAt": "2025-07-23T14:10:10Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOOCAVZs6rvoso",
+      "title": "Adding the comments from Eric V. when supporting call for adoption",
+      "url": "https://github.com/dr2lopez/entitlement-inventory/pull/8",
+      "state": "OPEN",
+      "author": "marisolpalmero",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-02T11:03:30Z",
+      "updatedAt": "2025-10-02T11:03:31Z",
+      "baseRepository": "dr2lopez/entitlement-inventory",
+      "baseRefName": "main",
+      "baseRefOid": "fce15cf4c590625dbe7b4e1bd6517127e92c3a86",
+      "headRepository": "marisolpalmero/entitlement-inventory",
+      "headRefName": "main",
+      "headRefOid": "856f4a9b14df5214e626a1b9b1a523de0e82d494",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
