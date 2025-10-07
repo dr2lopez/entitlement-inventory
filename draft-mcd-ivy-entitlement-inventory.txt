@@ -4,11 +4,11 @@
 
 Network Inventory YANG WG                                     M. Palmero
 Internet-Draft                                               Independent
-Intended status: Informational                                C. Cardona
-Expires: 24 January 2026                                             NTT
+Intended status: Standards Track                              C. Cardona
+Expires: 10 April 2026                                               NTT
                                                                 D. Lopez
                                                               Telefonica
-                                                            23 July 2025
+                                                          7 October 2025
 
 
                 A YANG Module for Entitlement Inventory
@@ -17,15 +17,15 @@ Expires: 24 January 2026                                             NTT
 Abstract
 
    This document proposes a YANG module for incorporating entitlements
-   in a network inventory.  Entitlements define the rights for their
-   holder to use specific capabilities in a network element(s).  The
-   model is rooted by the concept of the capabilities offered by a
-   network element, enabled by the held entitlements, and considers
-   entitlement scope, how they are assigned, and when they expire.  The
-   model introduces a descriptive definition of capabilities and the
-   entitlement use restrictions, supporting entitlement administration
-   and the understanding of the capabilities available through the
-   network.
+   in a network inventory, encompassing both virtual and physical
+   network elements.  Entitlements define the rights for their holder to
+   use specific capabilities in a network element(s).  The model is
+   rooted by the concept of the capabilities offered by an element,
+   enabled by the held entitlements, and considers entitlement scope,
+   how they are assigned, and when they expire.  The model introduces a
+   descriptive definition of capabilities and the entitlement use
+   restrictions, supporting entitlement administration and the
+   understanding of the capabilities available through the network.
 
 About This Document
 
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 January 2026.
+   This Internet-Draft will expire on 10 April 2026.
 
 Copyright Notice
 
@@ -104,10 +104,10 @@ Table of Contents
 
 1.  Introduction
 
-   The goal of any network elements included as assets in the inventory
-   of any network service provider or enterprise is to leverage their
-   capabilities to build network services.  Many of these capabilities
-   are not automatically enabled upon acquisition; their use may require
+   The purpose of any network elements included as assets in the
+   inventory of any network operator is to leverage their capabilities
+   to build network services.  Many of these capabilities are not
+   automatically enabled upon acquisition; their use may require
    specific rights—typically provided via entitlements or licenses from
    the vendor.
 
@@ -115,10 +115,10 @@ Table of Contents
    use cases in managing software entitlements and network capabilities:
 
    *  Listing entitlements (e.g., licenses) available across the
-      organization, their holders, and applicable scope.
+      operator organization, their holders, and applicable scope.
 
    *  Modeling the capabilities that entitlements permit or enable,
-      representing what a device can do when properly licensed.
+      representing what a network element may do when properly licensed.
 
    *  Representing the actual use of capabilities, including any active
       restrictions or limits defined by the associated entitlements.
@@ -141,15 +141,15 @@ Table of Contents
 
    To address this, the model relies on two core concepts: capability
    and entitlement.  A capability represents what a system or component
-   can do; an entitlement grants permission to use one or more of those
+   may do; an entitlement grants permission to use one or more of those
    capabilities, possibly under constraints such as time, scope, or
    usage limits.  Being able to represent and exchange this information
    across systems helps automate entitlement administration and simplify
    operational decisions.
 
    This draft provides a foundational YANG structure for representing
-   these relationships in a standard, vendor neutral way, complementing
-   the network inventory module.
+   these relationships as standards, complementing the network inventory
+   module.
 
 1.1.  Scope of the Entitlement Model
 
@@ -197,12 +197,12 @@ Table of Contents
 
    *  What are the implications of purchasing a specific entitlement?
 
-   *  Which entitlement should I acquire to get a specific capability?
+   *  Which entitlement is needed to obtain a specific capability?
 
    *  Is license migration feasible?
 
-   *  What capabilities will be allowed if I install an entitlement in a
-      specific device?
+   *  What capabilities are permitted when an entitlement is installed
+      in a specific device?
 
    *  Features or restrictions that depend on each user.  We are not
       covering this in the current version of this document, but it
@@ -240,10 +240,10 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   *  TBU Open Issue for the IVY WG, to include:
+   *  ToBeUpdated(TBU) Open Issue for the IVY WG, to include:
 
-   (Update Glossary for Network Inventory draft.  We need at least
-   formal definitions of "capability" and "entitlement")
+   <<Update Glossary under Network Inventory draft, [BaseInventory].  We
+   need at least formal definitions of "capability" and "entitlement".>>
 
    *  Capability: A function or resource that a network element can
       support or execute.
@@ -308,7 +308,7 @@ Table of Contents
          +--ro resource-amount?                  int32
          +--ro supporting-entitlements
             +--ro entitlement* [entitlement-id]
-            +--ro entitlement-id                 -> ../../../installed-entitlements/entitlement/eid
+            +--ro entitlement-id                 -> ../../../../../entitlements/entitlement/entitlement-id
             +--ro allowed?                       boolean
             +--ro in-use?                        boolean
             +--ro capability-restriction* [capability-restriction-id]
@@ -373,6 +373,7 @@ Table of Contents
    +--ro state?                               entitlement-state-t
    +--ro renewal-profile
    |  +--ro activation-date?                  yang:date-and-time
+   |  +--ro start-date?                       yang:date-and-time
    |  +--ro expiration-date?                  yang:date-and-time
    +--ro restrictions
    |  +--ro restriction* [restriction-id]
