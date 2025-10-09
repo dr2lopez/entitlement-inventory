@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-07T00:37:52.380325+00:00",
+  "timestamp": "2025-10-09T00:38:01.311571+00:00",
   "repo": "dr2lopez/entitlement-inventory",
   "labels": [
     {
@@ -337,26 +337,42 @@
       "id": "PR_kwDOOCAVZs6rvoso",
       "title": "Adding the comments from Eric V. when supporting call for adoption",
       "url": "https://github.com/dr2lopez/entitlement-inventory/pull/8",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "marisolpalmero",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-02T11:03:30Z",
-      "updatedAt": "2025-10-02T11:03:31Z",
+      "updatedAt": "2025-10-07T10:03:28Z",
       "baseRepository": "dr2lopez/entitlement-inventory",
       "baseRefName": "main",
       "baseRefOid": "fce15cf4c590625dbe7b4e1bd6517127e92c3a86",
       "headRepository": "marisolpalmero/entitlement-inventory",
       "headRefName": "main",
-      "headRefOid": "856f4a9b14df5214e626a1b9b1a523de0e82d494",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "8ecd4bbf1013d15c5edac4e6c2033ab66d27bd33",
+      "closedAt": "2025-10-07T10:03:28Z",
+      "mergedAt": "2025-10-07T10:03:27Z",
+      "mergedBy": "dr2lopez",
+      "mergeCommit": {
+        "oid": "06d0d51bb2fd06ff2ff65d4e6b39462ed07eabee"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOOCAVZs7FP2T_",
+          "commit": {
+            "abbreviatedOid": "856f4a9"
+          },
+          "author": "dr2lopez",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "We need to fix the issue with the double reference to RFC 2119 (I guess it is because moving from \"info\" to \"std\")",
+          "createdAt": "2025-10-07T09:34:40Z",
+          "updatedAt": "2025-10-07T09:34:40Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
