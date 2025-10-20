@@ -127,6 +127,44 @@ Entitlements may be listed without explicitly identifying the assets (network el
 
 Capabilities, restrictions and the entitlements supporting them within a network element are defined under the network-element under the container "capabilities".
 
+## Foundational model: NetworkElement-Entitlements-Capabilities and Restrictions
+
+To represent the complex relationships between network elements, capabilities, and entitlements, a foundational Network Inventory model should be built through a series of extensions. The following diagrams illustrate the progressive complexity of the approach, starting with simple network inventory extensions and culminating in a comprehensive model incorporating capabilities, entitlements, and restrictions.
+
+### Progressive Model Complexity
+
+{{fig-extBaseNetworkInventory}} depicts the initial step, highlighting the base network inventory and the areas to be extended: hardware, software, and entitlements. These extensions are necessary to properly model the relationships.
+
+~~~ aasvg
+{::include art/extensionBaseNetworkInventory.txt}
+~~~
+{: #fig-extBaseNetworkInventory title="Base Network Inventory Entitlement extension " }
+
+
+{{fig-ascii-art_baseInventory}} illustrates the initial relationship between Network Elements and entitlements is two ways: entitlements MIGHT be attached to NE, and NE might have entitlements installed.
+
+~~~ aasvg
+{::include art/ascii-art_baseInventory.txt}
+~~~
+{: #fig-ascii-art_baseInventory title="Relationship between entitlements and Base Inventory" }
+
+
+{{fig-capabilities_baseinventory}} depicts NE support capabilities thanks to entilements that entitle them of their use
+
+~~~ aasvg
+{::include art/capabilities_baseinventory.txt}
+~~~
+{: #fig-capabilities_baseinventory title="Capabilities integration with the Base Inventory" }
+
+
+Finally, NE support capabilities thanks to entilements that entitle them of their use under certain constraints as shown in {{fig-capabilities_restrictions}}.
+
+~~~ aasvg
+{::include art/capabilities_restrictions.txt}
+~~~
+{: #fig-capabilities_restrictions title="Complete model with restrictions" }
+
+
 ## Capabilities
 
 Capabilities are modeled by augmenting "network-element" in the "ietf-network-inventory" module in {{BaseInventory}} according to the following tree:
