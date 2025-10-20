@@ -202,7 +202,7 @@ The capabilities of an inventoried network element may be restricted based on th
 
 The entitlement modeling augments "network-inventory" in the ietf-network-inventory module in {{BaseInventory}} with a top-level entitlements container according to the following tree:
 
-Figure 1 depicts the relationship between the Entitlement Inventory model and other models. The Entitlement Inventory model enhances the model defined in the base network inventory model with entitlement-specific attributes and centralized entitlement management capabilities.
+{{fig-ModelRelationship}} depicts the relationship between the Entitlement Inventory model and other models. The Entitlement Inventory model enhances the model defined in the base network inventory model with entitlement-specific attributes and centralized entitlement management capabilities.
 
 ~~~
    +----------------------+
@@ -219,9 +219,6 @@ Figure 1 depicts the relationship between the Entitlement Inventory model and ot
    |  capabilities,       |
    |  restrictions        |
    +----------------------+
-
-      Figure 1: Relationship of Entitlement Inventory Model to Other
-                              Inventory Models
 ~~~
 {: #fig-ModelRelationship title="Relationship of Entitlement Inventory Model to Other Inventory Models" }
 
