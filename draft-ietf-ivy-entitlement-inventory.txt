@@ -461,6 +461,9 @@ Table of Contents
          Figure 1: Relationship of Entitlement Inventory Model to Other
                                  Inventory Models
 
+       Figure 5: Relationship of Entitlement Inventory Model to Other
+                              Inventory Models
+
 +--ro entitlements
    +--ro entitlement* [eid]
    +--ro eid                                  string
