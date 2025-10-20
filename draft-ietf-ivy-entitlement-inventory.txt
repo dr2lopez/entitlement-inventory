@@ -437,7 +437,7 @@ Table of Contents
    network-inventory module in [BaseInventory] with a top-level
    entitlements container according to the following tree:
 
-   Figure 1 depicts the relationship between the Entitlement Inventory
+   Figure 5 depicts the relationship between the Entitlement Inventory
    model and other models.  The Entitlement Inventory model enhances the
    model defined in the base network inventory model with entitlement-
    specific attributes and centralized entitlement management
@@ -457,9 +457,6 @@ Table of Contents
       |  capabilities,       |
       |  restrictions        |
       +----------------------+
-
-         Figure 1: Relationship of Entitlement Inventory Model to Other
-                                 Inventory Models
 
        Figure 5: Relationship of Entitlement Inventory Model to Other
                               Inventory Models
