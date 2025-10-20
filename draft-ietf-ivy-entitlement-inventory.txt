@@ -5,10 +5,10 @@
 Network Inventory YANG WG                                     M. Palmero
 Internet-Draft                                               Independent
 Intended status: Standards Track                              C. Cardona
-Expires: 13 April 2026                                               NTT
+Expires: 23 April 2026                                               NTT
                                                                 D. Lopez
                                                               Telefonica
-                                                         10 October 2025
+                                                         20 October 2025
 
 
                 A YANG Module for Entitlement Inventory
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 April 2026.
+   This Internet-Draft will expire on 23 April 2026.
 
 Copyright Notice
 
@@ -84,12 +84,15 @@ Table of Contents
      1.2.  Pre-Provisioned vs. Discovered Entitlements
    2.  Conventions and Definitions
    3.  Modeling Capabilities and Entitlements
-     3.1.  Capabilities
-     3.2.  Entitlements
-       3.2.1.  Reverse Mapping from Entitlements to Capabilities
-     3.3.  Entitlement Attachment
-     3.4.  Installed Entitlements
-     3.5.  Model Definition
+     3.1.  Foundational model:
+           NetworkElement-Entitlements-Capabilities and Restrictions
+       3.1.1.  Progressive Model Complexity
+     3.2.  Capabilities
+     3.3.  Entitlements
+       3.3.1.  Reverse Mapping from Entitlements to Capabilities
+     3.4.  Entitlement Attachment
+     3.5.  Installed Entitlements
+     3.6.  Model Definition
    4.  Use cases and Examples
      4.1.  MPLS Capability License on a Network OS
      4.2.  Bandwidth Upgrade via License
@@ -291,7 +294,99 @@ Table of Contents
    within a network element are defined under the network-element under
    the container "capabilities".
 
-3.1.  Capabilities
+3.1.  Foundational model: NetworkElement-Entitlements-Capabilities and
+      Restrictions
+
+   To represent the complex relationships between network elements,
+   capabilities, and entitlements, a foundational Network Inventory
+   model should be built through a series of extensions.  The following
+   diagrams illustrate the progressive complexity of the approach,
+   starting with simple network inventory extensions and culminating in
+   a comprehensive model incorporating capabilities, entitlements, and
+   restrictions.
+
+3.1.1.  Progressive Model Complexity
+
+   Figure 1 depicts the initial step, highlighting the base network
+   inventory and the areas to be extended: hardware, software, and
+   entitlements.  These extensions are necessary to properly model the
+   relationships.
+
+                       ┌─────────────────┐
+                       │Base Network     │
+                       │Inventory        │
+                       └─────────┬───────┘
+           ┌─────────────────────┼─────────────────────┐
+           ▼                     ▼                     ▼
+   ┌─────────────┐    ┌─────────────────┐    ┌─────────────┐
+   │  Hardware   │    │    Software     │    │Entitlements │
+   └─────────────┘    └─────────────────┘    └─────────────┘
+
+           Figure 1: Base Network Inventory Entitlement extension
+
+   Figure 2 illustrates the initial relationship between Network
+   Elements and entitlements is two ways: entitlements MIGHT be attached
+   to NE, and NE might have entitlements installed.
+
+                    ┌─────────────────────────┐
+                    │Base Network Inventory   │
+                    └─────────┬───────────────┘
+        ┌─────────────────────┼─────────────────────┐
+        ▼                     ▼                     ▼
+   ┌────┴────────┐    ┌───────┴─────────┐    ┌──────┴──────┐
+   │  Hardware   │    │    Software     │    │Entitlements │
+   └──────┬──────┘    └───────┬─────────┘    └───┬──┬──────┘
+          │                   │                  │  │
+          │                   └───────<──>───────┘  │
+          └───────────────────<──>──────────────────┘
+
+       Figure 2: Relationship between entitlements and Base Inventory
+
+   Figure 3 depicts NE support capabilities thanks to entilements that
+   entitle them of their use
+
+                    ┌─────────────────────────┐
+                    │Base Network Inventory   │
+                    └──────────┬──────────────┘
+          ┌────────────────────┼────────────────────┐
+          ▼                    ▼                    ▼
+     ┌────┴───────┐    ┌───────┴───────┐     ┌──────┴─────┐
+     │  Hardware  │    │  Entitlements │     │   Software │
+     └────┬───────┘    └─────┬─────────┘     └─────┬──────┘
+          │                  │                     │
+          │                  │enables              │
+          │supports   ┌──────V─────────┐   supports│
+          └──────────>│  Capabilities  │<──────────┘
+                      └────────────────┘
+
+         Figure 3: Capabilities integration with the Base Inventory
+
+   Finally, NE support capabilities thanks to entilements that entitle
+   them of their use under certain constraints as shown in Figure 4.
+
+                 ┌────────────────────────────┐
+                 │   Base Network Inventory   │
+                 └────────────┬───────────────┘
+                              │
+          ┌───────────────────┼─────────────────────┐
+          ▼                   ▼                     ▼
+   ┌──────┴─────┐     ┌───────┴───────┐      ┌──────┴─────┐
+   │  Hardware  │     │  Entitlements │      │   Software │
+   └──────┬─────┘     └───────┬───────┘      └──────┬─────┘
+          │                   │                     │
+          │                   │enables              │
+          │supports    ┌──────V─────────┐   supports│
+          └───────────>│  Capabilities  │<──────────┘
+                       └──────┬─────────┘
+                              │
+                              │constrained by
+                       ┌──────V─────────┐
+                       │  Restrictions  │
+                       └────────────────┘
+
+                 Figure 4: Complete model with restrictions
+
+3.2.  Capabilities
 
    Capabilities are modeled by augmenting "network-element" in the
    "ietf-network-inventory" module in [BaseInventory] according to the
@@ -336,7 +431,7 @@ Table of Contents
    entitlement usage and avoid misconfigurations or exceeding permitted
    capability limits.
 
-3.2.  Entitlements
+3.3.  Entitlements
 
    The entitlement modeling augments "network-inventory" in the ietf-
    network-inventory module in [BaseInventory] with a top-level
@@ -433,7 +528,7 @@ Table of Contents
    In such cases, the parent-entitlement-uid maintains the connection to
    the organizational entitlement policy.
 
-3.2.1.  Reverse Mapping from Entitlements to Capabilities
+3.3.1.  Reverse Mapping from Entitlements to Capabilities
 
    While the model includes links from capabilities to supporting
    entitlements, some inventory operators may need to evaluate
@@ -445,7 +540,7 @@ Table of Contents
    version of the model, once a reliable binding syntax for entitlement
    to capability is standardized.
 
-3.3.  Entitlement Attachment
+3.4.  Entitlement Attachment
 
    The "entitlement" container holds a container called "entitlement-
    attachment" which relates how the entitlement is operationally linked
@@ -486,7 +581,7 @@ Table of Contents
    network elements.  Such scenarios fall under the "what if" category,
    which is not covered by this model.
 
-3.4.  Installed Entitlements
+3.5.  Installed Entitlements
 
    Since capabilities are optional in network elements, the model also
    provides an augmentation to track entitlements that are installed
@@ -507,7 +602,7 @@ Table of Contents
    centralized entitlement management while maintaining the ability to
    track relationships to organization-wide entitlement policies.
 
-3.5.  Model Definition
+3.6.  Model Definition
 
    TBP
 
@@ -837,9 +932,9 @@ json
               Yu, C., Belotti, S., Bouquier, J., Peruzzini, F., and P.
               Bedard, "A Base YANG Data Model for Network Inventory",
               Work in Progress, Internet-Draft, draft-ietf-ivy-network-
-              inventory-yang-08, 22 July 2025,
+              inventory-yang-11, 14 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ivy-
-              network-inventory-yang-08>.
+              network-inventory-yang-11>.
 
 Acknowledgments
 

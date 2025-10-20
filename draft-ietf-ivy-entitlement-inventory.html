@@ -11,25 +11,24 @@
 <meta content="
        This document proposes a YANG module for incorporating entitlements in a network inventory, encompassing both virtual and physical network elements. Entitlements define the rights for their holder to use specific capabilities in a network element(s). The model is rooted by the concept of the capabilities offered by an element, enabled by the held entitlements, and considers entitlement scope, how they are assigned, and when they expire. The model introduces a descriptive definition of capabilities and the entitlement use restrictions, supporting entitlement administration and the understanding of the capabilities available through the network. 
     " name="description">
-<meta content="xml2rfc 3.30.2" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="inventory" name="keyword">
 <meta content="capability" name="keyword">
 <meta content="entitlement" name="keyword">
 <meta content="licensing" name="keyword">
 <meta content="draft-ietf-ivy-entitlement-inventory-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.2
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.4.0
+    platformdirs 4.5.0
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.5
-    setuptools 80.9.0
     wcwidth 0.2.14
 -->
 <link href="draft-ietf-ivy-entitlement-inventory.xml" rel="alternate" type="application/rfc+xml">
@@ -1053,7 +1052,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Palmero, et al.</td>
-<td class="center">Expires 13 April 2026</td>
+<td class="center">Expires 23 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-ivy-entitlement-inventory-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-10" class="published">10 October 2025</time>
+<time datetime="2025-10-20" class="published">20 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-13">13 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-23">23 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1129,7 +1128,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1176,24 +1175,32 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-modeling-capabilities-and-e" class="internal xref">Modeling Capabilities and Entitlements</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-capabilities" class="internal xref">Capabilities</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-entitlements" class="internal xref">Entitlements</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-foundational-model-networke" class="internal xref">Foundational model: NetworkElement-Entitlements-Capabilities and Restrictions</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
-                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-reverse-mapping-from-entitl" class="internal xref">Reverse Mapping from Entitlements to Capabilities</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
+                    <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-progressive-model-complexit" class="internal xref">Progressive Model Complexity</a></p>
 </li>
                 </ul>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-capabilities" class="internal xref">Capabilities</a></p>
+</li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-entitlement-attachment" class="internal xref">Entitlement Attachment</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-entitlements" class="internal xref">Entitlements</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.1">
+                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.  <a href="#name-reverse-mapping-from-entitl" class="internal xref">Reverse Mapping from Entitlements to Capabilities</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-installed-entitlements" class="internal xref">Installed Entitlements</a></p>
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-entitlement-attachment" class="internal xref">Entitlement Attachment</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-model-definition" class="internal xref">Model Definition</a></p>
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-installed-entitlements" class="internal xref">Installed Entitlements</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6">
+                <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.  <a href="#name-model-definition" class="internal xref">Model Definition</a></p>
 </li>
             </ul>
 </li>
@@ -1367,13 +1374,231 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-3-4">(TBD: Provide examples of how this can be done in future releases of this document)<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">Entitlements may be listed without explicitly identifying the assets (network elements or components) they apply to. Entitlements are defined directly under the network-inventory container for organizational management. Entitlements are linked to network-elements in multiple ways: (1) When entitlements are created for specific network-elements (i.e. they should only be installed on those), then those network elements are specified under the entitlement element's attachment section. (2) When an entitlement is installed in a network-element, it appears in the network-element's installed-entitlements list. (3) When an installed entitlement enables capabilities, the network-element's capabilities will reference the installed entitlement via the supporting-entitlements list.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">Capabilities, restrictions and the entitlements supporting them within a network element are defined under the network-element under the container "capabilities".<a href="#section-3-6" class="pilcrow">¶</a></p>
-<div id="capabilities">
+<div id="foundational-model-networkelement-entitlements-capabilities-and-restrictions">
 <section id="section-3.1">
-        <h3 id="name-capabilities">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-capabilities" class="section-name selfRef">Capabilities</a>
+        <h3 id="name-foundational-model-networke">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-foundational-model-networke" class="section-name selfRef">Foundational model: NetworkElement-Entitlements-Capabilities and Restrictions</a>
         </h3>
-<p id="section-3.1-1">Capabilities are modeled by augmenting "network-element" in the "ietf-network-inventory" module in <span>[<a href="#BaseInventory" class="cite xref">BaseInventory</a>]</span> according to the following tree:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.1-2">
+<p id="section-3.1-1">To represent the complex relationships between network elements, capabilities, and entitlements, a foundational Network Inventory model should be built through a series of extensions. The following diagrams illustrate the progressive complexity of the approach, starting with simple network inventory extensions and culminating in a comprehensive model incorporating capabilities, entitlements, and restrictions.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<div id="progressive-model-complexity">
+<section id="section-3.1.1">
+          <h4 id="name-progressive-model-complexit">
+<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-progressive-model-complexit" class="section-name selfRef">Progressive Model Complexity</a>
+          </h4>
+<p id="section-3.1.1-1"><a href="#fig-extBaseNetworkInventory" class="auto internal xref">Figure 1</a> depicts the initial step, highlighting the base network inventory and the areas to be extended: hardware, software, and entitlements. These extensions are necessary to properly model the relationships.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<span id="name-base-network-inventory-enti"></span><div id="fig-extBaseNetworkInventory">
+<figure id="figure-1">
+            <div id="section-3.1.1-2.1">
+              <div class="alignLeft art-svg artwork" id="section-3.1.1-2.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="176" width="464" viewBox="0 0 464 176" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <g class="text">
+                    <text x="240" y="36">┌─────────────────┐</text>
+                    <text x="184" y="52">│Base</text>
+                    <text x="240" y="52">Network</text>
+                    <text x="312" y="52">│</text>
+                    <text x="204" y="68">│Inventory</text>
+                    <text x="312" y="68">│</text>
+                    <text x="240" y="84">└─────────┬───────┘</text>
+                    <text x="248" y="100">┌─────────────────────┼─────────────────────┐</text>
+                    <text x="72" y="116">▼</text>
+                    <text x="248" y="116">▼</text>
+                    <text x="424" y="116">▼</text>
+                    <text x="64" y="132">┌─────────────┐</text>
+                    <text x="232" y="132">┌─────────────────┐</text>
+                    <text x="400" y="132">┌─────────────┐</text>
+                    <text x="8" y="148">│</text>
+                    <text x="60" y="148">Hardware</text>
+                    <text x="120" y="148">│</text>
+                    <text x="160" y="148">│</text>
+                    <text x="228" y="148">Software</text>
+                    <text x="304" y="148">│</text>
+                    <text x="392" y="148">│Entitlements</text>
+                    <text x="456" y="148">│</text>
+                    <text x="64" y="164">└─────────────┘</text>
+                    <text x="232" y="164">└─────────────────┘</text>
+                    <text x="400" y="164">└─────────────┘</text>
+                  </g>
+                </svg><a href="#section-3.1.1-2.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-base-network-inventory-enti" class="selfRef">Base Network Inventory Entitlement extension</a>
+            </figcaption></figure>
+</div>
+<p id="section-3.1.1-3"><a href="#fig-ascii-art_baseInventory" class="auto internal xref">Figure 2</a> illustrates the initial relationship between Network Elements and entitlements is two ways: entitlements MIGHT be attached to NE, and NE might have entitlements installed.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<span id="name-relationship-between-entitl"></span><div id="fig-ascii-art_baseInventory">
+<figure id="figure-2">
+            <div id="section-3.1.1-4.1">
+              <div class="alignLeft art-svg artwork" id="section-3.1.1-4.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="208" width="464" viewBox="0 0 464 208" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <g class="text">
+                    <text x="248" y="36">┌─────────────────────────┐</text>
+                    <text x="160" y="52">│Base</text>
+                    <text x="216" y="52">Network</text>
+                    <text x="288" y="52">Inventory</text>
+                    <text x="352" y="52">│</text>
+                    <text x="248" y="68">└─────────┬───────────────┘</text>
+                    <text x="224" y="84">┌─────────────────────┼─────────────────────┐</text>
+                    <text x="48" y="100">▼</text>
+                    <text x="224" y="100">▼</text>
+                    <text x="400" y="100">▼</text>
+                    <text x="64" y="116">┌────┴────────┐</text>
+                    <text x="232" y="116">┌───────┴─────────┐</text>
+                    <text x="400" y="116">┌──────┴──────┐</text>
+                    <text x="8" y="132">│</text>
+                    <text x="60" y="132">Hardware</text>
+                    <text x="120" y="132">│</text>
+                    <text x="160" y="132">│</text>
+                    <text x="228" y="132">Software</text>
+                    <text x="304" y="132">│</text>
+                    <text x="392" y="132">│Entitlements</text>
+                    <text x="456" y="132">│</text>
+                    <text x="64" y="148">└──────┬──────┘</text>
+                    <text x="232" y="148">└───────┬─────────┘</text>
+                    <text x="400" y="148">└───┬──┬──────┘</text>
+                    <text x="64" y="164">│</text>
+                    <text x="224" y="164">│</text>
+                    <text x="376" y="164">│</text>
+                    <text x="400" y="164">│</text>
+                    <text x="64" y="180">│</text>
+                    <text x="300" y="180">└───────&lt;──&gt;───────┘</text>
+                    <text x="400" y="180">│</text>
+                    <text x="232" y="196">└───────────────────&lt;──&gt;──────────────────┘</text>
+                  </g>
+                </svg><a href="#section-3.1.1-4.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-relationship-between-entitl" class="selfRef">Relationship between entitlements and Base Inventory</a>
+            </figcaption></figure>
+</div>
+<p id="section-3.1.1-5"><a href="#fig-capabilities_baseinventory" class="auto internal xref">Figure 3</a> depicts NE support capabilities thanks to entilements that entitle them of their use<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
+<span id="name-capabilities-integration-wi"></span><div id="fig-capabilities_baseinventory">
+<figure id="figure-3">
+            <div id="section-3.1.1-6.1">
+              <div class="alignLeft art-svg artwork" id="section-3.1.1-6.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="256" width="456" viewBox="0 0 456 256" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <g class="text">
+                    <text x="232" y="36">┌─────────────────────────┐</text>
+                    <text x="144" y="52">│Base</text>
+                    <text x="200" y="52">Network</text>
+                    <text x="272" y="52">Inventory</text>
+                    <text x="336" y="52">│</text>
+                    <text x="232" y="68">└──────────┬──────────────┘</text>
+                    <text x="216" y="84">┌────────────────────┼────────────────────┐</text>
+                    <text x="48" y="100">▼</text>
+                    <text x="216" y="100">▼</text>
+                    <text x="384" y="100">▼</text>
+                    <text x="60" y="116">┌────┴───────┐</text>
+                    <text x="216" y="116">┌───────┴───────┐</text>
+                    <text x="380" y="116">┌──────┴─────┐</text>
+                    <text x="8" y="132">│</text>
+                    <text x="60" y="132">Hardware</text>
+                    <text x="112" y="132">│</text>
+                    <text x="152" y="132">│</text>
+                    <text x="220" y="132">Entitlements</text>
+                    <text x="280" y="132">│</text>
+                    <text x="328" y="132">│</text>
+                    <text x="388" y="132">Software</text>
+                    <text x="432" y="132">│</text>
+                    <text x="60" y="148">└────┬───────┘</text>
+                    <text x="216" y="148">└─────┬─────────┘</text>
+                    <text x="380" y="148">└─────┬──────┘</text>
+                    <text x="48" y="164">│</text>
+                    <text x="200" y="164">│</text>
+                    <text x="376" y="164">│</text>
+                    <text x="48" y="180">│</text>
+                    <text x="228" y="180">│enables</text>
+                    <text x="376" y="180">│</text>
+                    <text x="80" y="196">│supports</text>
+                    <text x="212" y="196">┌──────V─────────┐</text>
+                    <text x="344" y="196">supports│</text>
+                    <text x="96" y="212">└──────────&gt;│</text>
+                    <text x="212" y="212">Capabilities</text>
+                    <text x="328" y="212">│&lt;──────────┘</text>
+                    <text x="212" y="228">└────────────────┘</text>
+                  </g>
+                </svg><a href="#section-3.1.1-6.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-capabilities-integration-wi" class="selfRef">Capabilities integration with the Base Inventory</a>
+            </figcaption></figure>
+</div>
+<p id="section-3.1.1-7">Finally, NE support capabilities thanks to entilements that entitle them of their use under certain constraints as shown in <a href="#fig-capabilities_restrictions" class="auto internal xref">Figure 4</a>.<a href="#section-3.1.1-7" class="pilcrow">¶</a></p>
+<span id="name-complete-model-with-restric"></span><div id="fig-capabilities_restrictions">
+<figure id="figure-4">
+            <div id="section-3.1.1-8.1">
+              <div class="alignLeft art-svg artwork" id="section-3.1.1-8.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="336" width="568" viewBox="0 0 568 336" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <g class="text">
+                    <text x="236" y="36">┌────────────────────────────┐</text>
+                    <text x="120" y="52">│</text>
+                    <text x="164" y="52">Base</text>
+                    <text x="216" y="52">Network</text>
+                    <text x="288" y="52">Inventory</text>
+                    <text x="352" y="52">│</text>
+                    <text x="236" y="68">└────────────┬───────────────┘</text>
+                    <text x="224" y="84">│</text>
+                    <text x="232" y="100">┌───────────────────┼─────────────────────┐</text>
+                    <text x="64" y="116">▼</text>
+                    <text x="224" y="116">▼</text>
+                    <text x="400" y="116">▼</text>
+                    <text x="60" y="132">┌──────┴─────┐</text>
+                    <text x="224" y="132">┌───────┴───────┐</text>
+                    <text x="396" y="132">┌──────┴─────┐</text>
+                    <text x="8" y="148">│</text>
+                    <text x="60" y="148">Hardware</text>
+                    <text x="112" y="148">│</text>
+                    <text x="160" y="148">│</text>
+                    <text x="228" y="148">Entitlements</text>
+                    <text x="288" y="148">│</text>
+                    <text x="344" y="148">│</text>
+                    <text x="404" y="148">Software</text>
+                    <text x="448" y="148">│</text>
+                    <text x="60" y="164">└──────┬─────┘</text>
+                    <text x="224" y="164">└───────┬───────┘</text>
+                    <text x="396" y="164">└──────┬─────┘</text>
+                    <text x="64" y="180">│</text>
+                    <text x="224" y="180">│</text>
+                    <text x="400" y="180">│</text>
+                    <text x="64" y="196">│</text>
+                    <text x="252" y="196">│enables</text>
+                    <text x="400" y="196">│</text>
+                    <text x="96" y="212">│supports</text>
+                    <text x="236" y="212">┌──────V─────────┐</text>
+                    <text x="368" y="212">supports│</text>
+                    <text x="116" y="228">└───────────&gt;│</text>
+                    <text x="236" y="228">Capabilities</text>
+                    <text x="352" y="228">│&lt;──────────┘</text>
+                    <text x="236" y="244">└──────┬─────────┘</text>
+                    <text x="224" y="260">│</text>
+                    <text x="268" y="276">│constrained</text>
+                    <text x="332" y="276">by</text>
+                    <text x="236" y="292">┌──────V─────────┐</text>
+                    <text x="168" y="308">│</text>
+                    <text x="236" y="308">Restrictions</text>
+                    <text x="304" y="308">│</text>
+                    <text x="236" y="324">└────────────────┘</text>
+                  </g>
+                </svg><a href="#section-3.1.1-8.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-complete-model-with-restric" class="selfRef">Complete model with restrictions</a>
+            </figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="capabilities">
+<section id="section-3.2">
+        <h3 id="name-capabilities">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-capabilities" class="section-name selfRef">Capabilities</a>
+        </h3>
+<p id="section-3.2-1">Capabilities are modeled by augmenting "network-element" in the "ietf-network-inventory" module in <span>[<a href="#BaseInventory" class="cite xref">BaseInventory</a>]</span> according to the following tree:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.2-2">
 <pre>
 +--ro capabilities
    +--ro capability-class* [capability-class]
@@ -1397,20 +1622,20 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                +--ro units?                      string
                +--ro max-value?                  int32
                +--ro current-value?              int32
-</pre><a href="#section-3.1-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.2-2" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1-3">For any given network element, the capabilities list <span class="bcp14">MAY</span> include all potential capabilities advertised by the vendor, and <span class="bcp14">MUST</span> include those for which the network operator holds a valid entitlement—whether active or not.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.1-4">The capabilities of an inventoried network element may be restricted based on the availability of proper entitlements. An entitlement manager might be interested in the capabilities available to be used on the network elements, and the capabilities that are currently available. The model includes this information by means of the "supporting entitlements" list, which references locally installed entitlements and includes potential restrictions related to the status of the entitlement. This allows organizations to monitor entitlement usage and avoid misconfigurations or exceeding permitted capability limits.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">For any given network element, the capabilities list <span class="bcp14">MAY</span> include all potential capabilities advertised by the vendor, and <span class="bcp14">MUST</span> include those for which the network operator holds a valid entitlement—whether active or not.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">The capabilities of an inventoried network element may be restricted based on the availability of proper entitlements. An entitlement manager might be interested in the capabilities available to be used on the network elements, and the capabilities that are currently available. The model includes this information by means of the "supporting entitlements" list, which references locally installed entitlements and includes potential restrictions related to the status of the entitlement. This allows organizations to monitor entitlement usage and avoid misconfigurations or exceeding permitted capability limits.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="entitlements">
-<section id="section-3.2">
+<section id="section-3.3">
         <h3 id="name-entitlements">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-entitlements" class="section-name selfRef">Entitlements</a>
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-entitlements" class="section-name selfRef">Entitlements</a>
         </h3>
-<p id="section-3.2-1">The entitlement modeling augments "network-inventory" in the ietf-network-inventory module in <span>[<a href="#BaseInventory" class="cite xref">BaseInventory</a>]</span> with a top-level entitlements container according to the following tree:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">Figure 1 depicts the relationship between the Entitlement Inventory model and other models. The Entitlement Inventory model enhances the model defined in the base network inventory model with entitlement-specific attributes and centralized entitlement management capabilities.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.2-3">
+<p id="section-3.3-1">The entitlement modeling augments "network-inventory" in the ietf-network-inventory module in <span>[<a href="#BaseInventory" class="cite xref">BaseInventory</a>]</span> with a top-level entitlements container according to the following tree:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">Figure 1 depicts the relationship between the Entitlement Inventory model and other models. The Entitlement Inventory model enhances the model defined in the base network inventory model with entitlement-specific attributes and centralized entitlement management capabilities.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.3-3">
 <pre>
    +----------------------+
    |                      |
@@ -1429,9 +1654,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 
       Figure 1: Relationship of Entitlement Inventory Model to Other
                               Inventory Models
-</pre><a href="#section-3.2-3" class="pilcrow">¶</a>
+</pre><a href="#section-3.3-3" class="pilcrow">¶</a>
 </div>
-<div class="alignLeft art-text artwork" id="section-3.2-4">
+<div class="alignLeft art-text artwork" id="section-3.3-4">
 <pre>
 +--ro entitlements
    +--ro entitlement* [eid]
@@ -1464,56 +1689,56 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                +--ro component* [network-element component-id]
                   +--ro network-element    -&gt; /network-inventory/network-elements/network-element/ne-id
                   +--ro component-id       -&gt; /network-inventory/network-elements/network-element/components/component/component-id
-</pre><a href="#section-3.2-4" class="pilcrow">¶</a>
+</pre><a href="#section-3.3-4" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-5">Entitlements and network elements are linked in the model in multiple ways. Entitlements at the network-inventory level might be attached to network elements through their attachment mechanism, representing organizational entitlements. Network elements have their own installed-entitlements that may be derived from the centralized entitlements or installed directly. The capabilities of network elements reference these locally installed entitlements through their supporting-entitlements lists. The former addresses the case of a centralized license server or inventory system, while the latter represents entitlements that are locally available and actively used by the network element's capabilities. An installed entitlement that is not referenced by any network element capability means that it is available locally but not currently in use.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
-<p id="section-3.2-6">Entitlements are managed both centrally at the network-inventory level and locally within network elements through installed-entitlements. Network elements utilize locally installed entitlements and reference them through their capabilities' supporting-entitlements lists. For instance, a license server or inventory system might list an entitlement at the top level, which then gets installed on specific network elements where the capabilities reference the local copy. The "parent-entitlement-uid" field in installed entitlements provides traceability back to centralized entitlements when applicable. Proper identification of entitlements is imperative to ensure consistency across systems, enabling monitoring systems to recognize when multiple locations reference related entitlements. Furthermore, there are cases where an authorized network element might have locally installed entitlements without explicit knowledge of the covering organizational license. Consider the scenario of a site license, wherein any device under the site may utilize a feature through locally installed entitlements derived from the site-wide license. In such cases, the parent-entitlement-uid maintains the connection to the organizational entitlement policy.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-5">Entitlements and network elements are linked in the model in multiple ways. Entitlements at the network-inventory level might be attached to network elements through their attachment mechanism, representing organizational entitlements. Network elements have their own installed-entitlements that may be derived from the centralized entitlements or installed directly. The capabilities of network elements reference these locally installed entitlements through their supporting-entitlements lists. The former addresses the case of a centralized license server or inventory system, while the latter represents entitlements that are locally available and actively used by the network element's capabilities. An installed entitlement that is not referenced by any network element capability means that it is available locally but not currently in use.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3-6">Entitlements are managed both centrally at the network-inventory level and locally within network elements through installed-entitlements. Network elements utilize locally installed entitlements and reference them through their capabilities' supporting-entitlements lists. For instance, a license server or inventory system might list an entitlement at the top level, which then gets installed on specific network elements where the capabilities reference the local copy. The "parent-entitlement-uid" field in installed entitlements provides traceability back to centralized entitlements when applicable. Proper identification of entitlements is imperative to ensure consistency across systems, enabling monitoring systems to recognize when multiple locations reference related entitlements. Furthermore, there are cases where an authorized network element might have locally installed entitlements without explicit knowledge of the covering organizational license. Consider the scenario of a site license, wherein any device under the site may utilize a feature through locally installed entitlements derived from the site-wide license. In such cases, the parent-entitlement-uid maintains the connection to the organizational entitlement policy.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
 <div id="reverse-mapping-from-entitlements-to-capabilities">
-<section id="section-3.2.1">
+<section id="section-3.3.1">
           <h4 id="name-reverse-mapping-from-entitl">
-<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-reverse-mapping-from-entitl" class="section-name selfRef">Reverse Mapping from Entitlements to Capabilities</a>
+<a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-reverse-mapping-from-entitl" class="section-name selfRef">Reverse Mapping from Entitlements to Capabilities</a>
           </h4>
-<p id="section-3.2.1-1">While the model includes links from capabilities to supporting entitlements, some inventory operators may need to evaluate entitlements independently and identify the capabilities they enable.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-2">To support this, implementers may use the "product-id" or "capability-class" metadata along with external references or catalogs. A reverse mapping structure may be introduced in a future version of the model, once a reliable binding syntax for entitlement to capability is standardized.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-1">While the model includes links from capabilities to supporting entitlements, some inventory operators may need to evaluate entitlements independently and identify the capabilities they enable.<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-2">To support this, implementers may use the "product-id" or "capability-class" metadata along with external references or catalogs. A reverse mapping structure may be introduced in a future version of the model, once a reliable binding syntax for entitlement to capability is standardized.<a href="#section-3.3.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="entitlement-attachment">
-<section id="section-3.3">
+<section id="section-3.4">
         <h3 id="name-entitlement-attachment">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-entitlement-attachment" class="section-name selfRef">Entitlement Attachment</a>
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-entitlement-attachment" class="section-name selfRef">Entitlement Attachment</a>
         </h3>
-<p id="section-3.3-1">The "entitlement" container holds a container called "entitlement-attachment" which relates how the entitlement is operationally linked to holders or network elements. Note that there is a difference between an entitlement being attached to a network element and an entitlement being installed in the network element. In the former, the license was explicitly associated with one or more network elements. Some licenses actually can be open but have a limited number of installation. Other licenses might be openly constrained to a geographic location. We are not dealing with these complex cases now, but the container can be expanded for this in the future.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">The model accommodates listing entitlements acquired by the organization but not yet applied or utilized by any actor/asset at the network-inventory level. For these pending entitlements, they can be managed centrally without requiring individual network elements to be aware of their existence.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.3-3">Some entitlements are inherently associated with a holder, such as organization or a user. For example, a software license might be directly attached to a user. Also, the use of a network device might come with a basic license provided solely to an organization. Some entitlements could be assigned to a more abstract description of holders, such as people under a jurisdiction or a geographical area. The model contains basic information about this, but it can be extended in the future to be more descriptive.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3-4">While attachment is optional, the model should be capable of expressing attachment in various scenarios. The model can be expanded to list to which network elements an entitlement is aimed for, when this link is more vague, such as a site license (e.g., network elements located in a specific site), or more open licenses (e.g., free software for all users subscribed to a streaming platform).<a href="#section-3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.3-5">It is important to note that the current model does not provide information on whether an entitlement can be reassigned to other network elements. Such scenarios fall under the "what if" category, which is not covered by this model.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.4-1">The "entitlement" container holds a container called "entitlement-attachment" which relates how the entitlement is operationally linked to holders or network elements. Note that there is a difference between an entitlement being attached to a network element and an entitlement being installed in the network element. In the former, the license was explicitly associated with one or more network elements. Some licenses actually can be open but have a limited number of installation. Other licenses might be openly constrained to a geographic location. We are not dealing with these complex cases now, but the container can be expanded for this in the future.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">The model accommodates listing entitlements acquired by the organization but not yet applied or utilized by any actor/asset at the network-inventory level. For these pending entitlements, they can be managed centrally without requiring individual network elements to be aware of their existence.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.4-3">Some entitlements are inherently associated with a holder, such as organization or a user. For example, a software license might be directly attached to a user. Also, the use of a network device might come with a basic license provided solely to an organization. Some entitlements could be assigned to a more abstract description of holders, such as people under a jurisdiction or a geographical area. The model contains basic information about this, but it can be extended in the future to be more descriptive.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<p id="section-3.4-4">While attachment is optional, the model should be capable of expressing attachment in various scenarios. The model can be expanded to list to which network elements an entitlement is aimed for, when this link is more vague, such as a site license (e.g., network elements located in a specific site), or more open licenses (e.g., free software for all users subscribed to a streaming platform).<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.4-5">It is important to note that the current model does not provide information on whether an entitlement can be reassigned to other network elements. Such scenarios fall under the "what if" category, which is not covered by this model.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="installed-entitlements">
-<section id="section-3.4">
+<section id="section-3.5">
         <h3 id="name-installed-entitlements">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-installed-entitlements" class="section-name selfRef">Installed Entitlements</a>
+<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-installed-entitlements" class="section-name selfRef">Installed Entitlements</a>
         </h3>
-<p id="section-3.4-1">Since capabilities are optional in network elements, the model also provides an augmentation to track entitlements that are installed directly on network elements. This augmentation of "network-element" in the "ietf-network-inventory" module provides local entitlement storage according to the following tree:<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.4-2">
+<p id="section-3.5-1">Since capabilities are optional in network elements, the model also provides an augmentation to track entitlements that are installed directly on network elements. This augmentation of "network-element" in the "ietf-network-inventory" module provides local entitlement storage according to the following tree:<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.5-2">
 <pre>
 +--ro installed-entitlements
    +--ro entitlement* [eid]
    +--ro eid                                  -&gt; /network-inventory/entitlements/entitlement/eid
-</pre><a href="#section-3.4-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-3.4-3">The installed entitlements represent references to entitlements that are locally present on the network element. The "eid" field provides a direct reference to the centralized entitlement at the network-inventory level.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
-<p id="section-3.4-4">This structure allows network elements to operate independently of centralized entitlement management while maintaining the ability to track relationships to organization-wide entitlement policies.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.5-3">The installed entitlements represent references to entitlements that are locally present on the network element. The "eid" field provides a direct reference to the centralized entitlement at the network-inventory level.<a href="#section-3.5-3" class="pilcrow">¶</a></p>
+<p id="section-3.5-4">This structure allows network elements to operate independently of centralized entitlement management while maintaining the ability to track relationships to organization-wide entitlement policies.<a href="#section-3.5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="model-definition">
-<section id="section-3.5">
+<section id="section-3.6">
         <h3 id="name-model-definition">
-<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-model-definition" class="section-name selfRef">Model Definition</a>
+<a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-model-definition" class="section-name selfRef">Model Definition</a>
         </h3>
-<p id="section-3.5-1">TBP<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.6-1">TBP<a href="#section-3.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1869,7 +2094,7 @@ json
 <dl class="references">
 <dt id="BaseInventory">[BaseInventory]</dt>
       <dd>
-<span class="refAuthor">Yu, C.</span>, <span class="refAuthor">Belotti, S.</span>, <span class="refAuthor">Bouquier, J.</span>, <span class="refAuthor">Peruzzini, F.</span>, and <span class="refAuthor">P. Bedard</span>, <span class="refTitle">"A Base YANG Data Model for Network Inventory"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ivy-network-inventory-yang-08</span>, <time datetime="2025-07-22" class="refDate">22 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-yang-08">https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-yang-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Yu, C.</span>, <span class="refAuthor">Belotti, S.</span>, <span class="refAuthor">Bouquier, J.</span>, <span class="refAuthor">Peruzzini, F.</span>, and <span class="refAuthor">P. Bedard</span>, <span class="refTitle">"A Base YANG Data Model for Network Inventory"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ivy-network-inventory-yang-11</span>, <time datetime="2025-10-14" class="refDate">14 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-yang-11">https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-yang-11</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
