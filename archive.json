@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-19T00:43:56.205574+00:00",
+  "timestamp": "2025-10-21T00:39:51.946144+00:00",
   "repo": "dr2lopez/entitlement-inventory",
   "labels": [
     {
@@ -373,6 +373,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOOCAVZs6ughxx",
+      "title": "New diagrams incorporated, they were presented during IETF 123",
+      "url": "https://github.com/dr2lopez/entitlement-inventory/pull/9",
+      "state": "MERGED",
+      "author": "marisolpalmero",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "we introduced the diagrams during the presentation to the IVY WG in IETF 123 but we didnt include them in the draft itself",
+      "createdAt": "2025-10-19T12:40:30Z",
+      "updatedAt": "2025-10-20T11:54:51Z",
+      "baseRepository": "dr2lopez/entitlement-inventory",
+      "baseRefName": "main",
+      "baseRefOid": "5563d4446b41363c3bcec7df2658f50021416e18",
+      "headRepository": "marisolpalmero/entitlement-inventory",
+      "headRefName": "main",
+      "headRefOid": "23a1628b4d3f84f91fe6697178451c0ce202aaaa",
+      "closedAt": "2025-10-20T11:54:51Z",
+      "mergedAt": "2025-10-20T11:54:51Z",
+      "mergedBy": "dr2lopez",
+      "mergeCommit": {
+        "oid": "cacd4f25bfff060a96a3fe30f3ded037c0ab261e"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
