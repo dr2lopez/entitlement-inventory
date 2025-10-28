@@ -7,18 +7,19 @@
           "components": {
             "component": [
               {
-                "component-id": "chassis-router-1"
+                "component-id": "chassis-router-1",
+                "class": "iana-hardware:chassis"
               }
             ]
           },
-          "entitlement-inventory:installed-entitlements": {
+          "ietf-entitlement-inventory:installed-entitlements": {
             "entitlement": [
               {
                 "entitlement-id": "ent-1"
               }
             ]
           },
-          "entitlement-inventory:capabilities": {
+          "ietf-entitlement-inventory:capabilities": {
             "capability-class": [
               {
                 "capability-class": "basic-capability-description",
@@ -43,7 +44,7 @@
         }
       ]
     },
-    "entitlement-inventory:entitlements": {
+    "ietf-entitlement-inventory:entitlements": {
           "entitlement": [
             {
               "entitlement-id": "ent-1",

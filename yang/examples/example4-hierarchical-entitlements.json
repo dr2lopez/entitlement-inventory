@@ -1,6 +1,6 @@
 {
   "ietf-network-inventory:network-inventory": {
-    "entitlement-inventory:entitlements": {
+    "ietf-entitlement-inventory:entitlements": {
       "entitlement": [
         {
           "entitlement-id": "bronze-routing-base",
@@ -59,11 +59,12 @@
         "components": {
           "component": [
             {
-              "component-id": "main-unit"
+              "component-id": "main-unit",
+              "class": "iana-hardware:chassis"
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "bronze-routing-base",
@@ -71,7 +72,7 @@
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",
@@ -132,11 +133,12 @@
         "components": {
           "component": [
             {
-              "component-id": "main-unit"
+              "component-id": "main-unit",
+              "class": "iana-hardware:chassis"
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "bronze-routing-base",
@@ -148,7 +150,7 @@
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",

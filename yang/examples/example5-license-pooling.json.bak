@@ -1,5 +1,6 @@
 {
-  "ietf-network-inventory:network-elements": {
+  "ietf-network-inventory:network-inventory": {
+    "network-elements": {
     "network-element": [
       {
         "ne-id": "datacenter-router-1",
@@ -10,7 +11,7 @@
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "enterprise-license-pool"
@@ -20,7 +21,7 @@
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",
@@ -85,14 +86,14 @@
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "enterprise-license-pool"
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",
@@ -134,14 +135,14 @@
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "advanced-security-pool"
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",
@@ -177,7 +178,7 @@
     ]
   },
   "ietf-network-inventory:network-inventory": {
-    "entitlement-inventory:entitlements": {
+    "ietf-entitlement-inventory:entitlements": {
       "entitlement": [
         {
           "entitlement-id": "enterprise-license-pool",
@@ -257,5 +258,6 @@
         }
       ]
     }
+  }
   }
 }

@@ -23,7 +23,8 @@ module ietf-entitlement-inventory {
      Author:  Diego Lopez
     ";
   description
-    "A YANG module for Entitlement Inventory, as per draft-ietf-ivy-entitlement-inventory-01.
+    "A YANG module for Entitlement Inventory, as per
+     draft-ietf-ivy-entitlement-inventory-01.
 
      Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -48,7 +49,8 @@ module ietf-entitlement-inventory {
 
   revision 2025-10-20 {
     description
-      "First full draft version for draft-ietf-ivy-entitlement-inventory";
+      "First full draft version for
+       draft-ietf-ivy-entitlement-inventory";
     reference
       "draft-ietf-ivy-entitlement-inventory-01";
   }
@@ -89,21 +91,25 @@ module ietf-entitlement-inventory {
 
   grouping installed-entitlements-group {
     description
-      "Grouping for installed entitlements that can be applied to network elements or components.";
+      "Grouping for installed entitlements that can be applied to
+       network elements or components.";
     container installed-entitlements {
       presence
-        "The presence of this container means the information system that exposes
-         this model knows of the installed entitlements of the element (network
-         element or component) that it populates. An empty list of entitlements
-         would then mean that no entitlement is installed in this device.";
+        "The presence of this container means the information system
+         that exposes this model knows of the installed entitlements
+         of the element (network element or component) that it
+         populates. An empty list of entitlements would then mean
+         that no entitlement is installed in this device.";
       config false;
       description
-        "Entitlements installed locally on this element (network element or component).";
+        "Entitlements installed locally on this element (network
+         element or component).";
       list entitlement {
         key "entitlement-id";
         description
-          "List of entitlements installed on this element. Each entitlement references
-           a global listed entitlement and indicates whether it is actively in use.";
+          "List of entitlements installed on this element. Each
+           entitlement references a global listed entitlement and
+           indicates whether it is actively in use.";
         leaf entitlement-id {
           type leafref {
             path "/inv:network-inventory/ei:entitlements"
@@ -115,13 +121,15 @@ module ietf-entitlement-inventory {
         leaf in-use {
           type boolean;
           description
-            "Informs whether the entitlement is actively used, besides being
-             installed. If existing, and if the capabilities list exist and the
-             information system supports setting their entitlement-state, this
-             information MUST be consistent with it. Meaning, this should be
-             in-use if any capability it supports is in-use, or false otherwise.
-             The no presence of this leaf means that the information system
-             cannot express this information";
+            "Informs whether the entitlement is actively used,
+             besides being installed. If existing, and if the
+             capabilities list exist and the information system
+             supports setting their entitlement-state, this
+             information MUST be consistent with it. Meaning, this
+             should be in-use if any capability it supports is
+             in-use, or false otherwise.  The no presence of this
+             leaf means that the information system cannot express
+             this information";
         }
       }
     }
@@ -129,34 +137,39 @@ module ietf-entitlement-inventory {
 
   grouping capabilities-group {
     description
-      "Grouping for capabilities that can be applied to network elements or components.
-       Capabilities represent what the element can do, potentially restricted by entitlements.";
+      "Grouping for capabilities that can be applied to network
+       elements or components.  Capabilities represent what the
+       element can do, potentially restricted by entitlements.";
     container capabilities {
       presence
-        "The presence of this container means the information system that exposes
-         this model is aware of and can report the capabilities of this element
-         (network element or component). An empty list of capability classes would
-         mean that the element has no capabilities configured or available.";
+        "The presence of this container means the information system
+         that exposes this model is aware of and can report the
+         capabilities of this element (network element or component).
+         An empty list of capability classes would mean that the
+         element has no capabilities configured or available.";
       config false;
       description
-        "Container for capabilities of this element (network element or component).";
+        "Container for capabilities of this element (network element
+         or component).";
       list capability-class {
         key "capability-class";
         description
-          "List of capability classes supported by this element. Each class groups
-           related capabilities.";
+          "List of capability classes supported by this element. Each
+           class groups related capabilities.";
         leaf capability-class {
           type identityref {
             base capability-class;
           }
           description
-            "Identifier for the capability class using an identity reference.";
+            "Identifier for the capability class using an identity
+             reference.";
         }
         list capability {
           key "capability-id";
           description
-            "Individual capability within this class. Represents a specific function
-             or feature that the element may perform.";
+            "Individual capability within this class. Represents a
+             specific function or feature that the element may
+             perform.";
           leaf capability-id {
             type string;
             description
@@ -169,12 +182,13 @@ module ietf-entitlement-inventory {
           }
           container entitlement-state {
             presence
-              "The presence of this container indicates the system can report
-               whether this capability is allowed and/or in use based on
-               entitlement status.";
+              "The presence of this container indicates the system
+               can report whether this capability is allowed and/or
+               in use based on entitlement status.";
             description
-              "Reports whether this capability is permitted by entitlements and
-               whether it is currently in active use.";
+              "Reports whether this capability is permitted by
+               entitlements and whether it is currently in active
+               use.";
             leaf allowed {
               type boolean;
               description
@@ -189,21 +203,25 @@ module ietf-entitlement-inventory {
           list supporting-entitlement {
             key "entitlement-id";
             description
-              "List of locally installed entitlements that enable or support this capability.
-               The capability may require one or more entitlements to be allowed and in use.";
+              "List of locally installed entitlements
+               that enable or support this capability. The
+               capability may require one or more entitlements to be
+               allowed and in use.";
             leaf entitlement-id {
               type leafref {
                 path "../../../../../installed-entitlements"
                    + "/entitlement/entitlement-id";
               }
               description
-                "Reference to locally installed entitlement supporting this capability.";
+                "Reference to locally installed entitlement
+                 supporting this capability.";
             }
           }
           list capability-restriction {
             key "capability-restriction-id";
             description
-              "Restrictions or limits imposed on this capability by entitlements.";
+              "Restrictions or limits imposed on this capability by
+               entitlements.";
             leaf capability-restriction-id {
               type string;
               description
@@ -217,22 +235,26 @@ module ietf-entitlement-inventory {
             leaf resource-name {
               type string;
               description
-                "Optional name of the physical or network resource being restricted.";
+                "Optional name of the physical or network resource
+                 being restricted.";
             }
             leaf units {
               type string;
               description
-                "Units for the restriction values (e.g., 'Mbps', 'connections', 'tunnels').";
+                "Units for the restriction values (e.g., 'Mbps',
+                 'connections', 'tunnels').";
             }
             leaf max-value {
               type int32;
               description
-                "Maximum permitted value for this restriction as defined by the entitlement.";
+                "Maximum permitted value for this restriction as
+                 defined by the entitlement.";
             }
             leaf current-value {
               type int32;
               description
-                "Current usage or consumption of this restricted resource at query time.";
+                "Current usage or consumption of this restricted
+                 resource at query time.";
             }
           }
         }
@@ -243,54 +265,60 @@ module ietf-entitlement-inventory {
   augment "/inv:network-inventory/inv:network-elements"
         + "/inv:network-element" {
     description
-      "Augments network elements with installed entitlements tracking which
-       entitlements or rights are locally available on the device.";
+      "Augments network elements with installed entitlements tracking
+       which entitlements or rights are locally available on the
+       device.";
     uses installed-entitlements-group;
   }
 
   augment "/inv:network-inventory/inv:network-elements"
         + "/inv:network-element/inv:components/inv:component" {
     description
-      "Augments network element components with installed entitlements for
-       component-level tracking.";
+      "Augments network element components with installed
+       entitlements for component-level tracking.";
     uses installed-entitlements-group;
   }
 
   augment "/inv:network-inventory/inv:network-elements"
         + "/inv:network-element" {
     description
-      "Augments network elements with capabilities information, describing
-       what functions the element can perform and their entitlement status.";
+      "Augments network elements with capabilities information,
+       describing what functions the element can perform and their
+       entitlement status.";
     uses capabilities-group;
   }
 
   augment "/inv:network-inventory/inv:network-elements"
         + "/inv:network-element/inv:components/inv:component" {
     description
-      "Augments network element components with capabilities for component-level
-       feature tracking and entitlement restrictions.";
+      "Augments network element components with capabilities for
+       component-level feature tracking and entitlement
+       restrictions.";
     uses capabilities-group;
   }
 
   augment "/inv:network-inventory" {
     description
-      "Augments the network inventory with a centralized entitlements catalog.
-       This provides organization-wide visibility of all acquired entitlements,
-       their holders, validity periods, and asset associations.";
+      "Augments the network inventory with a centralized entitlements
+       catalog.  This provides organization-wide visibility of all
+       acquired entitlements, their holders, validity periods, and
+       asset associations.";
     container entitlements {
       presence
-        "The presence of this container indicates the system maintains and can
-         report the organizational entitlement catalog. An empty list means the
-         organization has no entitlements defined.";
+        "The presence of this container indicates the system
+         maintains and can report the organizational entitlement
+         catalog. An empty list means the organization has no
+         entitlements defined.";
       config false;
       description
         "Top-level container for organizational entitlements.";
       list entitlement {
         key "entitlement-id";
         description
-          "List of entitlements owned or managed by the organization. Each entitlement
-           represents a license, right, or permission to use specific capabilities,
-           potentially with restrictions on scope, time, or usage.";
+          "List of entitlements owned or managed by the organization.
+           Each entitlement represents a license, right, or
+           permission to use specific capabilities, potentially with
+           restrictions on scope, time, or usage.";
         leaf entitlement-id {
           type string;
           description
@@ -304,20 +332,21 @@ module ietf-entitlement-inventory {
         leaf sku {
           type string;
           description
-            "Stock Keeping Unit - vendor's catalog/ordering number for this
-             entitlement. Used for procurement and asset management integration.";
+            "Stock Keeping Unit - vendor's catalog/ordering number
+             for this entitlement. Used for procurement and asset
+             management integration.";
         }
         leaf vendor {
           type string;
           description
-            "Vendor or issuer of this entitlement (e.g., 'Cisco', 'Juniper',
-             'Manufacturer Name'). Identifies the license provider.";
+            "Vendor or issuer of this entitlement. Identifies the
+             license provider.";
         }
         leaf part-number {
           type string;
           description
-            "Manufacturer's part number. May differ from SKU in distribution
-             channels.";
+            "Manufacturer's part number. May differ from SKU in
+             distribution channels.";
         }
         leaf state {
           type entitlement-state-t;
@@ -349,9 +378,10 @@ module ietf-entitlement-inventory {
           list restriction {
             key "restriction-id";
             description
-              "List of restrictions that apply globally to this entitlement across
-               all assets and holders. These may include usage limits, quotas, or
-               other constraints on how the entitlement can be utilized.";
+              "List of restrictions that apply globally to this
+               entitlement across all assets and holders. These may
+               include usage limits, quotas, or other constraints on
+               how the entitlement can be utilized.";
             leaf restriction-id {
               type string;
               description
@@ -360,18 +390,21 @@ module ietf-entitlement-inventory {
             leaf description {
               type string;
               description
-                "Human-readable description of the restriction. Should include
-                 temporal semantics if applicable (e.g., 'monthly accumulated',
-                 'per billing period', 'real-time snapshot').";
+                "Human-readable description of the restriction.
+                 Should include temporal semantics if applicable
+                 (e.g., 'monthly accumulated', 'per billing period',
+                 'real-time snapshot').";
             }
             leaf resource-name {
               type string;
               description
-                "Optional name of the physical or network resource being restricted
-                 (e.g., 'bandwidth', 'throughput', 'storage', 'memory'). Use this
-                 when the restriction tracks consumption of infrastructure resources.
-                 Not needed for abstract licensing metrics (license counts, tiers, etc.)
-                 where restriction-id and description are sufficient.";
+                "Optional name of the physical or network resource
+                 being restricted (e.g., 'bandwidth', 'throughput',
+                 'storage', 'memory'). Use this when the restriction
+                 tracks consumption of infrastructure resources.  Not
+                 needed for abstract licensing metrics (license
+                 counts, tiers, etc.) where restriction-id and
+                 description are sufficient.";
             }
             leaf units {
               type string;
@@ -386,11 +419,13 @@ module ietf-entitlement-inventory {
             leaf current-value {
               type int32;
               description
-                "Current usage value as reported by the system at query time.
-                 Temporal semantics (snapshot, accumulator, billing period, etc.)
-                 are defined by the restriction's description field. For real-time
-                 query timestamp, use the NETCONF/RESTCONF protocol's timestamp
-                 mechanisms rather than adding timestamps to individual restrictions.";
+                "Current usage value as reported by the system at
+                 query time.  Temporal semantics (snapshot,
+                 accumulator, billing period, etc.) are defined by
+                 the restriction's description field. For real-time
+                 query timestamp, use the NETCONF/RESTCONF protocol's
+                 timestamp mechanisms rather than adding timestamps
+                 to individual restrictions.";
             }
           }
         }
@@ -400,14 +435,16 @@ module ietf-entitlement-inventory {
           }
           must '. != ../entitlement-id' {
             error-message
-              "An entitlement cannot reference itself as its parent.";
+              "An entitlement cannot reference itself as its
+               parent.";
           }
           description
             "Reference to parent entitlement if this is derived.";
         }
         container entitlement-attachment {
           description
-            "Defines how the entitlement is attached to holders and assets.";
+            "Defines how the entitlement is attached to holders and
+             assets.";
           leaf universal-access {
             type boolean;
             description
@@ -448,8 +485,9 @@ module ietf-entitlement-inventory {
                      + "/inv:ne-id";
                 }
                 description
-                  "References to network elements covered by this entitlement.
-                   When specified, this entitlement applies to the listed network elements.";
+                  "References to network elements covered by this
+                   entitlement.  When specified, this entitlement
+                   applies to the listed network elements.";
               }
             }
             container components {
@@ -458,8 +496,9 @@ module ietf-entitlement-inventory {
               list component {
                 key "network-element component-id";
                 description
-                  "List of specific components to which this entitlement applies.
-                   Allows fine-grained entitlement assignment at the component level
+                  "List of specific components to which this
+                   entitlement applies.  Allows fine-grained
+                   entitlement assignment at the component level
                    rather than entire network elements.";
                 leaf network-element {
                   type leafref {

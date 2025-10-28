@@ -1,6 +1,6 @@
 {
   "ietf-network-inventory:network-inventory": {
-    "entitlement-inventory:entitlements": {
+    "ietf-entitlement-inventory:entitlements": {
       "entitlement": [
         {
           "entitlement-id": "bronze-routing-base",
@@ -52,7 +52,7 @@
       ]
     }
   },
-  "ietf-network-inventory:network-elements": {
+  "network-elements": {
     "network-element": [
       {
         "ne-id": "branch-router-1",
@@ -63,7 +63,7 @@
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "bronze-routing-base",
@@ -71,7 +71,7 @@
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",
@@ -136,7 +136,7 @@
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "bronze-routing-base",
@@ -148,7 +148,7 @@
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",

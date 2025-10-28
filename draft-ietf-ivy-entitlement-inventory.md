@@ -169,29 +169,8 @@ Finally, NE support capabilities thanks to entilements that entitle them of thei
 
 Capabilities are modeled by augmenting "network-element" in the "ietf-network-inventory" module in {{BaseInventory}} according to the following tree:
 
-~~~
-+--ro capabilities
-   +--ro capability-class* [capability-class]
-      +--ro capability-class                     identityref
-      +--ro capability* [capability-id]
-         +--ro capability-id                     string
-         +--ro extended-capability-description?     string
-         +--ro resource-description?             string
-         +--ro resource-units?                   string
-         +--ro resource-amount?                  int32
-         +--ro supporting-entitlements
-            +--ro entitlement* [entitlement-id]
-            +--ro entitlement-id                 -> ../../../../../entitlements/entitlement/entitlement-id
-            +--ro allowed?                       boolean
-            +--ro in-use?                        boolean
-            +--ro capability-restriction* [capability-restriction-id]
-               +--ro capability-restriction-id   string
-               +--ro component-id?               -> ../../../../../components/component/component-id
-               +--ro description?                string
-               +--ro resource-name?              string
-               +--ro units?                      string
-               +--ro max-value?                  int32
-               +--ro current-value?              int32
+~~~ aasvg
+{::include trees/capability_tree.txt}
 ~~~
 
 For any given network element, the capabilities list MAY include all potential capabilities advertised by the vendor, and MUST include those for which the network operator holds a valid entitlement—whether active or not.
@@ -223,37 +202,7 @@ The entitlement modeling augments "network-inventory" in the ietf-network-invent
 {: #fig-ModelRelationship title="Relationship of Entitlement Inventory Model to Other Inventory Models" }
 
 ~~~
-+--ro entitlements
-   +--ro entitlement* [eid]
-   +--ro eid                                  string
-   +--ro product-id?                          string
-   +--ro state?                               entitlement-state-t
-   +--ro renewal-profile
-   |  +--ro activation-date?                  yang:date-and-time
-   |  +--ro start-date?                       yang:date-and-time
-   |  +--ro expiration-date?                  yang:date-and-time
-   +--ro restrictions
-   |  +--ro restriction* [restriction-id]
-   |  +--ro restriction-id                    string
-   |  +--ro description?                      string
-   |  +--ro units?                            string
-   |  +--ro max-value?                        int32
-   |  +--ro current-value?                    int32
-   +--ro parent-entitlement-uid?              -> ../entitlement/eid
-   +--ro entitlement-attachment
-      +--ro universal-access?   boolean
-      +--ro holders
-      |  +--ro organizations_names
-      |  |  +--ro organizations*           string
-      |  +--ro users_names
-      |     +--ro users*                   string
-      +--ro assets
-         +--ro elements
-            +--ro network-elements*        -> /network-inventory/network-elements/network-element/ne-id
-            +--ro components
-               +--ro component* [network-element component-id]
-                  +--ro network-element    -> /network-inventory/network-elements/network-element/ne-id
-                  +--ro component-id       -> /network-inventory/network-elements/network-element/components/component/component-id
+{::include trees/entitlements_tree.txt}
 ~~~
 
 Entitlements and network elements are linked in the model in multiple ways. Entitlements at the network-inventory level might be attached to network elements through their attachment mechanism, representing organizational entitlements. Network elements have their own installed-entitlements that may be derived from the centralized entitlements or installed directly. The capabilities of network elements reference these locally installed entitlements through their supporting-entitlements lists. The former addresses the case of a centralized license server or inventory system, while the latter represents entitlements that are locally available and actively used by the network element's capabilities. An installed entitlement that is not referenced by any network element capability means that it is available locally but not currently in use.
@@ -283,9 +232,7 @@ It is important to note that the current model does not provide information on w
 Since capabilities are optional in network elements, the model also provides an augmentation to track entitlements that are installed directly on network elements. This augmentation of "network-element" in the "ietf-network-inventory" module provides local entitlement storage according to the following tree:
 
 ~~~
-+--ro installed-entitlements
-   +--ro entitlement* [eid]
-   +--ro eid                                  -> /network-inventory/entitlements/entitlement/eid
+{::include trees/installed_entitlments_tree.txt}
 ~~~
 
 The installed entitlements represent references to entitlements that are locally present on the network element. The "eid" field provides a direct reference to the centralized entitlement at the network-inventory level.

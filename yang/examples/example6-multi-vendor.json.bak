@@ -1,5 +1,6 @@
 {
-  "ietf-network-inventory:network-elements": {
+  "ietf-network-inventory:network-inventory": {
+    "network-elements": {
     "network-element": [
       {
         "ne-id": "vendor-a-router-hq-1",
@@ -10,14 +11,14 @@
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "vendor-a-sdwan-consumption"
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",
@@ -59,7 +60,7 @@
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "vendor-b-datacenter-perpetual"
@@ -69,7 +70,7 @@
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",
@@ -114,14 +115,14 @@
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "vendor-c-telemetry-tier-standard"
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",
@@ -157,7 +158,7 @@
     ]
   },
   "ietf-network-inventory:network-inventory": {
-    "entitlement-inventory:entitlements": {
+    "ietf-entitlement-inventory:entitlements": {
       "entitlement": [
         {
           "entitlement-id": "vendor-a-sdwan-consumption",
@@ -304,5 +305,6 @@
         }
       ]
     }
+  }
   }
 }

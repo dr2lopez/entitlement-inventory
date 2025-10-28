@@ -7,11 +7,12 @@
         "components": {
           "component": [
             {
-              "component-id": "main-chassis"
+              "component-id": "main-chassis",
+              "class": "iana-hardware:chassis"
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "security-suite-ent",
@@ -27,7 +28,7 @@
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",
@@ -109,7 +110,7 @@
     ]
   },
   "ietf-network-inventory:network-inventory": {
-    "entitlement-inventory:entitlements": {
+    "ietf-entitlement-inventory:entitlements": {
       "entitlement": [
         {
           "entitlement-id": "security-suite-ent",

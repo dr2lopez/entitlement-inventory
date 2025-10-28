@@ -1,6 +1,6 @@
 {
   "ietf-network-inventory:network-inventory": {
-    "entitlement-inventory:entitlements": {
+    "ietf-entitlement-inventory:entitlements": {
       "entitlement": [
         {
           "entitlement-id": "base-system-license",
@@ -155,14 +155,14 @@
             },
             {
               "component-id": "linecard-slot-1",
-              "entitlement-inventory:installed-entitlements": {
+              "ietf-entitlement-inventory:installed-entitlements": {
                 "entitlement": [
                   {
                     "entitlement-id": "port-license-100g-slot1"
                   }
                 ]
               },
-              "entitlement-inventory:capabilities": {
+              "ietf-entitlement-inventory:capabilities": {
                 "capability-class": [
                   {
                     "capability-class": "basic-capability-description",
@@ -197,14 +197,14 @@
             },
             {
               "component-id": "linecard-slot-2",
-              "entitlement-inventory:installed-entitlements": {
+              "ietf-entitlement-inventory:installed-entitlements": {
                 "entitlement": [
                   {
                     "entitlement-id": "port-license-100g-slot2"
                   }
                 ]
               },
-              "entitlement-inventory:capabilities": {
+              "ietf-entitlement-inventory:capabilities": {
                 "capability-class": [
                   {
                     "capability-class": "basic-capability-description",
@@ -239,14 +239,14 @@
             },
             {
               "component-id": "security-module",
-              "entitlement-inventory:installed-entitlements": {
+              "ietf-entitlement-inventory:installed-entitlements": {
                 "entitlement": [
                   {
                     "entitlement-id": "crypto-accelerator-license"
                   }
                 ]
               },
-              "entitlement-inventory:capabilities": {
+              "ietf-entitlement-inventory:capabilities": {
                 "capability-class": [
                   {
                     "capability-class": "basic-capability-description",
@@ -281,7 +281,7 @@
             }
           ]
         },
-        "entitlement-inventory:installed-entitlements": {
+        "ietf-entitlement-inventory:installed-entitlements": {
           "entitlement": [
             {
               "entitlement-id": "base-system-license"
@@ -300,7 +300,7 @@
             }
           ]
         },
-        "entitlement-inventory:capabilities": {
+        "ietf-entitlement-inventory:capabilities": {
           "capability-class": [
             {
               "capability-class": "basic-capability-description",
