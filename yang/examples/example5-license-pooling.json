@@ -179,8 +179,7 @@
         }
       }
     ]
-  },
-  "ietf-network-inventory:network-inventory": {
+    },
     "ietf-entitlement-inventory:entitlements": {
       "entitlement": [
         {
@@ -261,6 +260,5 @@
         }
       ]
     }
-  }
   }
 }

@@ -142,10 +142,9 @@
           }
         }
       ]
-    }
-  },
-  "network-elements": {
-    "network-element": [
+    },
+    "network-elements": {
+      "network-element": [
       {
         "ne-id": "modular-router-dc1",
         "components": {
@@ -338,5 +337,6 @@
         }
       }
     ]
+  }
   }
 }

@@ -50,10 +50,9 @@
           }
         }
       ]
-    }
-  },
-  "network-elements": {
-    "network-element": [
+    },
+    "network-elements": {
+      "network-element": [
       {
         "ne-id": "branch-router-1",
         "components": {
@@ -285,5 +284,6 @@
         }
       }
     ]
+  }
   }
 }
