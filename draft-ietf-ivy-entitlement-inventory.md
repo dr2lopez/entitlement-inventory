@@ -74,12 +74,12 @@ The entitlement model aims to provide an inventory of entitlements. This include
 
 * What entitlements are administered/owned by the organization?
 * How are entitlements restricted to some assets and holders?
-* What entitlements are installed on each network element?
-* What constraints do the current installed entitlements impose on the network elements' functionality?
+* What entitlements are installed on each network asset?
+* What constraints do the current installed entitlements impose on the network assets' functionality?
 * Does the entitlement impose any kind of global restrictions? What are they?
 * What are the restrictions that each network element has due to the entitlements it holds locally?
 
-(Note to LLM: "installed" entitlements means assigning an entitlmenets to a particular device. It can be by the act of "installing" in the device, but in other models, this might mean "asssigning" an entitlmenet to a device. Some enetilmtnet could be assinged to multiple elements (with  a limit), that's what we refer to by global restriction of the entilemente.
+In this document, the term "installed entitlements" refers to entitlements that have been assigned to a particular network asset. The act of installation may involve directly provisioning the entitlement on the device or component, or it may represent a logical assignment in a centralized system. Some entitlements may be assigned to multiple network assets up to a defined limit; such constraints can be modelled as global restrictions of under the entitlement.
 
 The model is designed with flexibility in mind, allowing for expansion through the utilization of tools provided by YANG.
 
@@ -95,17 +95,19 @@ With the aim of clarifying the model scope, here are some questions that our mod
 
 This model focuses on the ability to use capabilities, not on access control mechanisms. For example, if a router cannot enable MPLS due to entitlement restrictions, it means the organization lacks the rights to use that capability—even if access to the device itself is available. This distinction is separate from, for instance, the ability of a specific user to configure MPLS due to access control limitations.
 
-## (LLM: to be revised) Models for entitlmenet services
+## Entitlement Deployment Models
 
-The assignement of entitlements to entitle a device can be done in differnet ways. It can be done in the network elment, where a license is "installed" (is there re a better term) and it allows. Licenses could also resize outside the network elmenet, in an external element, that could be called a license server. License server can be local or in the cloud (are there references?). Network elements might require knowledge of the entitlment to oeprate, iether by them being locally intalled or by communication to the license server. In some sitations the license might just exist via commercial aggregament and the policy enformcement happens outside. 
+Entitlements can be deployed and managed in different ways depending on the operational environment and vendor implementation. The following deployment models are commonly encountered:
 
-This model is envision to be expose by both network elements and/or license servies. It has ways of adding information that is "known" by each element, and be clear of the ifnroation it does not have (mostly via the existence or not of containers). A network element might contain certain information, the license service other, and a telemetry monitoring system could gather from both sides and provide a single complete picutre if needed.
+- **Local Installation:** The entitlement is installed directly on the network asset, which maintains knowledge of its entitlements and enforces capability restrictions locally. This is a common approach for devices that operate independently.
 
-(LLM: if there are other entlilements models you consider importan please let me know)
+- **License Server:** Entitlements reside in an external license server, which may be deployed on-premises or in the cloud. Network assets communicate with the license server to verify entitlement status and capability permissions. This model supports centralized management and dynamic entitlement allocation.
 
-## Pre-Provisioned vs. Discovered Entitlements
+- **Commercial Agreement:** In some deployments, entitlements exist purely as commercial agreements, and policy enforcement occurs outside the network asset. The network asset may operate without direct knowledge of the entitlement, relying on external systems for compliance tracking.
 
-(LLM: not sure if this section can be convered by the last one)
+This model is designed to be exposed by both network elements and license services. It provides mechanisms for each system to express the information it knows while being clear about the information it does not have, primarily through the presence or absence of containers. A network element might contain certain entitlement information, a license service other information, and a telemetry monitoring system could gather data from both sources to provide a complete picture.
+
+### Entitlement Provisioning
 
 This model is not intended for automatic discovery of entitlements or capabilities through the network elements themselves. Instead, it assumes that entitlements and their associations are either:
 
@@ -113,7 +115,7 @@ This model is not intended for automatic discovery of entitlements or capabiliti
 - Installed on individual devices and reported through management interfaces; or
 - Manually configured as part of an inventory process.
 
-Future augmentations may explore capability discovery or telemetry driven models, but they are out of scope for the current version.
+Future augmentations may explore capability discovery or telemetry-driven models, but they are out of scope for the current version.
 
 
 # Conventions and Definitions
@@ -126,27 +128,13 @@ Future augmentations may explore capability discovery or telemetry driven models
 
 - Capability: A function or resource that a network element can support or execute.
 - Entitlement: A right granted to a holder (organization or user) to access or activate specific capabilities under defined conditions.
+- Network Asset: A network element or a component within a network element. The model supports entitlements and capabilities at both levels. This term is used throughout the document when the concept applies equally to network elements and their components.
 
 # Modeling Capabilities and Entitlements
 
-The model describes how to represent capabilities and the entitlements that enable them across inventoried network elements. Capabilities describe what a device can do. Entitlements indicate whether those capabilities are allowed and under what conditions.
+The model describes how to represent capabilities and the entitlements that enable them across inventoried network assets. Capabilities describe what an asset can do. Entitlements indicate whether those capabilities are allowed and under what conditions.
 
-(LLM: The next paragraph is redundant to the previous section we created, wher eshouuld the information be?, should the section be before or here?)
-
-In deployments where entitlements are directly associated with specific network elements, the devices themselves may expose entitlement information. Alternatively, some environments may rely on a centralized license server that maintains the entitlements of an organization. By querying the list of capabilities and entitlements, along with their associated metadata, a NETCONF or RESTCONF client can retrieve essential inventory details about what capabilities are available and which entitlements are currently in place.
-
-
-(LLM: The next sentence is mostly focused on capabilities. THis document IS NOT to define a full theory of capabilities or its internal relationships, we would like other work (to be define elsewhere) to define it and have flexible way of relating it. For that we will have a instance type of relationthip in yang, basically the capability reference will be of certain type, besides respeciting just an id and a description. For simple cases capabilities will just be described for the people reading (they will become a list basically), for more complex cases we can refernece other models wit ha full description of  capabiltiies. Also capabilities for the scope of entitlmeents are UP to the scope of the vendor. A vendor might just annouce" advanced services as capabilities, thta is fine, an viewer of the information MUST know form documentsio nwhat that means (e.g. MPLS, BGP, etc), but an implementation might be free to just list all capabilities using this. )
-
-Note that the model uses lists based on classes on multiple parts to be able to extend functionality.
-
-(TBD: Provide examples of how this can be done in future releases of this document)
-
-(LLM: In the next paragraph, I want you to specify that listing shortly that entiltmenets MUST be listed outside elements because some of them can be own by organizations freely without assignment until the organization decides to do so (either "installing" or "assigning" them for use in an elemnt))
-
-Entitlements may be listed without explicitly identifying the assets (network elements or components) they apply to. Entitlements are defined directly under the network-inventory container for organizational management. Entitlements are linked to network-elements in multiple ways: (1) When entitlements are created for specific network-elements (i.e. they should only be installed on those), then those network elements are specified under the entitlement element's attachment section. (2) When an entitlement is installed in a network-element, it appears in the network-element's installed-entitlements list. (3) When an installed entitlement enables capabilities, the network-element's capabilities will reference the installed entitlement via the supporting-entitlements list.
-
-Capabilities, restrictions and the entitlements supporting them within a network element are defined under the network-element under the container "capabilities".
+The following subsections describe how the model progressively builds upon the base network inventory to incorporate capabilities, entitlements, and their relationships. The model uses identity-based classes in multiple parts to enable extensibility, allowing implementations to derive custom types that reference external definitions when needed.
 
 ## Foundational model: NetworkElement-Entitlements-Capabilities and Restrictions
 
@@ -194,11 +182,13 @@ Capabilities are modeled by augmenting "network-element" in the "ietf-network-in
 {::include trees/capability_tree.txt}
 ~~~
 
-For any given network element, the capabilities list MAY include all potential capabilities advertised by the vendor, and MUST include those for which the network operator holds a valid entitlement—whether active or not.
+For any given network asset, the capabilities list MAY include all potential capabilities advertised by the vendor, and MUST include those for which the network operator holds a valid entitlement—whether active or not.
 
-(LLM: as described before, in the simple case, a vendor might just follow convention to describe capabilities such as Advanced services, this should be hinted but not overall PUSH in the draft as something recommended.. The model class systme will allow it to also link to other models with a more descriptive ifnormation of capaiblities. )
+This document does not define a complete theory of capabilities or their internal relationships; such work may be addressed elsewhere. Instead, the model provides a flexible framework through the use of identity-based capability classes. For simple use cases, capabilities are described using an identifier and a textual description, allowing implementations to present them as a basic list. For more complex scenarios, the `capability-class` identity can be derived to reference external models that provide comprehensive capability definitions.
 
-The capabilities of an inventoried network element may be restricted based on the availability of proper entitlements. An entitlement manager might be interested in the capabilities available to be used on the network elements, and the capabilities that are currently available. The model includes this information by means of the "supporting entitlements" list, which references locally installed entitlements and includes potential restrictions related to the status of the entitlement. This allows organizations to monitor entitlement usage and avoid misconfigurations or exceeding permitted capability limits.
+The granularity at which capabilities are defined is at the discretion of the vendor. A vendor MAY choose to advertise capabilities at a high level of abstraction, such as "Advanced Services," and consumers of this information should refer to vendor documentation to understand what specific functions are included. Alternatively, an implementation MAY enumerate capabilities at a finer granularity, listing individual protocols or features such as MPLS, BGP, or QoS. The model accommodates both approaches.
+
+The capabilities of an inventoried network asset may be restricted based on the availability of proper entitlements. An entitlement manager might be interested in the capabilities available to be used on the network assets, and the capabilities that are currently available. The model includes this information by means of the "supporting entitlements" list, which references locally installed entitlements and includes potential restrictions related to the status of the entitlement. This allows organizations to monitor entitlement usage and avoid misconfigurations or exceeding permitted capability limits.
 
 ## Entitlements
 
@@ -228,11 +218,23 @@ The entitlement modeling augments "network-inventory" in the ietf-network-invent
 {::include trees/entitlements_tree.txt}
 ~~~
 
-(LLM: The inventory model counts with network element and components within. A network elmenet is an abstraction, that in many cases can be considered the "network elemnt" per se: the router, the switch, etc. It is probalby necessary for multichassis lements like stacked swichtes that behave like one, otpical elements and so, where each component is very well  individual in many sense (comercially for insance), but the set behaves as a network element. there is really no concept of MAIN component under network elemnt unfotuntalty. This brings a limitation to our model. Entitlmenets are normally set in a more comerciatl set and normaly aim at serial numbers. We link to both network elemnts adn components BUT we recommend ONLY using the component when it is necessar.. when each component has its own set of limitations capabilites that must be mangaged (either individual swtichins in a stack, indivitual chassis in a multichassis network elment -ushc as optincal, or pay-as-you-grow routers where line cards inherit this rot of behaviour, we will . In the rest of the document we will reference to the 'element' interacting with the entitlement or offering a capability as the network asset to facilitate the langatue, in the concrete model though, we have to cover both cases by adding reference to both entwork element and component or extending each one of them if needed.)
+Entitlements MUST be listed at the top level, directly under the `network-inventory` container. This is required because organizations may own entitlements that are not yet assigned to any network asset. Such entitlements exist in a pending state, available for future assignment or installation when the organization decides to allocate them to specific assets.
 
-Entitlements and network elements are linked in the model in multiple ways. Entitlements at the network-inventory level might be attached to network elements through their attachment mechanism, representing organizational entitlements. Network elements have their own installed-entitlements that may be derived from the centralized entitlements or installed directly. The capabilities of network elements reference these locally installed entitlements through their supporting-entitlements lists. The former addresses the case of a centralized license server or inventory system, while the latter represents entitlements that are locally available and actively used by the network element's capabilities. An installed entitlement that is not referenced by any network element capability means that it is available locally but not currently in use.
+Entitlements may be listed without explicitly identifying the assets (network elements or components) they apply to. Entitlements are linked to network assets in multiple ways: (1) When entitlements are created for specific assets (i.e., they should only be installed on those), then those assets are specified under the entitlement's attachment section. (2) When an entitlement is installed on a network asset, it appears in the asset's installed-entitlements list. (3) When an installed entitlement enables capabilities, the asset's capabilities will reference the installed entitlement via the supporting-entitlements list.
 
-Entitlements are managed both centrally at the network-inventory level and locally within network elements through installed-entitlements. Network elements utilize locally installed entitlements and reference them through their capabilities' supporting-entitlements lists. For instance, a license server or inventory system might list an entitlement at the top level, which then gets installed on specific network elements where the capabilities reference the local copy. The "parent-entitlement-uid" field in installed entitlements provides traceability back to centralized entitlements when applicable. Proper identification of entitlements is imperative to ensure consistency across systems, enabling monitoring systems to recognize when multiple locations reference related entitlements. Furthermore, there are cases where an authorized network element might have locally installed entitlements without explicit knowledge of the covering organizational license. Consider the scenario of a site license, wherein any device under the site may utilize a feature through locally installed entitlements derived from the site-wide license. In such cases, the parent-entitlement-uid maintains the connection to the organizational entitlement policy.
+The base network inventory model includes both network elements and components within them. A network element is an abstraction that typically represents a complete device such as a router or switch. For single-chassis devices, entitlements are typically associated with the network element itself rather than with individual chassis components. However, certain deployment scenarios involve multi-chassis systems—such as stacked switches or optical network elements—where multiple physical units operate as a single logical network element. In these cases, each component may have its own commercial identity (such as a serial number) while the collection behaves as one network element.
+
+Entitlements are typically assigned based on commercial identifiers, often targeting serial numbers. The model supports linking entitlements to both network elements and individual components. However, component-level entitlement tracking is RECOMMENDED only when necessary—specifically when each component has its own set of capability limitations that must be managed independently. Examples include:
+
+- Individual switches in a stack, where each unit has separate entitlements;
+- Individual chassis in a multi-chassis network element, such as optical equipment; or
+- Pay-as-you-grow routers where line cards have independent entitlement requirements.
+
+In the YANG model, both network elements and components are supported by providing augmentations to each.
+
+Entitlements and network assets are linked in the model in multiple ways. Entitlements at the network-inventory level might be attached to network assets through their attachment mechanism, representing organizational entitlements. Network assets have their own installed-entitlements that may be derived from the centralized entitlements or installed directly. The capabilities of network assets reference these locally installed entitlements through their supporting-entitlements lists. The former addresses the case of a centralized license server or inventory system, while the latter represents entitlements that are locally available and actively used by the asset's capabilities. An installed entitlement that is not referenced by any capability means that it is available locally but not currently in use.
+
+Entitlements are managed both centrally at the network-inventory level and locally within network assets through installed-entitlements. Network assets utilize locally installed entitlements and reference them through their capabilities' supporting-entitlements lists. For instance, a license server or inventory system might list an entitlement at the top level, which then gets installed on specific network assets where the capabilities reference the local copy. The "parent-entitlement-uid" field in installed entitlements provides traceability back to centralized entitlements when applicable. Proper identification of entitlements is imperative to ensure consistency across systems, enabling monitoring systems to recognize when multiple locations reference related entitlements. Furthermore, there are cases where an authorized network asset might have locally installed entitlements without explicit knowledge of the covering organizational license. Consider the scenario of a site license, wherein any device under the site may utilize a feature through locally installed entitlements derived from the site-wide license. In such cases, the parent-entitlement-uid maintains the connection to the organizational entitlement policy.
 
 ### Reverse Mapping from Entitlements to Capabilities
 
@@ -242,32 +244,39 @@ To support this, implementers may use the "product-id" or "capability-class" met
 
 ## Entitlement Attachment
 
-The "entitlement" container holds a container called "entitlement-attachment" which relates how the entitlement is operationally linked to holders or network elements. Note that there is a difference between an entitlement being attached to a network element and an entitlement being installed in the network element. In the former, the license was explicitly associated with one or more network elements. Some licenses actually can be open but have a limited number of installation. Other licenses might be openly constrained to a geographic location. We are not dealing with these complex cases now, but the container can be expanded for this in the future.
+The "entitlement" container holds a container called "entitlement-attachment" which relates how the entitlement is operationally linked to holders or network assets. Note that there is a difference between an entitlement being attached to a network asset and an entitlement being installed on the asset. In the former, the license was explicitly associated with one or more assets. Some licenses actually can be open but have a limited number of installations. Other licenses might be openly constrained to a geographic location. We are not dealing with these complex cases now, but the container can be expanded for this in the future.
 
-The model accommodates listing entitlements acquired by the organization but not yet applied or utilized by any actor/asset at the network-inventory level. For these pending entitlements, they can be managed centrally without requiring individual network elements to be aware of their existence.
+The model accommodates listing entitlements acquired by the organization but not yet applied or utilized by any actor/asset at the network-inventory level. For these pending entitlements, they can be managed centrally without requiring individual network assets to be aware of their existence.
 
 Some entitlements are inherently associated with a holder, such as organization or a user. For example, a software license might be directly attached to a user. Also, the use of a network device might come with a basic license provided solely to an organization. Some entitlements could be assigned to a more abstract description of holders, such as people under a jurisdiction or a geographical area. The model contains basic information about this, but it can be extended in the future to be more descriptive.
 
-While attachment is optional, the model should be capable of expressing attachment in various scenarios. The model can be expanded to list to which network elements an entitlement is aimed for, when this link is more vague, such as a site license (e.g., network elements located in a specific site), or more open licenses (e.g., free software for all users subscribed to a streaming platform).
+While attachment is optional, the model should be capable of expressing attachment in various scenarios. The model can be expanded to list to which network assets an entitlement is aimed for, when this link is more vague, such as a site license (e.g., network assets located in a specific site), or more open licenses (e.g., free software for all users subscribed to a streaming platform).
 
-It is important to note that the current model does not provide information on whether an entitlement can be reassigned to other network elements. Such scenarios fall under the "what if" category, which is not covered by this model.
+It is important to note that the current model does not provide information on whether an entitlement can be reassigned to other network assets. Such scenarios fall under the "what if" category, which is not covered by this model.
 
 ## Installed Entitlements
 
-Since capabilities are optional in network elements, the model also provides an augmentation to track entitlements that are installed directly on network elements. This augmentation of "network-element" in the "ietf-network-inventory" module provides local entitlement storage according to the following tree:
+Since capabilities are optional in network assets, the model also provides an augmentation to track entitlements that are installed directly on network assets. This augmentation of "network-element" and "component" in the "ietf-network-inventory" module provides local entitlement storage according to the following tree:
 
 ~~~
 {::include trees/installed_entitlments_tree.txt}
 ~~~
 
-The installed entitlements represent references to entitlements that are locally present on the network element. The "eid" field provides a direct reference to the centralized entitlement at the network-inventory level.
+The installed entitlements represent references to entitlements that are locally present on the network asset. The "entitlement-id" field provides a direct reference to the centralized entitlement at the network-inventory level.
 
-This structure allows network elements to operate independently of centralized entitlement management while maintaining the ability to track relationships to organization-wide entitlement policies.
+This structure allows network assets to operate independently of centralized entitlement management while maintaining the ability to track relationships to organization-wide entitlement policies.
 
 
 ## Model Definition
+~~~
+{::include yang/ietf-entitlement-inventory.yang}
+~~~
 
-TBP
+### Model tree
+
+~~~
+{::include yang/trees/ietf-entitlement-inventory.tree}
+~~~
 
 
 # Use cases and Examples
