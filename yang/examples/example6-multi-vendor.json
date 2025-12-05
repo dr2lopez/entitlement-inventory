@@ -1,164 +1,176 @@
 {
   "ietf-network-inventory:network-inventory": {
     "network-elements": {
-    "network-element": [
-      {
-        "ne-id": "vendor-a-router-hq-1",
-        "components": {
-          "component": [
-            {
-              "component-id": "chassis",
-              "class": "iana-hardware:chassis"
-            }
-          ]
-        },
-        "ietf-entitlement-inventory:installed-entitlements": {
-          "entitlement": [
-            {
-              "entitlement-id": "vendor-a-sdwan-consumption"
-            }
-          ]
-        },
-        "ietf-entitlement-inventory:capabilities": {
-          "capability-class": [
-            {
-              "capability-class": "basic-capability-description",
-              "capability": [
-                {
-                  "capability-id": "sd-wan",
-                  "extended-capability-description": "SD-WAN with consumption-based billing",
-                  "entitlement-state": {
-                    "allowed": true,
-                    "in-use": true
-                  },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "vendor-a-sdwan-consumption"
-                    }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "active-tunnels",
-                      "description": "Current active SD-WAN tunnels",
-                      "resource-name": "tunnels",
-                      "units": "count",
-                      "max-value": 100,
-                      "current-value": 45
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "ne-id": "vendor-b-switch-dc-1",
-        "components": {
-          "component": [
-            {
-              "component-id": "main-unit",
-              "class": "iana-hardware:chassis"
-            }
-          ]
-        },
-        "ietf-entitlement-inventory:installed-entitlements": {
-          "entitlement": [
-            {
-              "entitlement-id": "vendor-b-datacenter-perpetual"
-            },
-            {
-              "entitlement-id": "vendor-b-support-subscription"
-            }
-          ]
-        },
-        "ietf-entitlement-inventory:capabilities": {
-          "capability-class": [
-            {
-              "capability-class": "basic-capability-description",
-              "capability": [
-                {
-                  "capability-id": "evpn-vxlan",
-                  "extended-capability-description": "EVPN-VXLAN overlay",
-                  "entitlement-state": {
-                    "allowed": true,
-                    "in-use": true
-                  },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "vendor-b-datacenter-perpetual"
+      "network-element": [
+        {
+          "ne-id": "vendor-a-router-hq-1",
+          "components": {
+            "component": [
+              {
+                "component-id": "chassis",
+                "class": "iana-hardware:chassis"
+              }
+            ]
+          },
+          "ietf-entitlement-inventory:installed-entitlements": {
+            "entitlement": [
+              {
+                "entitlement-id": "vendor-a-sdwan-consumption"
+              }
+            ]
+          },
+          "ietf-entitlement-inventory:capabilities": {
+            "capability-class": [
+              {
+                "capability-class": "basic-capability-description",
+                "capability": [
+                  {
+                    "capability-id": "sd-wan",
+                    "extended-capability-description": "SD-WAN with consumption-based billing",
+                    "entitlement-state": {
+                      "allowed": true,
+                      "in-use": true
                     },
-                    {
-                      "entitlement-id": "vendor-b-support-subscription"
+                    "supporting-entitlements": {
+                      "supporting-entitlement": [
+                        {
+                          "entitlement-id": "vendor-a-sdwan-consumption"
+                        }
+                      ]
+                    },
+                    "capability-restrictions": {
+                      "capability-restriction": [
+                        {
+                          "capability-restriction-id": "active-tunnels",
+                          "description": "Current active SD-WAN tunnels",
+                          "resource-name": "tunnels",
+                          "units": "count",
+                          "max-value": 100,
+                          "current-value": 45
+                        }
+                      ]
                     }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "vxlan-tunnels",
-                      "description": "Maximum VXLAN tunnel endpoints",
-                      "resource-name": "vteps",
-                      "units": "endpoints",
-                      "max-value": 500,
-                      "current-value": 234
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "ne-id": "vendor-c-switch-dc-2",
-        "components": {
-          "component": [
-            {
-              "component-id": "chassis",
-              "class": "iana-hardware:chassis"
-            }
-          ]
+                  }
+                ]
+              }
+            ]
+          }
         },
-        "ietf-entitlement-inventory:installed-entitlements": {
-          "entitlement": [
-            {
-              "entitlement-id": "vendor-c-telemetry-tier-standard"
-            }
-          ]
+        {
+          "ne-id": "vendor-b-switch-dc-1",
+          "components": {
+            "component": [
+              {
+                "component-id": "main-unit",
+                "class": "iana-hardware:chassis"
+              }
+            ]
+          },
+          "ietf-entitlement-inventory:installed-entitlements": {
+            "entitlement": [
+              {
+                "entitlement-id": "vendor-b-datacenter-perpetual"
+              },
+              {
+                "entitlement-id": "vendor-b-support-subscription"
+              }
+            ]
+          },
+          "ietf-entitlement-inventory:capabilities": {
+            "capability-class": [
+              {
+                "capability-class": "basic-capability-description",
+                "capability": [
+                  {
+                    "capability-id": "evpn-vxlan",
+                    "extended-capability-description": "EVPN-VXLAN overlay",
+                    "entitlement-state": {
+                      "allowed": true,
+                      "in-use": true
+                    },
+                    "supporting-entitlements": {
+                      "supporting-entitlement": [
+                        {
+                          "entitlement-id": "vendor-b-datacenter-perpetual"
+                        },
+                        {
+                          "entitlement-id": "vendor-b-support-subscription"
+                        }
+                      ]
+                    },
+                    "capability-restrictions": {
+                      "capability-restriction": [
+                        {
+                          "capability-restriction-id": "vxlan-tunnels",
+                          "description": "Maximum VXLAN tunnel endpoints",
+                          "resource-name": "vteps",
+                          "units": "endpoints",
+                          "max-value": 500,
+                          "current-value": 234
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
         },
-        "ietf-entitlement-inventory:capabilities": {
-          "capability-class": [
-            {
-              "capability-class": "basic-capability-description",
-              "capability": [
-                {
-                  "capability-id": "streaming-telemetry",
-                  "extended-capability-description": "Streaming telemetry tier",
-                  "entitlement-state": {
-                    "allowed": true,
-                    "in-use": true
-                  },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "vendor-c-telemetry-tier-standard"
+        {
+          "ne-id": "vendor-c-switch-dc-2",
+          "components": {
+            "component": [
+              {
+                "component-id": "chassis",
+                "class": "iana-hardware:chassis"
+              }
+            ]
+          },
+          "ietf-entitlement-inventory:installed-entitlements": {
+            "entitlement": [
+              {
+                "entitlement-id": "vendor-c-telemetry-tier-standard"
+              }
+            ]
+          },
+          "ietf-entitlement-inventory:capabilities": {
+            "capability-class": [
+              {
+                "capability-class": "basic-capability-description",
+                "capability": [
+                  {
+                    "capability-id": "streaming-telemetry",
+                    "extended-capability-description": "Streaming telemetry tier",
+                    "entitlement-state": {
+                      "allowed": true,
+                      "in-use": true
+                    },
+                    "supporting-entitlements": {
+                      "supporting-entitlement": [
+                        {
+                          "entitlement-id": "vendor-c-telemetry-tier-standard"
+                        }
+                      ]
+                    },
+                    "capability-restrictions": {
+                      "capability-restriction": [
+                        {
+                          "capability-restriction-id": "telemetry-streams",
+                          "description": "Maximum concurrent telemetry streams",
+                          "resource-name": "streams",
+                          "units": "streams",
+                          "max-value": 200,
+                          "current-value": 87
+                        }
+                      ]
                     }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "telemetry-streams",
-                      "description": "Maximum concurrent telemetry streams",
-                      "resource-name": "streams",
-                      "units": "streams",
-                      "max-value": 200,
-                      "current-value": 87
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+                  }
+                ]
+              }
+            ]
+          }
         }
-      }
-    ]
+      ]
     },
     "ietf-entitlement-inventory:entitlements": {
       "entitlement": [
@@ -189,15 +201,21 @@
             "universal-access": false,
             "holders": {
               "organizations_names": {
-                "organizations": ["Enterprise IT Dept"]
+                "organizations": [
+                  "Enterprise IT Dept"
+                ]
               },
               "users_names": {
-                "users": ["network-admin"]
+                "users": [
+                  "network-admin"
+                ]
               }
             },
             "assets": {
               "elements": {
-                "network-elements": ["vendor-a-router-hq-1"]
+                "network-elements": [
+                  "vendor-a-router-hq-1"
+                ]
               }
             }
           }
@@ -216,15 +234,21 @@
             "universal-access": false,
             "holders": {
               "organizations_names": {
-                "organizations": ["Enterprise IT Dept"]
+                "organizations": [
+                  "Enterprise IT Dept"
+                ]
               },
               "users_names": {
-                "users": ["datacenter-ops"]
+                "users": [
+                  "datacenter-ops"
+                ]
               }
             },
             "assets": {
               "elements": {
-                "network-elements": ["vendor-b-switch-dc-1"]
+                "network-elements": [
+                  "vendor-b-switch-dc-1"
+                ]
               }
             }
           }
@@ -245,15 +269,21 @@
             "universal-access": false,
             "holders": {
               "organizations_names": {
-                "organizations": ["Enterprise IT Dept"]
+                "organizations": [
+                  "Enterprise IT Dept"
+                ]
               },
               "users_names": {
-                "users": ["datacenter-ops"]
+                "users": [
+                  "datacenter-ops"
+                ]
               }
             },
             "assets": {
               "elements": {
-                "network-elements": ["vendor-b-switch-dc-1"]
+                "network-elements": [
+                  "vendor-b-switch-dc-1"
+                ]
               }
             }
           }
@@ -292,15 +322,22 @@
             "universal-access": false,
             "holders": {
               "organizations_names": {
-                "organizations": ["Enterprise IT Dept"]
+                "organizations": [
+                  "Enterprise IT Dept"
+                ]
               },
               "users_names": {
-                "users": ["datacenter-ops", "noc-team"]
+                "users": [
+                  "datacenter-ops",
+                  "noc-team"
+                ]
               }
             },
             "assets": {
               "elements": {
-                "network-elements": ["vendor-c-switch-dc-2"]
+                "network-elements": [
+                  "vendor-c-switch-dc-2"
+                ]
               }
             }
           }

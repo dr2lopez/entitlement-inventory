@@ -40,21 +40,25 @@
                     "allowed": true,
                     "in-use": true
                   },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "security-suite-ent"
-                    }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "concurrent-sessions",
+                  "supporting-entitlements": {
+                    "supporting-entitlement": [
+                      {
+                        "entitlement-id": "security-suite-ent"
+                      }
+                    ]
+                  },
+                  "capability-restrictions": {
+                    "capability-restriction": [
+                      {
+                        "capability-restriction-id": "concurrent-sessions",
                       "description": "Maximum concurrent firewall sessions",
                       "resource-name": "sessions",
                       "units": "connections",
-                      "max-value": 100000,
-                      "current-value": 45000
-                    }
-                  ]
+                        "max-value": 100000,
+                        "current-value": 45000
+                      }
+                    ]
+                  }
                 },
                 {
                   "capability-id": "vpn",
@@ -63,21 +67,25 @@
                     "allowed": true,
                     "in-use": true
                   },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "security-suite-ent"
-                    }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "tunnel-count",
+                  "supporting-entitlements": {
+                    "supporting-entitlement": [
+                      {
+                        "entitlement-id": "security-suite-ent"
+                      }
+                    ]
+                  },
+                  "capability-restrictions": {
+                    "capability-restriction": [
+                      {
+                        "capability-restriction-id": "tunnel-count",
                       "description": "Maximum VPN tunnels",
                       "resource-name": "tunnels",
                       "units": "count",
-                      "max-value": 500,
-                      "current-value": 120
-                    }
-                  ]
+                        "max-value": 500,
+                        "current-value": 120
+                      }
+                    ]
+                  }
                 },
                 {
                   "capability-id": "bgp-advanced",
@@ -86,21 +94,25 @@
                     "allowed": true,
                     "in-use": true
                   },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "advanced-routing-ent"
-                    }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "bgp-peers",
+                  "supporting-entitlements": {
+                    "supporting-entitlement": [
+                      {
+                        "entitlement-id": "advanced-routing-ent"
+                      }
+                    ]
+                  },
+                  "capability-restrictions": {
+                    "capability-restriction": [
+                      {
+                        "capability-restriction-id": "bgp-peers",
                       "description": "Maximum BGP peer sessions",
                       "resource-name": "peers",
                       "units": "sessions",
-                      "max-value": 200,
-                      "current-value": 75
-                    }
-                  ]
+                        "max-value": 200,
+                        "current-value": 75
+                      }
+                    ]
+                  }
                 }
               ]
             }

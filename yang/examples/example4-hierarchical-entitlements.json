@@ -15,12 +15,17 @@
             "universal-access": false,
             "holders": {
               "organizations_names": {
-                "organizations": ["Enterprise Networks"]
+                "organizations": [
+                  "Enterprise Networks"
+                ]
               }
             },
             "assets": {
               "elements": {
-                "network-elements": ["branch-router-1", "branch-router-2"]
+                "network-elements": [
+                  "branch-router-1",
+                  "branch-router-2"
+                ]
               }
             }
           }
@@ -39,12 +44,16 @@
             "universal-access": false,
             "holders": {
               "organizations_names": {
-                "organizations": ["Enterprise Networks"]
+                "organizations": [
+                  "Enterprise Networks"
+                ]
               }
             },
             "assets": {
               "elements": {
-                "network-elements": ["branch-router-2"]
+                "network-elements": [
+                  "branch-router-2"
+                ]
               }
             }
           }
@@ -53,237 +62,265 @@
     },
     "network-elements": {
       "network-element": [
-      {
-        "ne-id": "branch-router-1",
-        "components": {
-          "component": [
-            {
-              "component-id": "main-unit",
-              "class": "iana-hardware:chassis"
-            }
-          ]
-        },
-        "ietf-entitlement-inventory:installed-entitlements": {
-          "entitlement": [
-            {
-              "entitlement-id": "bronze-routing-base",
-              "in-use": true
-            }
-          ]
-        },
-        "ietf-entitlement-inventory:capabilities": {
-          "capability-class": [
-            {
-              "capability-class": "basic-capability-description",
-              "capability": [
-                {
-                  "capability-id": "ospf-routing",
-                  "extended-capability-description": "OSPF dynamic routing protocol",
-                  "entitlement-state": {
-                    "allowed": true,
-                    "in-use": true
+        {
+          "ne-id": "branch-router-1",
+          "components": {
+            "component": [
+              {
+                "component-id": "main-unit",
+                "class": "iana-hardware:chassis"
+              }
+            ]
+          },
+          "ietf-entitlement-inventory:installed-entitlements": {
+            "entitlement": [
+              {
+                "entitlement-id": "bronze-routing-base",
+                "in-use": true
+              }
+            ]
+          },
+          "ietf-entitlement-inventory:capabilities": {
+            "capability-class": [
+              {
+                "capability-class": "basic-capability-description",
+                "capability": [
+                  {
+                    "capability-id": "ospf-routing",
+                    "extended-capability-description": "OSPF dynamic routing protocol",
+                    "entitlement-state": {
+                      "allowed": true,
+                      "in-use": true
+                    },
+                    "supporting-entitlements": {
+                      "supporting-entitlement": [
+                        {
+                          "entitlement-id": "bronze-routing-base"
+                        }
+                      ]
+                    },
+                    "capability-restrictions": {
+                      "capability-restriction": [
+                        {
+                          "capability-restriction-id": "ospf-areas",
+                          "description": "Maximum OSPF areas",
+                          "resource-name": "routing-areas",
+                          "units": "areas",
+                          "max-value": 10,
+                          "current-value": 3
+                        }
+                      ]
+                    }
                   },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "bronze-routing-base"
+                  {
+                    "capability-id": "static-routing",
+                    "extended-capability-description": "Static route configuration",
+                    "entitlement-state": {
+                      "allowed": true,
+                      "in-use": true
+                    },
+                    "supporting-entitlements": {
+                      "supporting-entitlement": [
+                        {
+                          "entitlement-id": "bronze-routing-base"
+                        }
+                      ]
+                    },
+                    "capability-restrictions": {
+                      "capability-restriction": [
+                        {
+                          "capability-restriction-id": "static-routes",
+                          "description": "Maximum static routes",
+                          "resource-name": "routes",
+                          "units": "routes",
+                          "max-value": 500,
+                          "current-value": 127
+                        }
+                      ]
                     }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "ospf-areas",
-                      "description": "Maximum OSPF areas",
-                      "resource-name": "routing-areas",
-                      "units": "areas",
-                      "max-value": 10,
-                      "current-value": 3
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "ne-id": "branch-router-2",
+          "components": {
+            "component": [
+              {
+                "component-id": "main-unit",
+                "class": "iana-hardware:chassis"
+              }
+            ]
+          },
+          "ietf-entitlement-inventory:installed-entitlements": {
+            "entitlement": [
+              {
+                "entitlement-id": "bronze-routing-base",
+                "in-use": true
+              },
+              {
+                "entitlement-id": "silver-routing-upgrade",
+                "in-use": true
+              }
+            ]
+          },
+          "ietf-entitlement-inventory:capabilities": {
+            "capability-class": [
+              {
+                "capability-class": "basic-capability-description",
+                "capability": [
+                  {
+                    "capability-id": "ospf-routing",
+                    "extended-capability-description": "OSPF dynamic routing protocol",
+                    "entitlement-state": {
+                      "allowed": true,
+                      "in-use": true
+                    },
+                    "supporting-entitlements": {
+                      "supporting-entitlement": [
+                        {
+                          "entitlement-id": "bronze-routing-base"
+                        }
+                      ]
+                    },
+                    "capability-restrictions": {
+                      "capability-restriction": [
+                        {
+                          "capability-restriction-id": "ospf-areas",
+                          "description": "Maximum OSPF areas",
+                          "resource-name": "routing-areas",
+                          "units": "areas",
+                          "max-value": 10,
+                          "current-value": 5
+                        }
+                      ]
                     }
-                  ]
-                },
-                {
-                  "capability-id": "static-routing",
-                  "extended-capability-description": "Static route configuration",
-                  "entitlement-state": {
-                    "allowed": true,
-                    "in-use": true
                   },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "bronze-routing-base"
+                  {
+                    "capability-id": "static-routing",
+                    "extended-capability-description": "Static route configuration",
+                    "entitlement-state": {
+                      "allowed": true,
+                      "in-use": true
+                    },
+                    "supporting-entitlements": {
+                      "supporting-entitlement": [
+                        {
+                          "entitlement-id": "bronze-routing-base"
+                        }
+                      ]
+                    },
+                    "capability-restrictions": {
+                      "capability-restriction": [
+                        {
+                          "capability-restriction-id": "static-routes",
+                          "description": "Maximum static routes",
+                          "resource-name": "routes",
+                          "units": "routes",
+                          "max-value": 500,
+                          "current-value": 89
+                        }
+                      ]
                     }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "static-routes",
-                      "description": "Maximum static routes",
-                      "resource-name": "routes",
-                      "units": "routes",
-                      "max-value": 500,
-                      "current-value": 127
+                  },
+                  {
+                    "capability-id": "bgp-routing",
+                    "extended-capability-description": "BGP routing protocol with route policies",
+                    "entitlement-state": {
+                      "allowed": true,
+                      "in-use": true
+                    },
+                    "supporting-entitlements": {
+                      "supporting-entitlement": [
+                        {
+                          "entitlement-id": "bronze-routing-base"
+                        },
+                        {
+                          "entitlement-id": "silver-routing-upgrade"
+                        }
+                      ]
+                    },
+                    "capability-restrictions": {
+                      "capability-restriction": [
+                        {
+                          "capability-restriction-id": "bgp-peers",
+                          "description": "Maximum BGP peer sessions",
+                          "resource-name": "bgp-sessions",
+                          "units": "peers",
+                          "max-value": 100,
+                          "current-value": 24
+                        }
+                      ]
                     }
-                  ]
-                }
-              ]
-            }
-          ]
+                  },
+                  {
+                    "capability-id": "mpls",
+                    "extended-capability-description": "MPLS label switching",
+                    "entitlement-state": {
+                      "allowed": true,
+                      "in-use": true
+                    },
+                    "supporting-entitlements": {
+                      "supporting-entitlement": [
+                        {
+                          "entitlement-id": "bronze-routing-base"
+                        },
+                        {
+                          "entitlement-id": "silver-routing-upgrade"
+                        }
+                      ]
+                    },
+                    "capability-restrictions": {
+                      "capability-restriction": [
+                        {
+                          "capability-restriction-id": "mpls-lsps",
+                          "description": "Maximum MPLS label-switched paths",
+                          "resource-name": "lsps",
+                          "units": "paths",
+                          "max-value": 200,
+                          "current-value": 87
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "capability-id": "advanced-qos",
+                    "extended-capability-description": "Advanced QoS with traffic shaping",
+                    "entitlement-state": {
+                      "allowed": true,
+                      "in-use": false
+                    },
+                    "supporting-entitlements": {
+                      "supporting-entitlement": [
+                        {
+                          "entitlement-id": "bronze-routing-base"
+                        },
+                        {
+                          "entitlement-id": "silver-routing-upgrade"
+                        }
+                      ]
+                    },
+                    "capability-restrictions": {
+                      "capability-restriction": [
+                        {
+                          "capability-restriction-id": "qos-classes",
+                          "description": "Maximum QoS traffic classes",
+                          "resource-name": "qos-classes",
+                          "units": "classes",
+                          "max-value": 16,
+                          "current-value": 0
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
         }
-      },
-      {
-        "ne-id": "branch-router-2",
-        "components": {
-          "component": [
-            {
-              "component-id": "main-unit",
-              "class": "iana-hardware:chassis"
-            }
-          ]
-        },
-        "ietf-entitlement-inventory:installed-entitlements": {
-          "entitlement": [
-            {
-              "entitlement-id": "bronze-routing-base",
-              "in-use": true
-            },
-            {
-              "entitlement-id": "silver-routing-upgrade",
-              "in-use": true
-            }
-          ]
-        },
-        "ietf-entitlement-inventory:capabilities": {
-          "capability-class": [
-            {
-              "capability-class": "basic-capability-description",
-              "capability": [
-                {
-                  "capability-id": "ospf-routing",
-                  "extended-capability-description": "OSPF dynamic routing protocol",
-                  "entitlement-state": {
-                    "allowed": true,
-                    "in-use": true
-                  },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "bronze-routing-base"
-                    }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "ospf-areas",
-                      "description": "Maximum OSPF areas",
-                      "resource-name": "routing-areas",
-                      "units": "areas",
-                      "max-value": 10,
-                      "current-value": 5
-                    }
-                  ]
-                },
-                {
-                  "capability-id": "static-routing",
-                  "extended-capability-description": "Static route configuration",
-                  "entitlement-state": {
-                    "allowed": true,
-                    "in-use": true
-                  },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "bronze-routing-base"
-                    }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "static-routes",
-                      "description": "Maximum static routes",
-                      "resource-name": "routes",
-                      "units": "routes",
-                      "max-value": 500,
-                      "current-value": 89
-                    }
-                  ]
-                },
-                {
-                  "capability-id": "bgp-routing",
-                  "extended-capability-description": "BGP routing protocol with route policies",
-                  "entitlement-state": {
-                    "allowed": true,
-                    "in-use": true
-                  },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "bronze-routing-base"
-                    },
-                    {
-                      "entitlement-id": "silver-routing-upgrade"
-                    }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "bgp-peers",
-                      "description": "Maximum BGP peer sessions",
-                      "resource-name": "bgp-sessions",
-                      "units": "peers",
-                      "max-value": 100,
-                      "current-value": 24
-                    }
-                  ]
-                },
-                {
-                  "capability-id": "mpls",
-                  "extended-capability-description": "MPLS label switching",
-                  "entitlement-state": {
-                    "allowed": true,
-                    "in-use": true
-                  },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "bronze-routing-base"
-                    },
-                    {
-                      "entitlement-id": "silver-routing-upgrade"
-                    }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "mpls-lsps",
-                      "description": "Maximum MPLS label-switched paths",
-                      "resource-name": "lsps",
-                      "units": "paths",
-                      "max-value": 200,
-                      "current-value": 87
-                    }
-                  ]
-                },
-                {
-                  "capability-id": "advanced-qos",
-                  "extended-capability-description": "Advanced QoS with traffic shaping",
-                  "entitlement-state": {
-                    "allowed": true,
-                    "in-use": false
-                  },
-                  "supporting-entitlement": [
-                    {
-                      "entitlement-id": "bronze-routing-base"
-                    },
-                    {
-                      "entitlement-id": "silver-routing-upgrade"
-                    }
-                  ],
-                  "capability-restriction": [
-                    {
-                      "capability-restriction-id": "qos-classes",
-                      "description": "Maximum QoS traffic classes",
-                      "resource-name": "qos-classes",
-                      "units": "classes",
-                      "max-value": 16,
-                      "current-value": 0
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      }
-    ]
-  }
+      ]
+    }
   }
 }
