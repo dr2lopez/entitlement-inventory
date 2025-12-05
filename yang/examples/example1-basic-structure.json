@@ -31,11 +31,13 @@
                       "allowed": true,
                       "in-use": true
                     },
+		    "supporting-entitlements": {
                     "supporting-entitlement": [
                       {
                         "entitlement-id": "ent-1"
                       }
                     ]
+		    }
                   }
                 ]
               }

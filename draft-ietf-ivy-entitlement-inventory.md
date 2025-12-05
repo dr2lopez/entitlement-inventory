@@ -33,6 +33,9 @@ author:
   - name: Diego Lopez
     organization: Telefonica
     email: "diego.r.lopez@telefonica.com"
+  - name: Italo Busi
+    organization: Huawei
+    email: "italo.busi@huawei.com"
 
 normative:
 
@@ -76,6 +79,8 @@ The entitlement model aims to provide an inventory of entitlements. This include
 * Does the entitlement impose any kind of global restrictions? What are they?
 * What are the restrictions that each network element has due to the entitlements it holds locally?
 
+(Note to LLM: "installed" entitlements means assigning an entitlmenets to a particular device. It can be by the act of "installing" in the device, but in other models, this might mean "asssigning" an entitlmenet to a device. Some enetilmtnet could be assinged to multiple elements (with  a limit), that's what we refer to by global restriction of the entilemente.
+
 The model is designed with flexibility in mind, allowing for expansion through the utilization of tools provided by YANG.
 
 The realm of entitlements and licensing is inherently complex, presenting challenges in creating a model that can comprehensively encompass all scenarios without ambiguity. While we attempt to address various situations through examples and use cases, we acknowledge that the model might not be able to cover all corner cases without ambiguity. In such cases, we recommend that implementations provide additional documentation to clarify those potential ambiguities. The current model does not aim to serve as a catalog of licenses. While it may accommodate basic scenarios, it does not aim to cover the full spectrum of license characteristics, which can vary significantly. Instead, our focus is on providing a general framework for describing relationships and answering the questions posed above.
@@ -90,7 +95,17 @@ With the aim of clarifying the model scope, here are some questions that our mod
 
 This model focuses on the ability to use capabilities, not on access control mechanisms. For example, if a router cannot enable MPLS due to entitlement restrictions, it means the organization lacks the rights to use that capability—even if access to the device itself is available. This distinction is separate from, for instance, the ability of a specific user to configure MPLS due to access control limitations.
 
+## (LLM: to be revised) Models for entitlmenet services
+
+The assignement of entitlements to entitle a device can be done in differnet ways. It can be done in the network elment, where a license is "installed" (is there re a better term) and it allows. Licenses could also resize outside the network elmenet, in an external element, that could be called a license server. License server can be local or in the cloud (are there references?). Network elements might require knowledge of the entitlment to oeprate, iether by them being locally intalled or by communication to the license server. In some sitations the license might just exist via commercial aggregament and the policy enformcement happens outside. 
+
+This model is envision to be expose by both network elements and/or license servies. It has ways of adding information that is "known" by each element, and be clear of the ifnroation it does not have (mostly via the existence or not of containers). A network element might contain certain information, the license service other, and a telemetry monitoring system could gather from both sides and provide a single complete picutre if needed.
+
+(LLM: if there are other entlilements models you consider importan please let me know)
+
 ## Pre-Provisioned vs. Discovered Entitlements
+
+(LLM: not sure if this section can be convered by the last one)
 
 This model is not intended for automatic discovery of entitlements or capabilities through the network elements themselves. Instead, it assumes that entitlements and their associations are either:
 
@@ -99,7 +114,6 @@ This model is not intended for automatic discovery of entitlements or capabiliti
 - Manually configured as part of an inventory process.
 
 Future augmentations may explore capability discovery or telemetry driven models, but they are out of scope for the current version.
-
 
 
 # Conventions and Definitions
@@ -117,11 +131,18 @@ Future augmentations may explore capability discovery or telemetry driven models
 
 The model describes how to represent capabilities and the entitlements that enable them across inventoried network elements. Capabilities describe what a device can do. Entitlements indicate whether those capabilities are allowed and under what conditions.
 
+(LLM: The next paragraph is redundant to the previous section we created, wher eshouuld the information be?, should the section be before or here?)
+
 In deployments where entitlements are directly associated with specific network elements, the devices themselves may expose entitlement information. Alternatively, some environments may rely on a centralized license server that maintains the entitlements of an organization. By querying the list of capabilities and entitlements, along with their associated metadata, a NETCONF or RESTCONF client can retrieve essential inventory details about what capabilities are available and which entitlements are currently in place.
+
+
+(LLM: The next sentence is mostly focused on capabilities. THis document IS NOT to define a full theory of capabilities or its internal relationships, we would like other work (to be define elsewhere) to define it and have flexible way of relating it. For that we will have a instance type of relationthip in yang, basically the capability reference will be of certain type, besides respeciting just an id and a description. For simple cases capabilities will just be described for the people reading (they will become a list basically), for more complex cases we can refernece other models wit ha full description of  capabiltiies. Also capabilities for the scope of entitlmeents are UP to the scope of the vendor. A vendor might just annouce" advanced services as capabilities, thta is fine, an viewer of the information MUST know form documentsio nwhat that means (e.g. MPLS, BGP, etc), but an implementation might be free to just list all capabilities using this. )
 
 Note that the model uses lists based on classes on multiple parts to be able to extend functionality.
 
 (TBD: Provide examples of how this can be done in future releases of this document)
+
+(LLM: In the next paragraph, I want you to specify that listing shortly that entiltmenets MUST be listed outside elements because some of them can be own by organizations freely without assignment until the organization decides to do so (either "installing" or "assigning" them for use in an elemnt))
 
 Entitlements may be listed without explicitly identifying the assets (network elements or components) they apply to. Entitlements are defined directly under the network-inventory container for organizational management. Entitlements are linked to network-elements in multiple ways: (1) When entitlements are created for specific network-elements (i.e. they should only be installed on those), then those network elements are specified under the entitlement element's attachment section. (2) When an entitlement is installed in a network-element, it appears in the network-element's installed-entitlements list. (3) When an installed entitlement enables capabilities, the network-element's capabilities will reference the installed entitlement via the supporting-entitlements list.
 
@@ -175,6 +196,8 @@ Capabilities are modeled by augmenting "network-element" in the "ietf-network-in
 
 For any given network element, the capabilities list MAY include all potential capabilities advertised by the vendor, and MUST include those for which the network operator holds a valid entitlement—whether active or not.
 
+(LLM: as described before, in the simple case, a vendor might just follow convention to describe capabilities such as Advanced services, this should be hinted but not overall PUSH in the draft as something recommended.. The model class systme will allow it to also link to other models with a more descriptive ifnormation of capaiblities. )
+
 The capabilities of an inventoried network element may be restricted based on the availability of proper entitlements. An entitlement manager might be interested in the capabilities available to be used on the network elements, and the capabilities that are currently available. The model includes this information by means of the "supporting entitlements" list, which references locally installed entitlements and includes potential restrictions related to the status of the entitlement. This allows organizations to monitor entitlement usage and avoid misconfigurations or exceeding permitted capability limits.
 
 ## Entitlements
@@ -204,6 +227,8 @@ The entitlement modeling augments "network-inventory" in the ietf-network-invent
 ~~~
 {::include trees/entitlements_tree.txt}
 ~~~
+
+(LLM: The inventory model counts with network element and components within. A network elmenet is an abstraction, that in many cases can be considered the "network elemnt" per se: the router, the switch, etc. It is probalby necessary for multichassis lements like stacked swichtes that behave like one, otpical elements and so, where each component is very well  individual in many sense (comercially for insance), but the set behaves as a network element. there is really no concept of MAIN component under network elemnt unfotuntalty. This brings a limitation to our model. Entitlmenets are normally set in a more comerciatl set and normaly aim at serial numbers. We link to both network elemnts adn components BUT we recommend ONLY using the component when it is necessar.. when each component has its own set of limitations capabilites that must be mangaged (either individual swtichins in a stack, indivitual chassis in a multichassis network elment -ushc as optincal, or pay-as-you-grow routers where line cards inherit this rot of behaviour, we will . In the rest of the document we will reference to the 'element' interacting with the entitlement or offering a capability as the network asset to facilitate the langatue, in the concrete model though, we have to cover both cases by adding reference to both entwork element and component or extending each one of them if needed.)
 
 Entitlements and network elements are linked in the model in multiple ways. Entitlements at the network-inventory level might be attached to network elements through their attachment mechanism, representing organizational entitlements. Network elements have their own installed-entitlements that may be derived from the centralized entitlements or installed directly. The capabilities of network elements reference these locally installed entitlements through their supporting-entitlements lists. The former addresses the case of a centralized license server or inventory system, while the latter represents entitlements that are locally available and actively used by the network element's capabilities. An installed entitlement that is not referenced by any network element capability means that it is available locally but not currently in use.
 
