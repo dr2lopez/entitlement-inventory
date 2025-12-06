@@ -190,6 +190,27 @@ The granularity at which capabilities are defined is at the discretion of the ve
 
 The capabilities of an inventoried network asset may be restricted based on the availability of proper entitlements. An entitlement manager might be interested in the capabilities available to be used on the network assets, and the capabilities that are currently available. The model includes this information by means of the "supporting entitlements" list, which references locally installed entitlements and includes potential restrictions related to the status of the entitlement. This allows organizations to monitor entitlement usage and avoid misconfigurations or exceeding permitted capability limits.
 
+### Extending Capability Classes
+
+The `capability-class` identity provides an extension point for domain-specific capability models. The extension pattern involves two modules:
+
+1. An independent module defining capability concepts at any extent.
+2. An extension for the entitlemnet model that derives a new `capability-class` identity and augments the entitlement inventory model to reference the capability definitions.
+
+The following example module defines capability concepts for a specific domain:
+
+~~~
+{::include yang/examples/example-capability-framework.yang}
+~~~
+
+The following extension module extends the `capability-class` identity and augments the entitlement inventory to reference the capability definitions from the module above:
+
+~~~
+{::include yang/examples/example-capability-extension.yang}
+~~~
+
+This pattern allows capability definitions to evolve independently while maintaining a clean integration with the entitlement inventory through the capability-class identity mechanism.
+
 ## Entitlements
 
 The entitlement modeling augments "network-inventory" in the ietf-network-inventory module in {{BaseInventory}} with a top-level entitlements container according to the following tree:

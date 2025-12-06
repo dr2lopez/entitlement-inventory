@@ -1,0 +1,38 @@
+module example-capability-framework {
+  yang-version 1.1;
+  namespace "urn:example:capability-framework";
+  prefix excap;
+
+  organization
+    "Example Organization";
+  description
+    "Example module defining a list of capabilities.";
+
+  revision 2025-12-05 {
+    description
+      "Initial version.";
+  }
+
+  container capabilities {
+    description
+      "Container for capability definitions.";
+
+    list capability {
+      key "capability-id";
+      description
+        "List of capability definitions.";
+
+      leaf capability-id {
+        type string;
+        description
+          "Unique identifier for the capability.";
+      }
+
+      leaf description {
+        type string;
+        description
+          "Human-readable description of the capability.";
+      }
+    }
+  }
+}
