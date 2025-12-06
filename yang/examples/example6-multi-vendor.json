@@ -41,7 +41,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "active-tunnels",
+                          "restriction-id": "active-tunnels",
                           "description": "Current active SD-WAN tunnels",
                           "resource-name": "tunnels",
                           "units": "count",
@@ -101,7 +101,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "vxlan-tunnels",
+                          "restriction-id": "vxlan-tunnels",
                           "description": "Maximum VXLAN tunnel endpoints",
                           "resource-name": "vteps",
                           "units": "endpoints",
@@ -155,7 +155,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "telemetry-streams",
+                          "restriction-id": "telemetry-streams",
                           "description": "Maximum concurrent telemetry streams",
                           "resource-name": "streams",
                           "units": "streams",

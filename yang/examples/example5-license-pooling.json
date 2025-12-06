@@ -44,7 +44,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "bgp-peers",
+                          "restriction-id": "bgp-peers",
                           "description": "Maximum BGP peers",
                           "resource-name": "bgp-sessions",
                           "units": "peers",
@@ -71,7 +71,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "firewall-throughput",
+                          "restriction-id": "firewall-throughput",
                           "description": "Maximum firewall throughput",
                           "resource-name": "throughput",
                           "units": "Gbps",
@@ -125,7 +125,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "bgp-peers",
+                          "restriction-id": "bgp-peers",
                           "description": "Maximum BGP peers",
                           "resource-name": "bgp-sessions",
                           "units": "peers",
@@ -179,7 +179,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "firewall-throughput",
+                          "restriction-id": "firewall-throughput",
                           "description": "Maximum firewall throughput",
                           "resource-name": "throughput",
                           "units": "Gbps",

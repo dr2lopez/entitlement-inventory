@@ -91,6 +91,42 @@ module ietf-entitlement-inventory {
       "State of the entitlement.";
   }
 
+  grouping restriction-fields {
+    description
+      "Common fields for describing restrictions or limits.
+       Used both for capability-level restrictions and
+       entitlement-level global restrictions.";
+    leaf description {
+      type string;
+      description
+        "Human-readable description of the restriction.";
+    }
+    leaf resource-name {
+      type string;
+      description
+        "Optional name of the physical or network resource
+         being restricted (e.g., 'bandwidth', 'throughput',
+         'storage', 'memory').";
+    }
+    leaf units {
+      type string;
+      description
+        "Units for the restriction values (e.g., 'Mbps',
+         'connections', 'tunnels').";
+    }
+    leaf max-value {
+      type int32;
+      description
+        "Maximum permitted value for this restriction.";
+    }
+    leaf current-value {
+      type int32;
+      description
+        "Current usage or consumption of this restricted
+         resource at query time.";
+    }
+  }
+
   grouping installed-entitlements-group {
     description
       "Grouping for installed entitlements that can be applied to
@@ -105,12 +141,12 @@ module ietf-entitlement-inventory {
          that no entitlement is installed in this asset.";
       config false;
       description
-        "Entitlements installed locally on this asset.";
+        "Entitlements currently active and entitling this asset.";
       list entitlement {
         key "entitlement-id";
         description
-          "List of entitlements installed on this asset. Each
-           entitlement references a global listed entitlement.";
+          "List of entitlements actively entitling this asset.
+           Each entitlement references a global listed entitlement.";
         leaf entitlement-id {
           type leafref {
             path "/inv:network-inventory/ei:entitlements"
@@ -212,12 +248,12 @@ module ietf-entitlement-inventory {
                the capability requires no special
                entitlemnet to be provided.";
             description
-              "List of locally installed entitlements that
+              "List of installed entitlements that
                enable or support this capability.";
             list supporting-entitlement {
               key "entitlement-id";
               description
-                "List of locally installed entitlements
+                "List of installed entitlements
                  that enable or support this capability. The
                  capability may require one or more
                  entitlements to be allowed and in use.";
@@ -227,7 +263,7 @@ module ietf-entitlement-inventory {
                      + "/entitlement/entitlement-id";
                 }
                 description
-                  "Reference to locally installed entitlement
+                  "Reference to an installed entitlement
                    supporting this capability.";
               }
             }
@@ -243,45 +279,16 @@ module ietf-entitlement-inventory {
               "Restrictions or limits imposed on this capability by
                entitlements.";
             list capability-restriction {
-              key "capability-restriction-id";
+              key "restriction-id";
               description
                 "Restrictions or limits imposed on this capability by
                  entitlements.";
-              leaf capability-restriction-id {
+              leaf restriction-id {
                 type string;
                 description
-                  "Unique identifier for this
-                   capability restriction.";
+                  "Unique identifier for this capability restriction.";
               }
-              leaf description {
-                type string;
-                description
-                  "Human-readable description of the restriction.";
-              }
-              leaf resource-name {
-                type string;
-                description
-                  "Optional name of the physical or network resource
-                   being restricted.";
-              }
-              leaf units {
-                type string;
-                description
-                  "Units for the restriction values (e.g., 'Mbps',
-                   'connections', 'tunnels').";
-              }
-              leaf max-value {
-                type int32;
-                description
-                  "Maximum permitted value for this restriction as
-                   defined by the entitlement.";
-              }
-              leaf current-value {
-                type int32;
-                description
-                  "Current usage or consumption of this restricted
-                   resource at query time.";
-              }
+              uses restriction-fields;
             }
           }
         }
@@ -293,7 +300,7 @@ module ietf-entitlement-inventory {
         + "/inv:network-element" {
     description
       "Augments network elements with installed entitlements tracking
-       which entitlements or rights are locally available on the
+       which entitlements are currently active and entitling the
        device.";
     uses installed-entitlements-group;
   }
@@ -419,46 +426,7 @@ module ietf-entitlement-inventory {
               description
                 "Unique restriction identifier.";
             }
-            leaf description {
-              type string;
-              description
-                "Human-readable description of the restriction.
-                 Should include temporal semantics if applicable
-                 (e.g., 'monthly accumulated', 'per billing period',
-                 'real-time snapshot').";
-            }
-            leaf resource-name {
-              type string;
-              description
-                "Optional name of the physical or network resource
-                 being restricted (e.g., 'bandwidth', 'throughput',
-                 'storage', 'memory'). Use this when the restriction
-                 tracks consumption of infrastructure resources.  Not
-                 needed for abstract licensing metrics (license
-                 counts, tiers, etc.) where restriction-id and
-                 description are sufficient.";
-            }
-            leaf units {
-              type string;
-              description
-                "Units for the restriction value.";
-            }
-            leaf max-value {
-              type int32;
-              description
-                "Maximum allowed value.";
-            }
-            leaf current-value {
-              type int32;
-              description
-                "Current usage value as reported by the system at
-                 query time.  Temporal semantics (snapshot,
-                 accumulator, billing period, etc.) are defined by
-                 the restriction's description field. For real-time
-                 query timestamp, use the NETCONF/RESTCONF protocol's
-                 timestamp mechanisms rather than adding timestamps
-                 to individual restrictions.";
-            }
+            uses restriction-fields;
           }
         }
         leaf parent-entitlement-uid {

@@ -205,7 +205,7 @@
                           "capability-restrictions": {
                             "capability-restriction": [
                               {
-                                "capability-restriction-id": "port-count",
+                                "restriction-id": "port-count",
                                 "description": "Number of active ports",
                                 "resource-name": "ports",
                                 "units": "count",
@@ -252,7 +252,7 @@
                           "capability-restrictions": {
                             "capability-restriction": [
                               {
-                                "capability-restriction-id": "port-count",
+                                "restriction-id": "port-count",
                                 "description": "Number of active ports",
                                 "resource-name": "ports",
                                 "units": "count",
@@ -299,7 +299,7 @@
                           "capability-restrictions": {
                             "capability-restriction": [
                               {
-                                "capability-restriction-id": "crypto-throughput",
+                                "restriction-id": "crypto-throughput",
                                 "description": "Maximum encryption throughput",
                                 "resource-name": "throughput",
                                 "units": "Gbps",
@@ -357,7 +357,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "max-routes",
+                          "restriction-id": "max-routes",
                           "description": "Maximum routing table entries",
                           "resource-name": "routing-table",
                           "units": "entries",

@@ -96,7 +96,7 @@
                   "capability-restrictions": {
                   "capability-restriction": [
                     {
-                      "capability-restriction-id": "firewall-sessions",
+                      "restriction-id": "firewall-sessions",
                       "description": "Maximum concurrent firewall sessions",
                       "resource-name": "sessions",
                       "units": "connections",
@@ -123,7 +123,7 @@
                   "capability-restrictions": {
                   "capability-restriction": [
                     {
-                      "capability-restriction-id": "vpn-tunnels",
+                      "restriction-id": "vpn-tunnels",
                       "description": "Maximum VPN tunnels",
                       "resource-name": "tunnels",
                       "units": "tunnels",
@@ -150,7 +150,7 @@
                   "capability-restrictions": {
                   "capability-restriction": [
                     {
-                      "capability-restriction-id": "ospf-neighbors",
+                      "restriction-id": "ospf-neighbors",
                       "description": "Maximum OSPF neighbor adjacencies, just to give an example :)",
                       "resource-name": "neighbors",
                       "units": "adjacencies",

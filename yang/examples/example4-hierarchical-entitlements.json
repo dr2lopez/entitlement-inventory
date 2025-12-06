@@ -102,7 +102,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "ospf-areas",
+                          "restriction-id": "ospf-areas",
                           "description": "Maximum OSPF areas",
                           "resource-name": "routing-areas",
                           "units": "areas",
@@ -129,7 +129,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "static-routes",
+                          "restriction-id": "static-routes",
                           "description": "Maximum static routes",
                           "resource-name": "routes",
                           "units": "routes",
@@ -188,7 +188,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "ospf-areas",
+                          "restriction-id": "ospf-areas",
                           "description": "Maximum OSPF areas",
                           "resource-name": "routing-areas",
                           "units": "areas",
@@ -215,7 +215,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "static-routes",
+                          "restriction-id": "static-routes",
                           "description": "Maximum static routes",
                           "resource-name": "routes",
                           "units": "routes",
@@ -245,7 +245,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "bgp-peers",
+                          "restriction-id": "bgp-peers",
                           "description": "Maximum BGP peer sessions",
                           "resource-name": "bgp-sessions",
                           "units": "peers",
@@ -275,7 +275,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "mpls-lsps",
+                          "restriction-id": "mpls-lsps",
                           "description": "Maximum MPLS label-switched paths",
                           "resource-name": "lsps",
                           "units": "paths",
@@ -305,7 +305,7 @@
                     "capability-restrictions": {
                       "capability-restriction": [
                         {
-                          "capability-restriction-id": "qos-classes",
+                          "restriction-id": "qos-classes",
                           "description": "Maximum QoS traffic classes",
                           "resource-name": "qos-classes",
                           "units": "classes",

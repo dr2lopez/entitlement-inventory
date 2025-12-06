@@ -50,7 +50,7 @@
                   "capability-restrictions": {
                     "capability-restriction": [
                       {
-                        "capability-restriction-id": "concurrent-sessions",
+                        "restriction-id": "concurrent-sessions",
                       "description": "Maximum concurrent firewall sessions",
                       "resource-name": "sessions",
                       "units": "connections",
@@ -77,7 +77,7 @@
                   "capability-restrictions": {
                     "capability-restriction": [
                       {
-                        "capability-restriction-id": "tunnel-count",
+                        "restriction-id": "tunnel-count",
                       "description": "Maximum VPN tunnels",
                       "resource-name": "tunnels",
                       "units": "count",
@@ -104,7 +104,7 @@
                   "capability-restrictions": {
                     "capability-restriction": [
                       {
-                        "capability-restriction-id": "bgp-peers",
+                        "restriction-id": "bgp-peers",
                       "description": "Maximum BGP peer sessions",
                       "resource-name": "peers",
                       "units": "sessions",
