@@ -184,7 +184,13 @@ Capabilities are modeled by augmenting "network-element" in the "ietf-network-in
 
 For any given network asset, the capabilities list MAY include all potential capabilities advertised by the vendor, and MUST include those for which the network operator holds a valid entitlement—whether active or not.
 
-This document does not define a complete theory of capabilities or their internal relationships; such work may be addressed elsewhere. Instead, the model provides a flexible framework through the use of identity-based capability classes. For simple use cases, capabilities are described using an identifier and a textual description, allowing implementations to present them as a basic list. For more complex scenarios, the `capability-class` identity can be derived to reference external models that provide comprehensive capability definitions.
+This document does not define a complete theory of capabilities or their internal relationships; such work may be addressed elsewhere. Instead, the model provides a flexible framework through the use of identity-based capability classes:
+
+- **Basic capability class**: The module defines `basic-capability-description` as a simple capability class where capabilities are described using only an identifier and a textual description. This allows implementations to present capabilities as a straightforward list without requiring external model dependencies.
+
+- **Extended capability classes**: For scenarios requiring structured capability definitions, implementations derive new identities from `capability-class` to reference external models. The entitlement inventory module intentionally does not define domain-specific capability classes (such as routing, switching, or bandwidth). Instead, extensions create new capability classes that point to separate YANG modules or data models where capabilities are formally defined with their own structure, constraints, and semantics.
+
+This separation ensures that capability definitions can evolve independently of the entitlement inventory model, and that implementations can adopt capability models appropriate to their domain without modifications to this base module.
 
 The granularity at which capabilities are defined is at the discretion of the vendor. A vendor MAY choose to advertise capabilities at a high level of abstraction, such as "Advanced Services," and consumers of this information should refer to vendor documentation to understand what specific functions are included. Alternatively, an implementation MAY enumerate capabilities at a finer granularity, listing individual protocols or features such as MPLS, BGP, or QoS. The model accommodates both approaches.
 
@@ -192,10 +198,18 @@ The capabilities of an inventoried network asset may be restricted based on the 
 
 ### Extending Capability Classes
 
-The `capability-class` identity provides an extension point for domain-specific capability models. The extension pattern involves two modules:
+The `capability-class` identity provides an extension point for integrating external capability models. This module does not define domain-specific capability classes; instead, extensions derive new capability classes that reference separate models where capabilities are formally defined.
 
-1. An independent module defining capability concepts at any extent.
-2. An extension for the entitlemnet model that derives a new `capability-class` identity and augments the entitlement inventory model to reference the capability definitions.
+The extension pattern involves two modules:
+
+1. **Capability definition module**: An independent module defining capability concepts with its own structure (lists, containers, attributes). This module has no dependency on the entitlement inventory.
+2. **Integration module**: An extension module that derives a new `capability-class` identity and augments the entitlement inventory to reference the capability definitions from the first module.
+
+This pattern ensures that:
+
+- Capability models evolve independently of entitlement tracking
+- Multiple capability domains can coexist (e.g., routing capabilities, security capabilities, QoS capabilities) each with their own defining module
+- The entitlement inventory remains a thin integration layer rather than a repository of capability definitions
 
 The following example module defines capability concepts for a specific domain:
 
@@ -342,7 +356,9 @@ Implementations SHOULD document which levels they support and any deviations fro
 
 # Use cases and Examples
 
-This section describes use cases, provide an example of how they could be modeled by the model, and show how each of the questions that we have explored in this draft can be answered by the model.
+This section describes use cases, provides examples of how they could be modeled, and shows how each of the questions explored in this draft can be answered by the model.
+
+Note: The examples in this section use hypothetical capability class values (e.g., `"ietf-entitlement-inventory:routing"`) for illustration purposes. In practice, implementations would either use `basic-capability-description` for simple text-based capability lists, or derive custom capability classes that reference external capability definition models as described in {{extending-capability-classes}}.
 
 ## MPLS Capability License on a Network OS
 An operator installs a software license (entitlement) enabling MPLS routing on a NOS. The license is attached to a specific network element and activates the "mpls-routing" capability class.
