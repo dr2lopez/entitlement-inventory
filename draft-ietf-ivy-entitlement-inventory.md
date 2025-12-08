@@ -158,7 +158,7 @@ To represent the complex relationships between network elements, capabilities, a
 {: #fig-ascii-art_baseInventory title="Relationship between entitlements and Base Inventory" }
 
 
-{{fig-capabilities_baseinventory}} depicts NE support capabilities thanks to entilements that entitle them of their use
+{{fig-capabilities_baseinventory}} depicts NE support capabilities thanks to entitlements that entitle them of their use
 
 ~~~ aasvg
 {::include art/capabilities_baseinventory.txt}
@@ -166,7 +166,7 @@ To represent the complex relationships between network elements, capabilities, a
 {: #fig-capabilities_baseinventory title="Capabilities integration with the Base Inventory" }
 
 
-Finally, NE support capabilities thanks to entilements that entitle them of their use under certain constraints as shown in {{fig-capabilities_restrictions}}.
+Finally, NE support capabilities thanks to entitlements that entitle them of their use under certain constraints as shown in {{fig-capabilities_restrictions}}.
 
 ~~~ aasvg
 {::include art/capabilities_restrictions.txt}
@@ -269,7 +269,7 @@ In the YANG model, both network elements and components are supported by providi
 
 Entitlements and network assets are linked in the model in multiple ways. Entitlements at the network-inventory level might be attached to network assets through their attachment mechanism, representing organizational entitlements. Network assets have their own installed-entitlements that may be derived from the centralized entitlements or assigned directly. The capabilities of network assets reference these installed entitlements through their supporting-entitlements lists. The former addresses the case of a centralized license server or inventory system, while the latter represents entitlements that are actively entitling the asset's capabilities. An installed entitlement that is not referenced by any capability means that it is active on the asset but not currently in use.
 
-Entitlements are managed both centrally at the network-inventory level and at the asset level through installed-entitlements. Network assets reference their installed entitlements through their capabilities' supporting-entitlements lists. For instance, a license server or inventory system might list an entitlement at the top level, which then gets installed on specific network assets where the capabilities reference the active entitlement. The "parent-entitlement-uid" field in installed entitlements provides traceability back to centralized entitlements when applicable. Proper identification of entitlements is imperative to ensure consistency across systems, enabling monitoring systems to recognize when multiple locations reference related entitlements. Furthermore, there are cases where an authorized network asset might have installed entitlements without explicit knowledge of the covering organizational license. Consider the scenario of a site license, wherein any device under the site may utilize a feature through installed entitlements derived from the site-wide license. In such cases, the parent-entitlement-uid maintains the connection to the organizational entitlement policy.
+Entitlements are managed both centrally at the network-inventory level and at the asset level through installed-entitlements. Network assets reference their installed entitlements through their capabilities' supporting-entitlements lists. For instance, a license server or inventory system might list an entitlement at the top level, which then gets installed on specific network assets where the capabilities reference the active entitlement. Each installed entitlement references its centralized entitlement directly via the entitlement-id leafref. For hierarchical or pooled entitlements (e.g., a base license with add-on upgrades), the "parent-entitlement-uid" field in the centralized entitlement catalog links child entitlements to their parent. Proper identification of entitlements is imperative to ensure consistency across systems, enabling monitoring systems to recognize when multiple locations reference related entitlements.
 
 ### Reverse Mapping from Entitlements to Capabilities
 
@@ -301,6 +301,8 @@ The installed entitlements represent references to entitlements that are current
 
 This structure allows network assets to track which entitlements are actively granting them rights, while maintaining the ability to trace relationships to organization-wide entitlement policies.
 
+When entitlements are installed at the component level (e.g., line cards), implementations MAY also list them at the parent network-element level to provide a consolidated view of all entitlements active on the device. Management systems should recognize when an entitlement-id appears at both levels and treat them as the same license instance to avoid double-counting. This point requires further exploration in future instances of this document.
+
 ## Implementation Considerations
 
 The model is designed to support partial implementations. Not all systems need to implement every container or feature. The use of presence containers throughout the model allows implementations to signal which parts of the model they support. An implementation that does not populate a presence container indicates that it cannot report that information.
@@ -328,6 +330,8 @@ At this level, the system additionally answers: What can each asset do?
 ### Level 4: Capability-Entitlement Linkage
 
 Advanced implementations populate the `supporting-entitlements` container within each capability. This links capabilities to the installed entitlements that enable them, along with the `entitlement-state` container indicating whether each capability is allowed and in use.
+
+When a capability lists multiple supporting entitlements, the `entitlement-state/allowed` field MUST reflect the combined effect of all required entitlements. If any required entitlement is missing, expired, or revoked, `allowed` should be false. The `in-use` field indicates whether the capability is currently operational.
 
 At this level, the system additionally answers: Which entitlements enable which capabilities? What is allowed and what is in use?
 
@@ -425,7 +429,29 @@ This example demonstrates extending the capability-class identity to reference e
 
 # IANA Considerations
 
-(TBP)
+This document registers one URI in the "IETF XML Registry" {{!RFC3688}} and one YANG module in the "YANG Module Names" registry {{!RFC6020}}.
+
+## URI Registration
+
+IANA is requested to register the following URI in the "ns" subregistry within the "IETF XML Registry" {{!RFC3688}}:
+
+~~~~
+   URI:  urn:ietf:params:xml:ns:yang:ietf-entitlement-inventory
+   Registrant Contact:  The IESG.
+   XML:  N/A; the requested URI is an XML namespace.
+~~~~
+
+## YANG Module Name Registration
+
+IANA is requested to register the following entry in the "YANG Module Names" registry {{!RFC6020}}:
+
+~~~~
+   Name:         ietf-entitlement-inventory
+   Namespace:    urn:ietf:params:xml:ns:yang:ietf-entitlement-inventory
+   Prefix:       ei
+   Maintained by IANA:  N
+   Reference:    RFC XXXX
+~~~~
 
 
 # Security Considerations

@@ -246,7 +246,7 @@ module ietf-entitlement-inventory {
                should not exist if the system cannot report this.
                An empty list of supporting-entitlement means
                the capability requires no special
-               entitlemnet to be provided.";
+               entitlement to be provided.";
             description
               "List of installed entitlements that
                enable or support this capability.";
@@ -286,7 +286,8 @@ module ietf-entitlement-inventory {
               leaf restriction-id {
                 type string;
                 description
-                  "Unique identifier for this capability restriction.";
+                  "Unique identifier for this
+                   capability restriction.";
               }
               uses restriction-fields;
             }
@@ -517,11 +518,14 @@ module ietf-entitlement-inventory {
                   type leafref {
                     path "/inv:network-inventory"
                        + "/inv:network-elements"
-                       + "/inv:network-element/inv:components"
-                       + "/inv:component/inv:component-id";
+                       + "/inv:network-element"
+                       + "[inv:ne-id=current()/../network-element]"
+                       + "/inv:components/"
+                       + "inv:component/inv:component-id";
                   }
                   description
-                    "Reference to component.";
+                    "Reference to component within the specified
+                     network element.";
                 }
               }
             }
