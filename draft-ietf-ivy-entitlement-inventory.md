@@ -356,294 +356,71 @@ Implementations SHOULD document which levels they support and any deviations fro
 
 # Use cases and Examples
 
-This section describes use cases, provides examples of how they could be modeled, and shows how each of the questions explored in this draft can be answered by the model.
+This section describes use cases and provides validated JSON examples demonstrating how to model entitlements and capabilities. Each example shows how the questions explored in this draft can be answered by the model.
 
-Note: The examples in this section use hypothetical capability class values (e.g., `"ietf-entitlement-inventory:routing"`) for illustration purposes. In practice, implementations would either use `basic-capability-description` for simple text-based capability lists, or derive custom capability classes that reference external capability definition models as described in {{extending-capability-classes}}.
+## Basic Structure
 
-## MPLS Capability License on a Network OS
-An operator installs a software license (entitlement) enabling MPLS routing on a NOS. The license is attached to a specific network element and activates the "mpls-routing" capability class.
-
-Complete example showing network inventory augmented with entitlements:
+This example shows the fundamental structure of the model: a network element with an installed entitlement that enables a capability. The entitlement is defined at the network-inventory level and referenced by the network element. The capability includes entitlement-state (allowed/in-use) and supporting-entitlements that link back to the installed entitlement.
 
 ~~~
-json
-{
-  "ietf-network-inventory:network-inventory": {
-    "entitlements": {
-      "entitlement": [
-        {
-          "eid": "mpls-license-001",
-          "product-id": "mpls-software-lic-v2",
-          "state": "active",
-          "renewal-profile": {
-            "activation-date": "2025-01-01T00:00:00Z",
-            "expiration-date": "2026-01-01T00:00:00Z"
-          },
-          "entitlement-attachment": {
-            "holders": {
-              "organizations_names": {
-                "organizations": ["ACME Corp"]
-              }
-            },
-            "assets": {
-              "elements": {
-                "network-elements": ["router-5"]
-              }
-            }
-          }
-        }
-      ]
-    },
-    "network-elements": {
-      "network-element": [
-        {
-          "ne-id": "router-5",
-          "ne-type": "ietf-network-inventory:router",
-          "installed-entitlements": {
-            "entitlement": [
-              {
-                "eid": "mpls-license-001"
-              }
-            ]
-          },
-          "capabilities": {
-            "capability-class": [
-              {
-                "capability-class": "ietf-entitlement-inventory:routing",
-                "capability": [
-                  {
-                    "capability-id": "mpls-routing",
-                    "extended-capability-description": "MPLS Label Switching Protocol",
-                    "supporting-entitlements": {
-                      "entitlement": [
-                        {
-                          "entitlement-id": "mpls-license-001",
-                          "allowed": true,
-                          "in-use": true
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    }
-  }
-}
+{::include yang/examples/example1-basic-structure.json}
 ~~~
 
-## Bandwidth Upgrade via License
+## Expired License Handling
 
-A vendor-N device uses a capacity license to expand throughput.
-
-Complete example showing network inventory augmented with bandwidth entitlements:
+This example demonstrates how the model handles entitlement lifecycle states. An expired security entitlement results in capabilities being disallowed (allowed: false), while an active routing entitlement keeps its capabilities enabled. The installed-entitlements list shows in-use status reflecting actual capability usage.
 
 ~~~
-json
-{
-  "ietf-network-inventory:network-inventory": {
-    "entitlements": {
-      "entitlement": [
-        {
-          "eid": "vendorN-bw-10g",
-          "product-id": "vendorN-bw-upgrade",
-          "state": "active",
-          "restrictions": {
-            "restriction": [
-              {
-                "restriction-id": "global-cap",
-                "description": "Organization bandwidth cap",
-                "units": "Gbps",
-                "max-value": 100,
-                "current-value": 25
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "network-elements": {
-      "network-element": [
-        {
-          "ne-id": "switch-10g-01",
-          "ne-type": "ietf-network-inventory:switch",
-          "installed-entitlements": {
-            "entitlement": [
-              {
-                "eid": "vendorN-bw-10g"
-              }
-            ]
-          },
-          "capabilities": {
-            "capability-class": [
-              {
-                "capability-class": "ietf-entitlement-inventory:bandwidth",
-                "capability": [
-                  {
-                    "capability-id": "bw-capability",
-                    "resource-description": "Licensed bandwidth",
-                    "resource-units": "Gbps",
-                    "resource-amount": 10,
-                    "supporting-entitlements": {
-                      "entitlement": [
-                        {
-                          "entitlement-id": "vendorN-bw-10g",
-                          "allowed": true,
-                          "in-use": true,
-                          "capability-restriction": [
-                            {
-                              "capability-restriction-id": "bw-limit",
-                              "description": "Current bandwidth usage",
-                              "resource-name": "active-bandwidth",
-                              "units": "Gbps",
-                              "max-value": 10,
-                              "current-value": 6
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    }
-  }
-}
+{::include yang/examples/example2-expired-license.json}
 ~~~
 
-## Floating License Managed by License Server
+## Utilization Tracking with Restrictions
 
-A shared entitlement is held by a license server and consumed dynamically by multiple switches.
-
-Complete example showing floating license across multiple network elements:
+This example shows comprehensive utilization tracking across multiple capabilities. Each capability includes capability-restrictions with current-value and max-value fields, enabling organizations to monitor resource consumption against licensed limits. This addresses the question: "What constraints apply and what are current usage levels?"
 
 ~~~
-json
-{
-  "ietf-network-inventory:network-inventory": {
-    "entitlements": {
-      "entitlement": [
-        {
-          "eid": "shared-switch-license-1",
-          "product-id": "advanced-switching-features",
-          "state": "active",
-          "entitlement-attachment": {
-            "universal-access": true,
-            "holders": {
-              "organizations_names": {
-                "organizations": ["NTT"]
-              }
-            },
-          },
-          "restrictions": {
-            "restriction": [
-              {
-                "restriction-id": "concurrent-users",
-                "description": "Maximum concurrent feature usage",
-                "units": "sessions",
-                "max-value": 50,
-                "current-value": 12
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "network-elements": {
-      "network-element": [
-        {
-          "ne-id": "switch-1",
-          "ne-type": "ietf-network-inventory:switch",
-          "installed-entitlements": {
-            "entitlement": [
-              {
-                "eid": "shared-switch-license-1"
-              }
-            ]
-          },
-          "capabilities": {
-            "capability-class": [
-              {
-                "capability-class": "ietf-entitlement-inventory:switching",
-                "capability": [
-                  {
-                    "capability-id": "advanced-vlan-features",
-                    "extended-capability-description": "Advanced VLAN management features",
-                    "supporting-entitlements": {
-                      "entitlement": [
-                        {
-                          "entitlement-id": "shared-switch-license-1",
-                          "allowed": true,
-                          "in-use": false
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "capability-id": "qos-policies",
-                    "extended-capability-description": "Quality of Service policies",
-                    "supporting-entitlements": {
-                      "entitlement": [
-                        {
-                          "entitlement-id": "shared-switch-license-1",
-                          "allowed": true,
-                          "in-use": true
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "ne-id": "switch-2",
-          "ne-type": "ietf-network-inventory:switch",
-          "installed-entitlements": {
-            "entitlement": [
-              {
-                "eid": "shared-switch-license-1"
-              }
-            ]
-          },
-          "capabilities": {
-            "capability-class": [
-              {
-                "capability-class": "ietf-entitlement-inventory:switching",
-                "capability": [
-                  {
-                    "capability-id": "advanced-vlan-features",
-                    "extended-capability-description": "Advanced VLAN management features",
-                    "supporting-entitlements": {
-                      "entitlement": [
-                        {
-                          "entitlement-id": "shared-switch-license-1",
-                          "allowed": true,
-                          "in-use": true
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    }
-  }
-}
+{::include yang/examples/example3-utilization-tracking.json}
 ~~~
 
-This example demonstrates how a floating license can be managed centrally while being installed locally on multiple network elements. Each switch has its own local copy of the entitlement that traces back to the centralized policy. The centralized entitlement shows global restrictions (concurrent users), while individual switches show their local usage. This entitlement may be tracked across devices using a license server asset that records usage or seat count (future extension).
+## Hierarchical Entitlements
+
+This example demonstrates the parent-entitlement-uid mechanism for modeling entitlement hierarchies. A base "bronze" entitlement provides foundational capabilities, while a "silver" upgrade entitlement (referencing the bronze as parent) adds advanced features. This pattern supports tiered licensing models.
+
+~~~
+{::include yang/examples/example4-hierarchical-entitlements.json}
+~~~
+
+## License Pooling
+
+This example shows how shared entitlements can be installed across multiple network elements. A pool-based license is defined once at the network-inventory level with global restrictions (total seats), then installed on multiple routers. Each router's capabilities reference the shared entitlement, and individual capability-restrictions track per-device usage against the pool.
+
+~~~
+{::include yang/examples/example5-license-pooling.json}
+~~~
+
+## Multi-Vendor Environment
+
+This example illustrates entitlement management in a heterogeneous network with devices from multiple vendors. Each vendor may use different licensing models (consumption-based, perpetual, subscription), but the unified model captures all entitlements consistently. The example shows how organizations gain visibility across their entire multi-vendor infrastructure.
+
+~~~
+{::include yang/examples/example6-multi-vendor.json}
+~~~
+
+## Component-Level Entitlements
+
+This example demonstrates entitlement tracking at the component level within a modular network element. Individual line cards have their own port licenses, while the chassis has system-level entitlements. This addresses scenarios where different components within the same device have independent entitlement requirements, such as pay-as-you-grow deployments.
+
+~~~
+{::include yang/examples/example7-modular-components.json}
+~~~
+
+## Capability Class Extension
+
+This example demonstrates extending the capability-class identity to reference external capability definitions. The example-capability-extension module derives a new capability class and augments the model to reference capabilities defined in a separate module. This pattern allows domain-specific capability models to integrate cleanly with entitlement tracking.
+
+~~~
+{::include yang/examples/example8-capability-extension.json}
+~~~
 
 
 # IANA Considerations
