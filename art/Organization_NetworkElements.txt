@@ -1,0 +1,22 @@
+        Organizational Level
+   ┌─────────────────────────────┐
+   │  Entitlements Inventory     │
+   │  (centralized)              │
+   └──────────┬──────────────────┘
+              │ attached to
+              ▼
+   ┌─────────────────────────────┐
+   │  Network Elements           │
+   │  ┌──────────────────────┐   │
+   │  │ Installed            │   │
+   │  │ Entitlements         │   │
+   │  └─────┬────────────────┘   │
+   │        │ enables            │
+   │        ▼                    │
+   │  ┌──────────────────────┐   │
+   │  │ Capabilities         │   │
+   │  │  - allowed           │   │
+   │  │  - in-use            │   │
+   │  │  - restrictions      │   │
+   │  └──────────────────────┘   │
+   └─────────────────────────────┘
