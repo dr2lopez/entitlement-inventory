@@ -360,13 +360,61 @@ Implementations SHOULD document which levels they support and any deviations fro
 ~~~
 
 
-# Use cases and Examples
+# Implementation Examples and Validation Scenarios
 
-This section describes use cases and provides validated JSON examples demonstrating how to model entitlements and capabilities. Each example shows how the questions explored in this draft can be answered by the model.
+This section provides a progressive, from basic to advanced, series of validated JSON examples demonstrating practical implementation patterns for the entitlement inventory model. The examples are organized from simple to more complex, enabling implementers to:
+
+1. Understand core concepts through minimal working examples.
+2. Explore operational scenarios.
+3. Identify implementation patterns for common use cases.
+4. Validate their own implementations*against canonical examples.
+
+Each example:
+- Addresses specific operational questions
+- Builds upon concepts introduced in previous examples
+- Includes contextual explanation of design choices
+- Provides JSON that validates against the ietf-entitlement-inventory YANG module. 
+
+In order to use the examples:
+- Start with Basic Structure Example to understand fundamental relationships
+- Progress through examples based on your deployment scenario
+- Refer to the YANG module trees introduced in the draft, for complete model structure
+
+## Overview of Examples
+
+The following table summarizes the examples provided in this section and the primary concepts each demonstrates:
+
+| Example | Title | Complexity | Key Concepts | Operational Question Addressed |
+|---------|-------|------------|--------------|--------------------------------|
+| 1 | Basic Structure | Simple | Fundamental relationships, entitlement states | What are the core components of the model? |
+| 2 | Expired License Handling | Simple | Lifecycle management, state transitions | How does the model handle expired entitlements? |
+| 3 | Utilization Tracking | Moderate | Restrictions, usage monitoring | What constraints apply and how to track usage? |
+| 4 | Hierarchical Entitlements | Moderate | Parent-child relationships, tiered licensing | How to model license upgrades and dependencies? |
+| 5 | License Pooling | Advanced | Shared entitlements, multi-device allocation | How to manage pooled licenses across devices? |
+| 6 | Multi-Vendor Environment | Advanced | Heterogeneous networks, vendor diversity | How to unify entitlements across vendors? |
+| 7 | Component-Level Entitlements | Advanced | Modular devices, granular licensing | How to track entitlements for device components? |
+| 8 | Capability Class Extension | Expert | Extensibility, external references | How to integrate custom capability models? |
+
+**Legend:**
+-  Simple: Foundational concepts, minimal complexity
+-  Moderate: Multi-component scenarios, intermediate concepts
+-  Advanced: Complex deployments, advanced patterns
+-  Expert: Extensibility and customization
+
 
 ## Basic Structure
 
-This example shows the fundamental structure of the model: a network element with an installed entitlement that enables a capability. The entitlement is defined at the network-inventory level and referenced by the network element. The capability includes entitlement-state (allowed/in-use) and supporting-entitlements that link back to the installed entitlement.
+### Scenario
+A network operator has purchased a single routing license for a router. The license enables basic routing capabilities. This represents the simplest possible deployment: one device, one entitlement, one capability.
+
+### Operational Context
+This example answers the fundamental questions:
+- What entitlements does the organization own?
+- Which device is this entitlement installed on?
+- What capability does this entitlement enable?
+- Is the capability currently allowed and in-use? This is based on the entitlement-state field.
+
+### JSON Example
 
 ~~~
 {::include yang/examples/example1-basic-structure.json}
@@ -374,7 +422,27 @@ This example shows the fundamental structure of the model: a network element wit
 
 ## Expired License Handling
 
+### Scenario
+The basic structure example showed a healthy state where an active entitlement enables a capability.  However, entitlements have lifecycles, they can expire, be revoked, or become inactive. This example demonstrates how the model represents these state transitions and their impact on capabilities.
+
 This example demonstrates how the model handles entitlement lifecycle states. An expired security entitlement results in capabilities being disallowed (allowed: false), while an active routing entitlement keeps its capabilities enabled. The installed-entitlements list shows in-use status reflecting actual capability usage.
+
+### Operational Context
+Based on the state comparison: Active vs Expired, there is an operational impact with the corresponding risk analysis.
+
+| Aspect | Impact | Remediation |
+|--------|--------|-------------|
+| **Security capabilities** | Disabled, features stopped | Renew ent-sec-001 or purchase new license |
+| **Routing capabilities** | Unaffected, continue operating | Monitor expiration date (2025-06-30) |
+| **Device operation** | Continues with reduced functionality | Plan renewal before 2025-06-30 |
+| **Compliance risk** | Potential breach if security required | Immediate action if security is mandatory |
+
+Implementation considerations should consider:
+- Do not delete the entitlement record (preserve for audit)
+- Do not immediately remove installed-entitlement (keep for renewal)
+- Do not affect unrelated entitlements on the same device
+
+### JSON Example
 
 ~~~
 {::include yang/examples/example2-expired-license.json}
@@ -382,7 +450,12 @@ This example demonstrates how the model handles entitlement lifecycle states. An
 
 ## Utilization Tracking with Restrictions
 
+### Scenario
 This example shows comprehensive utilization tracking across multiple capabilities. Each capability includes capability-restrictions with current-value and max-value fields, enabling organizations to monitor resource consumption against licensed limits. This addresses the question: "What constraints apply and what are current usage levels?"
+
+### Operational Context
+
+### JSON Example
 
 ~~~
 {::include yang/examples/example3-utilization-tracking.json}
@@ -390,7 +463,13 @@ This example shows comprehensive utilization tracking across multiple capabiliti
 
 ## Hierarchical Entitlements
 
+### Scenario
 This example demonstrates the parent-entitlement-uid mechanism for modeling entitlement hierarchies. A base "bronze" entitlement provides foundational capabilities, while a "silver" upgrade entitlement (referencing the bronze as parent) adds advanced features. This pattern supports tiered licensing models.
+
+### Operational Context
+<TBC>
+
+### JSON Example
 
 ~~~
 {::include yang/examples/example4-hierarchical-entitlements.json}
@@ -398,7 +477,13 @@ This example demonstrates the parent-entitlement-uid mechanism for modeling enti
 
 ## License Pooling
 
+### Scenario
 This example shows how shared entitlements can be installed across multiple network elements. A pool-based license is defined once at the network-inventory level with global restrictions (total seats), then installed on multiple routers. Each router's capabilities reference the shared entitlement, and individual capability-restrictions track per-device usage against the pool.
+
+### Operational Context
+<TBC>
+
+### JSON Example
 
 ~~~
 {::include yang/examples/example5-license-pooling.json}
@@ -406,7 +491,13 @@ This example shows how shared entitlements can be installed across multiple netw
 
 ## Multi-Vendor Environment
 
+### Scenario
 This example illustrates entitlement management in a heterogeneous network with devices from multiple vendors. Each vendor may use different licensing models (consumption-based, perpetual, subscription), but the unified model captures all entitlements consistently. The example shows how organizations gain visibility across their entire multi-vendor infrastructure.
+
+### Operational Context
+<TBC>
+
+### JSON Example
 
 ~~~
 {::include yang/examples/example6-multi-vendor.json}
@@ -414,7 +505,13 @@ This example illustrates entitlement management in a heterogeneous network with 
 
 ## Component-Level Entitlements
 
+### Scenario
 This example demonstrates entitlement tracking at the component level within a modular network element. Individual line cards have their own port licenses, while the chassis has system-level entitlements. This addresses scenarios where different components within the same device have independent entitlement requirements, such as pay-as-you-grow deployments.
+
+### Operational Context
+<TBC>
+
+### JSON Example
 
 ~~~
 {::include yang/examples/example7-modular-components.json}
@@ -422,7 +519,13 @@ This example demonstrates entitlement tracking at the component level within a m
 
 ## Capability Class Extension
 
+### Scenario
 This example demonstrates extending the capability-class identity to reference external capability definitions. The example-capability-extension module derives a new capability class and augments the model to reference capabilities defined in a separate module. This pattern allows domain-specific capability models to integrate cleanly with entitlement tracking.
+
+### Operational Context
+<TBC>
+
+### JSON Example
 
 ~~~
 {::include yang/examples/example8-capability-extension.json}
