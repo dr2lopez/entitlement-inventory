@@ -1,0 +1,90 @@
+module: ietf-entitlement-inventory
+
+  augment /inv:network-inventory/inv:network-elements/inv:network-element:
+    +--ro installed-entitlements!
+       +--ro entitlement* [entitlement-id]
+          +--ro entitlement-id    -> /inv:network-inventory/ei:entitlements/entitlement/entitlement-id
+          +--ro in-use?           boolean
+  augment /inv:network-inventory/inv:network-elements/inv:network-element/inv:components/inv:component:
+    +--ro installed-entitlements!
+       +--ro entitlement* [entitlement-id]
+          +--ro entitlement-id    -> /inv:network-inventory/ei:entitlements/entitlement/entitlement-id
+          +--ro in-use?           boolean
+  augment /inv:network-inventory/inv:network-elements/inv:network-element:
+    +--ro capabilities!
+       +--ro capability-class* [capability-class]
+          +--ro capability-class    identityref
+          +--ro capability* [capability-id]
+             +--ro capability-id                      string
+             +--ro extended-capability-description?   string
+             +--ro entitlement-state!
+             |  +--ro allowed?   boolean
+             |  +--ro in-use?    boolean
+             +--ro supporting-entitlements!
+             |  +--ro supporting-entitlement* [entitlement-id]
+             |     +--ro entitlement-id    -> ../../../../../../installed-entitlements/entitlement/entitlement-id
+             +--ro capability-restrictions!
+                +--ro capability-restriction* [restriction-id]
+                   +--ro restriction-id    string
+                   +--ro description?      string
+                   +--ro resource-name?    string
+                   +--ro units?            string
+                   +--ro max-value?        int32
+                   +--ro current-value?    int32
+  augment /inv:network-inventory/inv:network-elements/inv:network-element/inv:components/inv:component:
+    +--ro capabilities!
+       +--ro capability-class* [capability-class]
+          +--ro capability-class    identityref
+          +--ro capability* [capability-id]
+             +--ro capability-id                      string
+             +--ro extended-capability-description?   string
+             +--ro entitlement-state!
+             |  +--ro allowed?   boolean
+             |  +--ro in-use?    boolean
+             +--ro supporting-entitlements!
+             |  +--ro supporting-entitlement* [entitlement-id]
+             |     +--ro entitlement-id    -> ../../../../../../installed-entitlements/entitlement/entitlement-id
+             +--ro capability-restrictions!
+                +--ro capability-restriction* [restriction-id]
+                   +--ro restriction-id    string
+                   +--ro description?      string
+                   +--ro resource-name?    string
+                   +--ro units?            string
+                   +--ro max-value?        int32
+                   +--ro current-value?    int32
+  augment /inv:network-inventory:
+    +--ro entitlements!
+       +--ro entitlement* [entitlement-id]
+          +--ro entitlement-id            string
+          +--ro product-id?               string
+          +--ro sku?                      string
+          +--ro vendor?                   string
+          +--ro part-number?              string
+          +--ro state?                    entitlement-state-t
+          +--ro renewal-profile
+          |  +--ro activation-date?   yang:date-and-time
+          |  +--ro start-date?        yang:date-and-time
+          |  +--ro expiration-date?   yang:date-and-time
+          +--ro restrictions!
+          |  +--ro restriction* [restriction-id]
+          |     +--ro restriction-id    string
+          |     +--ro description?      string
+          |     +--ro resource-name?    string
+          |     +--ro units?            string
+          |     +--ro max-value?        int32
+          |     +--ro current-value?    int32
+          +--ro parent-entitlement-uid?   -> ../../entitlement/entitlement-id
+          +--ro entitlement-attachment
+             +--ro universal-access?   boolean
+             +--ro holders
+             |  +--ro organizations_names
+             |  |  +--ro organizations*   string
+             |  +--ro users_names
+             |     +--ro users*   string
+             +--ro assets
+                +--ro elements
+                |  +--ro network-elements*   -> /inv:network-inventory/network-elements/network-element/ne-id
+                +--ro components
+                   +--ro component* [network-element component-id]
+                      +--ro network-element    -> /inv:network-inventory/network-elements/network-element/ne-id
+                      +--ro component-id       -> /inv:network-inventory/network-elements/network-element[inv:ne-id=current()/../network-element]/components/component/component-id
