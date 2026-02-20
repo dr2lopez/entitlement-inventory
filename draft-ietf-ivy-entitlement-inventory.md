@@ -373,7 +373,7 @@ Each example:
 - Addresses specific operational questions
 - Builds upon concepts introduced in previous examples
 - Includes contextual explanation of design choices
-- Provides JSON that validates against the ietf-entitlement-inventory YANG module. 
+- Provides JSON that validates against the ietf-entitlement-inventory YANG module.
 
 In order to use the examples:
 - Start with Basic Structure Example to understand fundamental relationships
