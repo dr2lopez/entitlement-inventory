@@ -120,10 +120,10 @@ Future augmentations may explore capability discovery or telemetry-driven models
 
 <<Update Glossary under  Network Inventory draft, {{BaseInventory}}. We need at least formal definitions of "capability" and "entitlement".>>
 
--Capability: A discrete function, feature, or resource that a network element is technically capable of performing when properly entitled. Examples include MPLS routing, specific bandwidth throughput, or advanced QoS features.
--Entitlement: A vendor-issued authorization (typically a license) that grants permission to activate and use one or more capabilities on specific network elements, potentially subject to constraints such as time limits, usage quotas, or scope restrictions.
--Installed Entitlement: An entitlement that has been locally activated on a network element and is available for use by that element's capabilities.
--Capability Restriction: A constraint imposed by an entitlement that limits how a capability can be used (e.g., bandwidth cap, concurrent user limit, geographic restriction)."
+- Capability: A discrete function, feature, or resource that a network element is technically capable of performing when properly entitled. Examples include MPLS routing, specific bandwidth throughput, or advanced QoS features.
+- Entitlement: A vendor-issued authorization (typically a license) that grants permission to activate and use one or more capabilities on specific network elements, potentially subject to constraints such as time limits, usage quotas, or scope restrictions.
+- Installed Entitlement: An entitlement that has been locally activated on a network element and is available for use by that element's capabilities.
+- Capability Restriction: A constraint imposed by an entitlement that limits how a capability can be used (e.g., bandwidth cap, concurrent user limit, geographic restriction).
 - Network Asset: A network element or a component within a network element. The model supports entitlements and capabilities at both levels. This term is used throughout the document when the concept applies equally to network elements and their components.
 
 # Modeling Capabilities and Entitlements
@@ -133,7 +133,7 @@ The model describes how to represent capabilities and the entitlements that enab
 ~~~ aasvg
 {::include art/Organization_NetworkElements.txt}
 ~~~
-{: #fig-extBaseNetworkInventory title="Relationship Between Entitlements and Capabilities" }
+{: #fig-org title="Relationship Between Entitlements and Capabilities" }
 
 The following subsections describe how the model progressively builds upon the base network inventory to incorporate capabilities, entitlements, and their relationships. The model uses identity-based classes in multiple parts to enable extensibility, allowing implementations to derive custom types that reference external definitions when needed.
 
@@ -367,7 +367,7 @@ This section provides a progressive, from basic to advanced, series of validated
 1. Understand core concepts through minimal working examples.
 2. Explore operational scenarios.
 3. Identify implementation patterns for common use cases.
-4. Validate their own implementations*against canonical examples.
+4. Validate their own implementations against canonical examples.
 
 Each example:
 - Addresses specific operational questions
@@ -466,9 +466,6 @@ This example shows comprehensive utilization tracking across multiple capabiliti
 ### Scenario
 This example demonstrates the parent-entitlement-uid mechanism for modeling entitlement hierarchies. A base "bronze" entitlement provides foundational capabilities, while a "silver" upgrade entitlement (referencing the bronze as parent) adds advanced features. This pattern supports tiered licensing models.
 
-### Operational Context
-<TBC>
-
 ### JSON Example
 
 ~~~
@@ -479,9 +476,6 @@ This example demonstrates the parent-entitlement-uid mechanism for modeling enti
 
 ### Scenario
 This example shows how shared entitlements can be installed across multiple network elements. A pool-based license is defined once at the network-inventory level with global restrictions (total seats), then installed on multiple routers. Each router's capabilities reference the shared entitlement, and individual capability-restrictions track per-device usage against the pool.
-
-### Operational Context
-<TBC>
 
 ### JSON Example
 
@@ -494,9 +488,6 @@ This example shows how shared entitlements can be installed across multiple netw
 ### Scenario
 This example illustrates entitlement management in a heterogeneous network with devices from multiple vendors. Each vendor may use different licensing models (consumption-based, perpetual, subscription), but the unified model captures all entitlements consistently. The example shows how organizations gain visibility across their entire multi-vendor infrastructure.
 
-### Operational Context
-<TBC>
-
 ### JSON Example
 
 ~~~
@@ -508,8 +499,6 @@ This example illustrates entitlement management in a heterogeneous network with 
 ### Scenario
 This example demonstrates entitlement tracking at the component level within a modular network element. Individual line cards have their own port licenses, while the chassis has system-level entitlements. This addresses scenarios where different components within the same device have independent entitlement requirements, such as pay-as-you-grow deployments.
 
-### Operational Context
-<TBC>
 
 ### JSON Example
 
@@ -521,9 +510,6 @@ This example demonstrates entitlement tracking at the component level within a m
 
 ### Scenario
 This example demonstrates extending the capability-class identity to reference external capability definitions. The example-capability-extension module derives a new capability class and augments the model to reference capabilities defined in a separate module. This pattern allows domain-specific capability models to integrate cleanly with entitlement tracking.
-
-### Operational Context
-<TBC>
 
 ### JSON Example
 
