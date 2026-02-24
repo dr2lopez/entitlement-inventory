@@ -10,6 +10,10 @@ TREE_FILES := trees/capability_tree.txt trees/entitlements_tree.txt trees/instal
 
 unpaginated: $(drafts:=.unpaginated.txt)
 
+
+ifneq (,$(filter clean clean-all,$(MAKECMDGOALS)))
+# no tree generation rules during clean
+else
 # Generate YANG trees from the module (ensures docs match implementation)
 $(TREE_FILES): yang/ietf-entitlement-inventory.yang generate-trees.sh
 	./generate-trees.sh
@@ -18,6 +22,8 @@ trees: $(TREE_FILES)
 
 # Make the draft depend on tree files
 draft-ietf-ivy-entitlement-inventory.md: $(TREE_FILES)
+endif
+
 
 # Validate examples against YANG schema
 validate: yang/ietf-entitlement-inventory.yang
