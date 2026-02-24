@@ -5,10 +5,10 @@
 Network Inventory YANG WG                                     M. Palmero
 Internet-Draft                                               Independent
 Intended status: Standards Track                              C. Cardona
-Expires: 23 April 2026                                               NTT
+Expires: 28 August 2026                                              NTT
                                                                 D. Lopez
                                                               Telefonica
-                                                         20 October 2025
+                                                        24 February 2026
 
 
                 A YANG Module for Entitlement Inventory
@@ -61,11 +61,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2026.
+   This Internet-Draft will expire on 28 August 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -837,9 +837,9 @@ json
               Yu, C., Belotti, S., Bouquier, J., Peruzzini, F., and P.
               Bedard, "A Base YANG Data Model for Network Inventory",
               Work in Progress, Internet-Draft, draft-ietf-ivy-network-
-              inventory-yang-11, 14 October 2025,
+              inventory-yang-14, 5 February 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ivy-
-              network-inventory-yang-11>.
+              network-inventory-yang-14>.
 
 Acknowledgments
 
