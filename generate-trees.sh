@@ -3,6 +3,9 @@
 # This ensures documentation trees stay in sync with the actual model
 
 set -euo pipefail
+set -x  # print commands as they run
+
+trap 'rc=$?; echo "::error::generate-trees.sh failed (exit=$rc) at line $LINENO: $BASH_COMMAND"; exit $rc' ERR
 
 YANG_DIR="yang"
 TREES_DIR="trees"
