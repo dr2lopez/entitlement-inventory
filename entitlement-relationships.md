@@ -53,7 +53,7 @@ The relationship between Network elements and entitlements is 2 way: entitlement
                      │  Capabilities   │◄────────┘
                      └─────────────────┘
 ~~~
-NE support capabilities thanks to entilements that entitle them of their use
+NE support capabilities thanks to entitlements that entitle them of their use
 
 ### Figure 4: Complete Model with Restrictions
 
@@ -82,4 +82,4 @@ NE support capabilities thanks to entilements that entitle them of their use
                      │  Restrictions   │
                      └─────────────────┘
 ~~~
-NE support capabilities thanks to entilements that entitle them of their use under certain constraints
+NE support capabilities thanks to entitlements that entitle them of their use under certain constraints

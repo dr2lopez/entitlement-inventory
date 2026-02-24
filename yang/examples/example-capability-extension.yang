@@ -1,0 +1,52 @@
+module example-capability-extension {
+  yang-version 1.1;
+  namespace "urn:example:capability-extension";
+  prefix excapext;
+
+  import ietf-entitlement-inventory {
+    prefix ei;
+  }
+  import ietf-network-inventory {
+    prefix inv;
+  }
+  import example-capability-framework {
+    prefix excap;
+  }
+
+  organization
+    "Example Organization";
+  description
+    "Example module that extends capability-class and adds
+     a reference to capability definitions in another module.";
+
+  revision 2025-12-05 {
+    description
+      "Initial version.";
+  }
+
+  identity example-capability-class {
+    base ei:capability-class;
+    description
+      "Capability class that references the example
+       capability framework.";
+  }
+
+  augment "/inv:network-inventory/inv:network-elements"
+        + "/inv:network-element/ei:capabilities"
+        + "/ei:capability-class/ei:capability" {
+    when "derived-from-or-self(../ei:capability-class,"
+       + "'excapext:example-capability-class')";
+    description
+      "Adds a reference to capability definitions.";
+
+    leaf capability-ref {
+      type leafref {
+        path "/excap:capabilities/excap:capability"
+           + "/excap:capability-id";
+      }
+      description
+        "Reference to a capability definition in the
+         example-capability-framework module.";
+    }
+  }
+}
