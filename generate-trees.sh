@@ -48,25 +48,59 @@ pyang -f tree $PYANG_PATHS $YANG_DIR/ietf-entitlement-inventory.yang > $YANG_TRE
 # Generate capability subtree (extract from first network-element augment only)
 echo "Generating capability subtree..."
 pyang -f tree $PYANG_PATHS $YANG_DIR/ietf-entitlement-inventory.yang 2>/dev/null | \
-  awk '/\+--ro capabilities!/,/^  augment|^$/' | \
-  head -20 | \
-  grep -v "^  augment" | grep -v "^$" | \
-  sed 's/^   //' > $TREES_DIR/capability_tree.txt
+awk '
+  # Enter the network-element augment
+  /^  augment \/inv:network-inventory\/inv:network-elements\/inv:network-element:$/ {in_ne=1; next}
+  # Leave on any other augment header
+  /^  augment / {in_ne=0}
+
+  # Start printing at capabilities within that augment
+  in_ne && /^    \+--ro capabilities!/ {p=1}
+
+  # Print until we leave the augment (handled above)
+  in_ne && p {
+    sub(/^   /,"")     # your old sed s/^   //
+    print
+  }
+' > "$TREES_DIR/capability_tree.txt"
 
 # Generate entitlements subtree
 echo "Generating entitlements subtree..."
 pyang -f tree $PYANG_PATHS $YANG_DIR/ietf-entitlement-inventory.yang 2>/dev/null | \
-  awk '/augment \/inv:network-inventory:$/,/^$/' | \
-  grep -v "^  augment" | \
-  sed 's/^   //' > $TREES_DIR/entitlements_tree.txt
+awk '
+  # Enter the inventory-root augment
+  /^  augment \/inv:network-inventory:$/ {in_inv=1; next}
+  # Leave on any other augment header
+  /^  augment / {in_inv=0}
+
+  # Start printing at entitlements within that augment
+  in_inv && /^    \+--ro entitlements!/ {p=1}
+
+  in_inv && p {
+    sub(/^   /,"")
+    print
+  }
+' > "$TREES_DIR/entitlements_tree.txt"
 
 # Generate installed-entitlements subtree (from network-element augment)
 echo "Generating installed-entitlements subtree..."
 pyang -f tree $PYANG_PATHS $YANG_DIR/ietf-entitlement-inventory.yang 2>/dev/null | \
-  awk '/\+--ro installed-entitlements!/,/^  augment|^$/' | \
-  head -4 | \
-  grep -v "^  augment" | grep -v "^$" | \
-  sed 's/^   //' > $TREES_DIR/installed_entitlments_tree.txt
+awk '
+  /^  augment \/inv:network-inventory\/inv:network-elements\/inv:network-element:$/ {in_ne=1; next}
+  /^  augment / {in_ne=0}
+
+  # start at installed-entitlements
+  in_ne && /^    \+--ro installed-entitlements!/ {p=1; first=1}
+
+  # once started, stop when we reach the next sibling at the same level
+  in_ne && p && !first && /^    \+--ro / {exit}
+
+  in_ne && p {
+    sub(/^   /,"")
+    print
+    first=0
+  }
+' > "$TREES_DIR/installed_entitlments_tree.txt"
 
 echo "Tree generation complete."
 echo ""
