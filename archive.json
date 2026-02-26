@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-24T00:55:53.774901+00:00",
+  "timestamp": "2026-02-26T00:55:25.289944+00:00",
   "repo": "dr2lopez/entitlement-inventory",
   "labels": [
     {
@@ -407,24 +407,26 @@
       "id": "PR_kwDOOCAVZs6wRY0R",
       "title": "Model and examples",
       "url": "https://github.com/dr2lopez/entitlement-inventory/pull/10",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jccardonar",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-29T01:56:36Z",
-      "updatedAt": "2026-02-20T16:31:34Z",
+      "updatedAt": "2026-02-24T22:15:07Z",
       "baseRepository": "dr2lopez/entitlement-inventory",
       "baseRefName": "main",
       "baseRefOid": "e9d67a20a9f47094025001651a505fc8d0d30f6a",
       "headRepository": "jccardonar/entitlement-inventory",
       "headRefName": "model_and_examples",
-      "headRefOid": "71f0a5e65fbcec0379249e7548005e7c7b28c038",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "63341bd2b75580f6e16ae35a0272b95289cbb6fe",
+      "closedAt": "2026-02-24T22:15:07Z",
+      "mergedAt": "2026-02-24T22:15:07Z",
+      "mergedBy": "dr2lopez",
+      "mergeCommit": {
+        "oid": "71efe8bfdb96f1eed383989b8d6252a161a47d76"
+      },
       "comments": [],
       "reviews": []
     }
