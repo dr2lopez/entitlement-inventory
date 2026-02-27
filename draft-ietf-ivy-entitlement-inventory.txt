@@ -5,12 +5,12 @@
 Network Inventory YANG WG                                     M. Palmero
 Internet-Draft                                               Independent
 Intended status: Standards Track                              C. Cardona
-Expires: 28 August 2026                                              NTT
+Expires: 31 August 2026                                              NTT
                                                                 D. Lopez
                                                               Telefonica
                                                                  I. Busi
                                                                   Huawei
-                                                        24 February 2026
+                                                        27 February 2026
 
 
                 A YANG Module for Entitlement Inventory
@@ -18,11 +18,12 @@ Expires: 28 August 2026                                              NTT
 
 Abstract
 
-   This document defines a YANG data model for managing software
-   entitlements (licenses) within a network inventory.  The model
-   represents the relationship between organizational entitlements,
-   network element capabilities, and the constraints that entitlements
-   impose on capability usage.
+   This document defines a YANG data model for managing software-based
+   entitlements (licenses, authorization tokens, pay-as-you-go service
+   credentials…) within a network inventory.  The model represents the
+   relationship between organizational entitlements, network element
+   capabilities, and the constraints that entitlements impose on
+   capability usage.
 
    This data model enables operators to determine what capabilities
    their network elements possess, which capabilities are currently
@@ -64,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 August 2026.
+   This Internet-Draft will expire on 31 August 2026.
 
 Copyright Notice
 
@@ -154,10 +155,14 @@ Table of Contents
 
 1.  Introduction
 
-   Network elements provide capabilities—functions such as MPLS routing,
-   advanced QoS, or bandwidth throughput—that operators use to build
-   services.  Many capabilities require entitlements (licenses) from
-   vendors before activation.
+   Network elements provide capabilities‚ i.e., functions related to
+   their role in the network, such as MPLS routing, advanced QoS, or
+   bandwidth throughput, which operators use to build services.  Many
+   capabilities require an evidence item for the right to use them,
+   issued by the network element vendor, for their activation.  These
+   evidence items are called entitlements, and can take different forms,
+   such as software licenses, access tokens or credentials for as-
+   a-service consumption.
 
    This document defines a YANG data model for tracking entitlements and
    their relationship to capabilities.  The model supports three
@@ -176,23 +181,22 @@ Table of Contents
 
    As network technology evolves toward modular, software-defined, and
    virtualized architectures, managing the rights to activate specific
-   functions becomes increasingly complex.  These rights granted via
-   entitlements or licenses must be tracked, aggregated, and matched to
-   assets to ensure that services can be delivered using available
-   capabilities.  This complexity calls for structured, machine-readable
-   models that represent which capabilities are available, permitted,
-   and in use.
+   functions becomes increasingly complex.  These rights, granted via
+   entitlements, must be tracked, aggregated, and matched to assets to
+   ensure that services can be delivered using available capabilities.
+   This complexity calls for structured, machine-readable models that
+   represent which capabilities are available, permitted, and in use.
 
    This draft provides a foundational YANG structure for representing
-   these relationships as standards, complementing the network inventory
-   module.
+   these relationships as standardized data, complementing the network
+   inventory module.
 
 1.1.  Scope of the Entitlement Model
 
    The entitlement model provides an inventory of entitlements.  This
    includes the entitled holders and the capabilities to which they are
    entitled.  Additionally, it offers information into the restrictions
-   of the operation of the different assets (network entities and
+   of the operation of the different assets (network elements and
    components).  In general, this model seeks to address the following
    questions:
 
@@ -217,7 +221,7 @@ Table of Contents
    entitlement on the device or component, or it may represent a logical
    assignment in a centralized system.  Some entitlements may be
    assigned to multiple network assets up to a defined limit; such
-   constraints can be modelled as global restrictions of under the
+   constraints can be modelled as global restrictions under the
    entitlement.
 
    The model supports entitlement tracking and capability management.
@@ -250,19 +254,19 @@ Table of Contents
    on the operational environment and vendor implementation.  The
    following deployment models are commonly encountered:
 
-   *  *Local Installation:* The entitlement is installed directly on the
+   *  *Local Installation*: The entitlement is installed directly on the
       network asset, which maintains knowledge of its entitlements and
       enforces capability restrictions locally.  This is a common
       approach for devices that operate independently.
 
-   *  *License Server:* Entitlements reside in an external license
+   *  *License Server*: Entitlements reside in an external (license)
       server, which may be deployed on-premises or in the cloud.
       Network assets communicate with the license server to verify
       entitlement status and capability permissions.  This model
       supports centralized management and dynamic entitlement
       allocation.
 
-   *  *Commercial Agreement:* In some deployments, entitlements exist
+   *  *Commercial Agreement*: In some deployments, entitlements exist
       purely as commercial agreements, and policy enforcement occurs
       outside the network asset.  The network asset may operate without
       direct knowledge of the entitlement, relying on external systems
@@ -291,7 +295,7 @@ Table of Contents
    *  Manually configured as part of an inventory process.
 
    Future augmentations may explore capability discovery or telemetry-
-   driven models, but they are out of scope for the current version.
+   driven models, but they are out of scope of the current version.
 
 2.  Conventions and Definitions
 
@@ -399,9 +403,9 @@ Table of Contents
 
            Figure 2: Base Network Inventory Entitlement extension
 
-   Figure 3 illustrates the initial relationship between Network
-   Elements and entitlements is two ways: entitlements SHOULD be
-   attached to NE, and NE SHOULD have entitlements installed.
+   Figure 3 illustrates the initial relationship between network
+   elements and entitlements, which is two-way: entitlements SHOULD be
+   attached to NEs, and NEs SHOULD have entitlements installed.
 
                     ┌─────────────────────────┐
                     │Base Network Inventory   │
@@ -417,8 +421,8 @@ Table of Contents
 
        Figure 3: Relationship between entitlements and Base Inventory
 
-   Figure 4 depicts NE support capabilities thanks to entitlements that
-   entitle them of their use
+   Figure 4 depicts NE support capabilities by means of entitlements
+   that authorize their use.
 
                     ┌─────────────────────────┐
                     │Base Network Inventory   │
@@ -517,7 +521,7 @@ Table of Contents
    The granularity at which capabilities are defined is at the
    discretion of the vendor.  A vendor MAY choose to advertise
    capabilities at a high level of abstraction, such as "Advanced
-   Services," and consumers of this information should refer to vendor
+   Services", and consumers of this information should refer to vendor
    documentation to understand what specific functions are included.
    Alternatively, an implementation MAY enumerate capabilities at a
    finer granularity, listing individual protocols or features such as
@@ -538,7 +542,7 @@ Table of Contents
 
    The capability-class identity provides an extension point for
    integrating external capability models.  This module does not define
-   domain-specific capability classes; instead, extensions derive new
+   domain-specific capability classes.  Instead, extensions derive new
    capability classes that reference separate models where capabilities
    are formally defined.
 
@@ -555,14 +559,14 @@ Table of Contents
 
    This pattern ensures that:
 
-   *  Capability models evolve independently of entitlement tracking
+   *  Capability models evolve independently of entitlement tracking.
 
    *  Multiple capability domains can coexist (e.g., routing
       capabilities, security capabilities, QoS capabilities) each with
-      their own defining module
+      their own defining module.
 
    *  The entitlement inventory remains a thin integration layer rather
-      than a repository of capability definitions
+      than a repository of capability definitions.
 
    The following example module defines capability concepts for a
    specific domain:
@@ -673,30 +677,6 @@ Table of Contents
    network-inventory module in [BaseInventory] with a top-level
    entitlements container according to the following tree:
 
-   Figure 6 depicts the relationship between the Entitlement Inventory
-   model and other models.  The Entitlement Inventory model enhances the
-   model defined in the base network inventory model with entitlement-
-   specific attributes and centralized entitlement management
-   capabilities.
-
-      +----------------------+
-      |                      |
-      |Base Network Inventory|
-      |                      |
-      +----------+-----------+
-                 ^
-                 |
-      +----------+-----------+
-      |                      |
-      | Entitlement Inventory|
-      |  e.g., licenses,     |
-      |  capabilities,       |
-      |  restrictions        |
-      +----------------------+
-
-       Figure 6: Relationship of Entitlement Inventory Model to Other
-                              Inventory Models
-
  +--ro entitlements!
     +--ro entitlement* [entitlement-id]
        +--ro entitlement-id            string
@@ -733,6 +713,30 @@ Table of Contents
                    +--ro network-element    -> /inv:network-inventory/network-elements/network-element/ne-id
                    +--ro component-id       -> /inv:network-inventory/network-elements/network-element[inv:ne-id=current()/../network-element]/components/component/component-id
 
+   Figure 6 depicts the relationship between the Entitlement Inventory
+   model and other models.  The Entitlement Inventory model enhances the
+   model defined in the base network inventory model with entitlement-
+   specific attributes and centralized entitlement management
+   capabilities.
+
+      +----------------------+
+      |                      |
+      |Base Network Inventory|
+      |                      |
+      +----------+-----------+
+                 ^
+                 |
+      +----------+-----------+
+      |                      |
+      | Entitlement Inventory|
+      |  e.g., licenses,     |
+      |  capabilities,       |
+      |  restrictions        |
+      +----------------------+
+
+       Figure 6: Relationship of Entitlement Inventory Model to Other
+                              Inventory Models
+
    Entitlements MUST be listed at the top level, directly under the
    network-inventory container.  This is required because organizations
    may own entitlements that are not yet assigned to any network asset.
@@ -757,7 +761,7 @@ Table of Contents
    For single-chassis devices, entitlements are typically associated
    with the network element itself rather than with individual chassis
    components.  However, certain deployment scenarios involve multi-
-   chassis systems—such as stacked switches or optical network
+   chassis systems, such as stacked switches or optical network
    elements—where multiple physical units operate as a single logical
    network element.  In these cases, each component may have its own
    commercial identity (such as a serial number) while the collection
