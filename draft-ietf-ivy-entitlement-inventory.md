@@ -38,10 +38,10 @@ author:
     email: "italo.busi@huawei.com"
 
 normative:
-RFC8341:
+ RFC8341:
 
 informative:
-  BaseInventory: I-D.ietf-ivy-network-inventory-yang
+ BaseInventory: I-D.ietf-ivy-network-inventory-yang
 
 --- abstract
 
