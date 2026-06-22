@@ -60,7 +60,7 @@ This document defines a YANG data model for tracking entitlements and their rela
 - Representing capabilities available on network elements and whether entitlements permit their use
 - Monitoring active capability usage and enforced restrictions
 
-Operators use this information to answer: What can this device do? What is it 
+Operators use this information to answer: What can this device do? What is it
 entitled to do? What restrictions apply?
 
 As network technology evolves toward modular, software-defined, and virtualized architectures, managing the rights to activate specific functions becomes increasingly complex. These rights, granted via entitlements, must be tracked, aggregated, and matched to assets to ensure that services can be delivered using available capabilities. This complexity calls for structured, machine-readable models that represent which capabilities are available, permitted, and in use.
@@ -528,7 +528,7 @@ When entitlements are managed both centrally and locally, implementations SHOULD
 * Locally installed entitlements
 * Actual capability usage
 
-Implementations maintaining hierarchical entitlements via the `parent-entitlement-uid` field SHOULD validate the entitlement hierarchy for circular references before committing changes. 
+Implementations maintaining hierarchical entitlements via the `parent-entitlement-uid` field SHOULD validate the entitlement hierarchy for circular references before committing changes.
 While the model prevents direct self-reference, cycles at greater depth (e.g., A references B as parent while B references A) cannot be detected by YANG constraints alone and must be handled at the management system level.
 
 ## Entitlement Expiration Handling
