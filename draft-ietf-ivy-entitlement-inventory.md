@@ -60,7 +60,8 @@ This document defines a YANG data model for tracking entitlements and their rela
 - Representing capabilities available on network elements and whether entitlements permit their use
 - Monitoring active capability usage and enforced restrictions
 
-Operators use this information to answer: What can this device do? What is it entitlement-id to do? What restrictions apply?
+Operators use this information to answer: What can this device do? What is it 
+entitled to do? What restrictions apply?
 
 As network technology evolves toward modular, software-defined, and virtualized architectures, managing the rights to activate specific functions becomes increasingly complex. These rights, granted via entitlements, must be tracked, aggregated, and matched to assets to ensure that services can be delivered using available capabilities. This complexity calls for structured, machine-readable models that represent which capabilities are available, permitted, and in use.
 
@@ -190,7 +191,7 @@ This document does not define a complete theory of capabilities or their interna
 
 - **Basic capability class**: The module defines `basic-capability-description` as a simple capability  class using only identifiers and descriptions. This supports implementations that present capabilities as straightforward lists.
 
-- **Extended capability classes**: For structured capability definitions, implementations derive new identities from `capability-class`. These reference external YANG modules where capabilities have formal structure and semantics. (TBU - See Section X for extension examples.)
+- **Extended capability classes**: For structured capability definitions, implementations derive new identities from `capability-class`. These reference external YANG modules where capabilities have formal structure and semantics. See {{ext-capability}} for extension examples.
 
 This separation ensures that capability definitions can evolve independently of the entitlement inventory model, and that implementations can adopt capability models appropriate to their domain without modifications to this base module.
 
@@ -198,7 +199,7 @@ The granularity at which capabilities are defined is at the discretion of the ve
 
 The capabilities of an inventoried network asset may be restricted based on the availability of proper entitlements. An entitlement manager should be interested in the capabilities available to be used on the network assets, and the capabilities that are currently available. The model includes this information by means of the "supporting entitlements" list, which references installed entitlements and includes potential restrictions related to the status of the entitlement. This allows organizations to monitor entitlement usage and avoid misconfigurations or exceeding permitted capability limits.
 
-### Extending Capability Classes
+### Extending Capability Classes {#ext-capability}
 
 The `capability-class` identity provides an extension point for integrating external capability models. This module does not define domain-specific capability classes. Instead, extensions derive new capability classes that reference separate models where capabilities are formally defined.
 
@@ -527,6 +528,9 @@ When entitlements are managed both centrally and locally, implementations SHOULD
 * Locally installed entitlements
 * Actual capability usage
 
+Implementations maintaining hierarchical entitlements via the `parent-entitlement-uid` field SHOULD validate the entitlement hierarchy for circular references before committing changes. 
+While the model prevents direct self-reference, cycles at greater depth (e.g., A references B as parent while B references A) cannot be detected by YANG constraints alone and must be handled at the management system level.
+
 ## Entitlement Expiration Handling
 
 Network elements SHOULD generate notifications when installed entitlements are approaching expiration. The notification timing and handling is implementation-specific but SHOULD provide sufficient lead time for renewal.
@@ -576,13 +580,21 @@ IANA is requested to register the following entry in the "YANG Module Names" reg
 
 Implementations MUST protect entitlement data with appropriate access controls consistent with organizational security policies.
 
+The entitlement data exposed by this model includes commercially sensitive information such as product identifiers, SKUs, part numbers, vendor identifiers, and contract validity periods. Operators SHOULD restrict read access to this data using NACM (Network Access Control Management, {{RFC8341}}) to authorized personnel only. Unauthorized access to entitlement records could expose procurement strategies, contract terms, or financial obligations.
+
 ## Entitlement Tampering
 
 Implementations SHOULD use cryptographic signatures or similar mechanisms to verify entitlement integrity. Network elements SHOULD validate entitlements before activating capabilities.
 
+The capability inventory exposed by this model reveals which features and functions are active on a network element. This information could assist an attacker in identifying exploitable capabilities or understanding the operational profile of the network. Operators SHOULD apply NACM rules to restrict read access to capability data to authorized management systems and personnel.
+
+This model is entirely read-only (all nodes are defined as `config false`). Write access to the underlying entitlement state is managed by external systems such as license servers or asset management platforms, whose communication channels with network elements are outside the scope of this document. Implementations SHOULD ensure that those channels are protected in accordance with current security best practices, including mutual authentication and encryption.
+
 ## Information Disclosure
 
 Access to entitlement inventory data SHOULD be restricted to authorized personnel. Consider implementing role-based access controls that limit visibility based on operational need.
+
+The channel used to populate `installed-entitlements` data — whether from a license server, an asset management system, or direct device reporting — is outside the scope of this document. However, implementations SHOULD ensure that such channels operate within a secured management plane, protected against eavesdropping and unauthorized modification. Failure to secure these channels could allow an attacker to inject false entitlement state, causing capabilities to appear allowed or restricted in ways that do not reflect the actual organizational entitlements.
 
 --- back
 

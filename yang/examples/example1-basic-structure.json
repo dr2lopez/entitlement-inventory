@@ -26,7 +26,7 @@
                 "capability": [
                   {
                     "capability-id": "generic-routing-functions",
-                    "extended-capability-description": "Basic routing capablities",
+                    "extended-capability-description": "Basic routing capabilities",
                     "entitlement-state": {
                       "allowed": true,
                       "in-use": true

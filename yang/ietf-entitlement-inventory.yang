@@ -49,6 +49,14 @@ module ietf-entitlement-inventory {
      they appear in all capitals, as shown here.
     ";
 
+  revision 2026-05-25 {
+    description
+      "updated draft version
+       draft-ietf-ivy-entitlement-inventory";
+    reference
+      "draft-ietf-ivy-entitlement-inventory-02";
+  }
+
   revision 2025-10-20 {
     description
       "First full draft version for
@@ -115,12 +123,12 @@ module ietf-entitlement-inventory {
          'connections', 'tunnels').";
     }
     leaf max-value {
-      type int32;
+      type uint32;
       description
         "Maximum permitted value for this restriction.";
     }
     leaf current-value {
-      type int32;
+      type uint32;
       description
         "Current usage or consumption of this restricted
          resource at query time.";
@@ -440,7 +448,14 @@ module ietf-entitlement-inventory {
                parent.";
           }
           description
-            "Reference to parent entitlement if this is derived.";
+            "Reference to parent entitlement if this is derived or
+     child entitlement (e.g., an upgrade add-on referencing
+     its base license). Implementations MUST NOT create
+     circular references among entitlements. Although this
+     constraint cannot be fully enforced via YANG 'must'
+     statements due to XPath 1.0 limitations, management
+     systems SHOULD validate the full entitlement hierarchy
+     for cycles before committing changes.";
         }
         container entitlement-attachment {
           description
@@ -458,7 +473,7 @@ module ietf-entitlement-inventory {
                does not apply any restrictions on who can
                use or not the asset where assigned
                to the entitlement.";
-            container organizations_names {
+            container organizations-names {
               description
                 "Organization holders.";
               leaf-list organizations {
@@ -467,7 +482,7 @@ module ietf-entitlement-inventory {
                   "List of organization names.";
               }
             }
-            container users_names {
+            container users-names {
               description
                 "User holders.";
               leaf-list users {
