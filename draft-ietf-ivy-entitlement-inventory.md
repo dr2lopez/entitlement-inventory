@@ -131,7 +131,7 @@ Future augmentations may explore capability discovery or telemetry-driven models
 
 The model describes how to represent capabilities and the entitlements that enable them across inventoried network assets. Capabilities describe what an asset can do. Entitlements indicate whether those capabilities are allowed and under what conditions.
 
-~~~ aasvg
+~~~{::nomarkdown}aasvg{:/}
 {::include art/Organization_NetworkElements.txt}
 ~~~
 {: #fig-org title="Relationship Between Entitlements and Capabilities" }
@@ -147,7 +147,7 @@ To represent the complex relationships between network elements, capabilities, a
 
 {{fig-extBaseNetworkInventory}} depicts the initial step, highlighting the base network inventory and the areas to be extended: hardware, software, and entitlements. These extensions are necessary to properly model the relationships.
 
-~~~ aasvg
+~~~{::nomarkdown}aasvg{:/}
 {::include art/extensionBaseNetworkInventory.txt}
 ~~~
 {: #fig-extBaseNetworkInventory title="Base Network Inventory Entitlement extension" }
@@ -155,7 +155,7 @@ To represent the complex relationships between network elements, capabilities, a
 
 {{fig-ascii-art_baseInventory}} illustrates the initial relationship between network elements and entitlements, which is two-way: entitlements SHOULD be attached to NEs, and NEs SHOULD have entitlements installed.
 
-~~~ aasvg
+~~~{::nomarkdown}aasvg{:/}
 {::include art/ascii-art_baseInventory.txt}
 ~~~
 {: #fig-ascii-art_baseInventory title="Relationship between entitlements and Base Inventory" }
@@ -163,7 +163,7 @@ To represent the complex relationships between network elements, capabilities, a
 
 {{fig-capabilities_baseinventory}} depicts NE support capabilities by means of entitlements that authorize their use.
 
-~~~ aasvg
+~~~{::nomarkdown}aasvg{:/}
 {::include art/capabilities_baseinventory.txt}
 ~~~
 {: #fig-capabilities_baseinventory title="Capabilities integration with the Base Inventory" }
@@ -171,7 +171,7 @@ To represent the complex relationships between network elements, capabilities, a
 
 Finally, NE support capabilities thanks to entitlements that entitle them of their use under certain constraints as shown in {{fig-capabilities_restrictions}}.
 
-~~~ aasvg
+~~~{::nomarkdown}aasvg{:/}
 {::include art/capabilities_restrictions.txt}
 ~~~
 {: #fig-capabilities_restrictions title="Complete model with restrictions" }
