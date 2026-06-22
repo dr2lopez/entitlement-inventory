@@ -5,12 +5,12 @@
 Network Inventory YANG WG                                     M. Palmero
 Internet-Draft                                               Independent
 Intended status: Standards Track                              C. Cardona
-Expires: 31 August 2026                                              NTT
+Expires: 24 December 2026                                            NTT
                                                                 D. Lopez
                                                               Telefonica
                                                                  I. Busi
                                                                   Huawei
-                                                        27 February 2026
+                                                            22 June 2026
 
 
                 A YANG Module for Entitlement Inventory
@@ -65,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 August 2026.
+   This Internet-Draft will expire on 24 December 2026.
 
 Copyright Notice
 
@@ -177,7 +177,7 @@ Table of Contents
    *  Monitoring active capability usage and enforced restrictions
 
    Operators use this information to answer: What can this device do?
-   What is it entitlement-id to do?  What restrictions apply?
+   What is it entitled to do?  What restrictions apply?
 
    As network technology evolves toward modular, software-defined, and
    virtualized architectures, managing the rights to activate specific
@@ -489,8 +489,8 @@ Table of Contents
                 +--ro description?      string
                 +--ro resource-name?    string
                 +--ro units?            string
-                +--ro max-value?        int32
-                +--ro current-value?    int32
+                +--ro max-value?        uint32
+                +--ro current-value?    uint32
 
    For any given network asset, the capabilities list MAY include all
    potential capabilities advertised by the vendor, and MUST include
@@ -510,8 +510,8 @@ Table of Contents
    *  *Extended capability classes*: For structured capability
       definitions, implementations derive new identities from
       capability-class.  These reference external YANG modules where
-      capabilities have formal structure and semantics.  (TBU - See
-      Section X for extension examples.)
+      capabilities have formal structure and semantics.  See
+      Section 3.2.1 for extension examples.
 
    This separation ensures that capability definitions can evolve
    independently of the entitlement inventory model, and that
@@ -695,15 +695,15 @@ Table of Contents
        |     +--ro description?      string
        |     +--ro resource-name?    string
        |     +--ro units?            string
-       |     +--ro max-value?        int32
-       |     +--ro current-value?    int32
+       |     +--ro max-value?        uint32
+       |     +--ro current-value?    uint32
        +--ro parent-entitlement-uid?   -> ../../entitlement/entitlement-id
        +--ro entitlement-attachment
           +--ro universal-access?   boolean
           +--ro holders
-          |  +--ro organizations_names
+          |  +--ro organizations-names
           |  |  +--ro organizations*   string
-          |  +--ro users_names
+          |  +--ro users-names
           |     +--ro users*   string
           +--ro assets
              +--ro elements
@@ -1033,6 +1033,14 @@ Table of Contents
         they appear in all capitals, as shown here.
        ";
 
+     revision 2026-05-25 {
+       description
+         "updated draft version
+          draft-ietf-ivy-entitlement-inventory";
+       reference
+         "draft-ietf-ivy-entitlement-inventory-02";
+     }
+
      revision 2025-10-20 {
        description
          "First full draft version for
@@ -1099,12 +1107,12 @@ Table of Contents
             'connections', 'tunnels').";
        }
        leaf max-value {
-         type int32;
+         type uint32;
          description
            "Maximum permitted value for this restriction.";
        }
        leaf current-value {
-         type int32;
+         type uint32;
          description
            "Current usage or consumption of this restricted
             resource at query time.";
@@ -1424,7 +1432,14 @@ Table of Contents
                   parent.";
              }
              description
-               "Reference to parent entitlement if this is derived.";
+               "Reference to parent entitlement if this is derived or
+        child entitlement (e.g., an upgrade add-on referencing
+        its base license). Implementations MUST NOT create
+        circular references among entitlements. Although this
+        constraint cannot be fully enforced via YANG 'must'
+        statements due to XPath 1.0 limitations, management
+        systems SHOULD validate the full entitlement hierarchy
+        for cycles before committing changes.";
            }
            container entitlement-attachment {
              description
@@ -1442,7 +1457,7 @@ Table of Contents
                   does not apply any restrictions on who can
                   use or not the asset where assigned
                   to the entitlement.";
-               container organizations_names {
+               container organizations-names {
                  description
                    "Organization holders.";
                  leaf-list organizations {
@@ -1451,7 +1466,7 @@ Table of Contents
                      "List of organization names.";
                  }
                }
-               container users_names {
+               container users-names {
                  description
                    "User holders.";
                  leaf-list users {
@@ -1553,8 +1568,8 @@ module: ietf-entitlement-inventory
                    +--ro description?      string
                    +--ro resource-name?    string
                    +--ro units?            string
-                   +--ro max-value?        int32
-                   +--ro current-value?    int32
+                   +--ro max-value?        uint32
+                   +--ro current-value?    uint32
   augment /inv:network-inventory/inv:network-elements/inv:network-element/inv:components/inv:component:
     +--ro capabilities!
        +--ro capability-class* [capability-class]
@@ -1574,8 +1589,8 @@ module: ietf-entitlement-inventory
                    +--ro description?      string
                    +--ro resource-name?    string
                    +--ro units?            string
-                   +--ro max-value?        int32
-                   +--ro current-value?    int32
+                   +--ro max-value?        uint32
+                   +--ro current-value?    uint32
   augment /inv:network-inventory:
     +--ro entitlements!
        +--ro entitlement* [entitlement-id]
@@ -1595,15 +1610,15 @@ module: ietf-entitlement-inventory
           |     +--ro description?      string
           |     +--ro resource-name?    string
           |     +--ro units?            string
-          |     +--ro max-value?        int32
-          |     +--ro current-value?    int32
+          |     +--ro max-value?        uint32
+          |     +--ro current-value?    uint32
           +--ro parent-entitlement-uid?   -> ../../entitlement/entitlement-id
           +--ro entitlement-attachment
              +--ro universal-access?   boolean
              +--ro holders
-             |  +--ro organizations_names
+             |  +--ro organizations-names
              |  |  +--ro organizations*   string
-             |  +--ro users_names
+             |  +--ro users-names
              |     +--ro users*   string
              +--ro assets
                 +--ro elements
@@ -1746,18 +1761,18 @@ module: ietf-entitlement-inventory
                 "capability": [
                   {
                     "capability-id": "generic-routing-functions",
-                    "extended-capability-description": "Basic routing capablities",
+                    "extended-capability-description": "Basic routing capabilities",
                     "entitlement-state": {
                       "allowed": true,
                       "in-use": true
                     },
-                    "supporting-entitlements": {
+                "supporting-entitlements": {
                     "supporting-entitlement": [
                       {
                         "entitlement-id": "ent-1"
                       }
                     ]
-                    }
+            }
                   }
                 ]
               }
@@ -3702,6 +3717,14 @@ module: ietf-entitlement-inventory
 
    *  Actual capability usage
 
+   Implementations maintaining hierarchical entitlements via the parent-
+   entitlement-uid field SHOULD validate the entitlement hierarchy for
+   circular references before committing changes.  While the model
+   prevents direct self-reference, cycles at greater depth (e.g., A
+   references B as parent while B references A) cannot be detected by
+   YANG constraints alone and must be handled at the management system
+   level.
+
 5.2.  Entitlement Expiration Handling
 
    Network elements SHOULD generate notifications when installed
@@ -3758,17 +3781,51 @@ module: ietf-entitlement-inventory
    Implementations MUST protect entitlement data with appropriate access
    controls consistent with organizational security policies.
 
+   The entitlement data exposed by this model includes commercially
+   sensitive information such as product identifiers, SKUs, part
+   numbers, vendor identifiers, and contract validity periods.
+   Operators SHOULD restrict read access to this data using NACM
+   (Network Access Control Management, [RFC8341]) to authorized
+   personnel only.  Unauthorized access to entitlement records could
+   expose procurement strategies, contract terms, or financial
+   obligations.
+
 7.2.  Entitlement Tampering
 
    Implementations SHOULD use cryptographic signatures or similar
    mechanisms to verify entitlement integrity.  Network elements SHOULD
    validate entitlements before activating capabilities.
 
+   The capability inventory exposed by this model reveals which features
+   and functions are active on a network element.  This information
+   could assist an attacker in identifying exploitable capabilities or
+   understanding the operational profile of the network.  Operators
+   SHOULD apply NACM rules to restrict read access to capability data to
+   authorized management systems and personnel.
+
+   This model is entirely read-only (all nodes are defined as config
+   false).  Write access to the underlying entitlement state is managed
+   by external systems such as license servers or asset management
+   platforms, whose communication channels with network elements are
+   outside the scope of this document.  Implementations SHOULD ensure
+   that those channels are protected in accordance with current security
+   best practices, including mutual authentication and encryption.
+
 7.3.  Information Disclosure
 
    Access to entitlement inventory data SHOULD be restricted to
    authorized personnel.  Consider implementing role-based access
    controls that limit visibility based on operational need.
+
+   The channel used to populate installed-entitlements data — whether
+   from a license server, an asset management system, or direct device
+   reporting — is outside the scope of this document.  However,
+   implementations SHOULD ensure that such channels operate within a
+   secured management plane, protected against eavesdropping and
+   unauthorized modification.  Failure to secure these channels could
+   allow an attacker to inject false entitlement state, causing
+   capabilities to appear allowed or restricted in ways that do not
+   reflect the actual organizational entitlements.
 
 8.  References
 
@@ -3792,15 +3849,20 @@ module: ietf-entitlement-inventory
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+   [RFC8341]  Bierman, A. and M. Bjorklund, "Network Configuration
+              Access Control Model", STD 91, RFC 8341,
+              DOI 10.17487/RFC8341, March 2018,
+              <https://www.rfc-editor.org/rfc/rfc8341>.
+
 8.2.  Informative References
 
    [BaseInventory]
               Yu, C., Belotti, S., Bouquier, J., Peruzzini, F., and P.
               Bedard, "A Base YANG Data Model for Network Inventory",
               Work in Progress, Internet-Draft, draft-ietf-ivy-network-
-              inventory-yang-14, 5 February 2026,
+              inventory-yang-18, 27 May 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ivy-
-              network-inventory-yang-14>.
+              network-inventory-yang-18>.
 
 Acknowledgments
 
