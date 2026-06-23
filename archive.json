@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-21T02:10:05.529458+00:00",
+  "timestamp": "2026-06-23T01:52:46.146983+00:00",
   "repo": "dr2lopez/entitlement-inventory",
   "labels": [
     {
@@ -435,24 +435,26 @@
       "id": "PR_kwDOOCAVZs7e9-os",
       "title": "review of the YANG and tune a few fixes in the draft",
       "url": "https://github.com/dr2lopez/entitlement-inventory/pull/11",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "marisolpalmero",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "@dr2lopez , @italobusi @jccardonar could you please review ?\r\nI propose a few changes in the YANG and the draft, we need to get the terminology aligned as well, I have also sent email on this to the authors and chairs. Not sure if there is agreement for the IVY terminology",
       "createdAt": "2026-05-25T08:35:38Z",
-      "updatedAt": "2026-05-25T08:35:38Z",
+      "updatedAt": "2026-06-22T15:10:52Z",
       "baseRepository": "dr2lopez/entitlement-inventory",
       "baseRefName": "main",
       "baseRefOid": "83461f16959ef4d10f19b802d0c2c8e93dd73425",
       "headRepository": "marisolpalmero/entitlement-inventory",
       "headRefName": "main",
       "headRefOid": "078167a9016b35d56ca6962b4b99833d00eadb47",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-06-22T15:10:52Z",
+      "mergedAt": "2026-06-22T15:10:52Z",
+      "mergedBy": "dr2lopez",
+      "mergeCommit": {
+        "oid": "a5603606cac1ec641995b888ded5b5dcde869e95"
+      },
       "comments": [],
       "reviews": []
     }
